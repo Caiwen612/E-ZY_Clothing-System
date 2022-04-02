@@ -29,4 +29,14 @@ public class Validation {
             throw new ValidationException(Font.useFont(Font.BOLD_RED, "Please only key in Y or N."));
         }
     }
+
+    //Check product ID
+    public static boolean validProductID(char productID){
+        if(productID == 'T' || productID == 'P' || productID == 'A' || productID == 'S'){
+            return true;
+        } else{
+            System.out.println(Font.useFont(Font.BOLD_RED,"Please only key in the product ID start with T,P,A,S" ));
+            return false;
+        }
+    }
 }
