@@ -39,4 +39,18 @@ public class Validation {
             return false;
         }
     }
+
+    //Check product quantity
+    public static void validProductQuantity(int quantity, int productQuantity) throws ValidationException {
+        if(quantity > productQuantity){
+            throw new ValidationException(Font.useFont(Font.BOLD_RED, "Please only key in the quantity less than or equal to " + productQuantity));
+        }
+    }
+
+    //Check price range
+    public static void validPriceRange(double lowerPrice, double upperPrice) throws ValidationException {
+        if(lowerPrice > upperPrice){
+            throw new ValidationException(Font.useFont(Font.BOLD_RED, "Invalid price range: Lower price must be less than upper price"));
+        }
+    }
 }

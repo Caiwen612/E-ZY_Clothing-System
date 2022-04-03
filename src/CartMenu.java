@@ -8,18 +8,23 @@ import java.util.Scanner;
 
 
 public class CartMenu {
+    static Scanner input = new Scanner(System.in);
     public static void main(String [] args) throws InterruptedException{
-        Scanner input = new Scanner(System.in);
-        System.out.println("\tCart");
-        //CartDetails
+        //Create a new cart
+        Cart cart = new Cart();
+
+
+        System.out.println("\t\t+----------+");
+        System.out.println("\t\t|   Cart   |");
+        System.out.println("\t\t+----------+");
+        //Display cart
+//        cart.getCartItem();
         System.out.println("\t\t[1] Add Item");
         System.out.println("\t\t[2] Edit Item");
         System.out.println("\t\t[3] Delete Item");
         System.out.println("\t\t[4] Sort Item");
         System.out.println("\t\t[5] Make Payment");
         System.out.println("\t\t[6] Back to previous Menu");
-        
-        
 
         // Get input for cart option
         boolean cartOptionError = true;
@@ -34,12 +39,15 @@ public class CartMenu {
                 System.err.println(e.getMessage());
                 Thread.sleep(1000);
             } catch (InputMismatchException e) {
-                // Customize the message for let user know
                 System.err.println(Font.useFont(Font.BOLD_RED, "Please only key in integer"));
                 input.nextLine();
                 Thread.sleep(1000);
             }
         } while (cartOptionError);
+        switch (cartOption) {
+            case 1:
+
+        }
 
 
     }

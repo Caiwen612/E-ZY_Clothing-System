@@ -1,4 +1,4 @@
-public class Shirt extends Product{
+public class Shirt extends Product implements Cloneable {
     private String shirtID;
     private static int shirtCount = 1;
 
@@ -12,11 +12,16 @@ public class Shirt extends Product{
         shirtCount++;
     }
 
+    public Shirt(String name, double price, int qty, int rating) {
+        super(name, price, qty, rating);
+        this.shirtID = generateID();
+        shirtCount++;
+    }
+
     //Setter and getter
     public String getShirtID() {
         return this.shirtID;
     }
-
     //Method
     public static String generateID(){
         return "T" + shirtCount;
@@ -38,5 +43,12 @@ public class Shirt extends Product{
             return false;
         }
         return true;
+    }
+
+    @Override
+    public Shirt clone() {
+        Shirt clone = (Shirt) super.clone();
+        // TODO: copy mutable state here, so the clone can't change the internals of the original
+        return clone;
     }
 }
