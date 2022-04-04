@@ -17,97 +17,14 @@ public class ProductMixCart {
         Cart cart = new Cart();
         //Start
         setProducts(productArrayList);
+        //Testing purpose
+        cart.addItem(productArrayList.get(2).clone(),2);
+        cart.addItem(productArrayList.get(3).clone(),6);
+        cart.addItem(productArrayList.get(4).clone(),4);
+        cart.addItem(productArrayList.get(5).clone(),5);
+        cart.addItem(productArrayList.get(6).clone(),2);
+        cart.addItem(productArrayList.get(7).clone(),6);
         cartMenu(productArrayList,cart);
-    }
-
-    private static void cartMenu(ArrayList<Product> productArrayList, Cart cart) throws InterruptedException {
-        //Create a new cart
-
-        System.out.println("\t\t+----------+");
-        System.out.println("\t\t|   Cart   |");
-        System.out.println("\t\t+----------+");
-        //Display cart
-        cart.displayItem();
-//        cart.getCartItem();
-        System.out.println("\t[1] Add Item");
-        System.out.println("\t[2] Edit Item");
-        System.out.println("\t[3] Delete Item");
-        System.out.println("\t[4] Sort Item");
-        System.out.println("\t[5] Make Payment");
-        System.out.println("\t[6] Back to previous Menu");
-
-        // Get input for cart option
-        boolean cartOptionError = true;
-        int cartOption = 0;
-        do {
-            try {
-                System.out.print("Enter your option: ");
-                cartOption = input.nextInt();
-                Validation.validOption(cartOption, 1, 6);
-                cartOptionError = false;
-            } catch (ValidationException e) {
-                System.err.println(e.getMessage());
-                Thread.sleep(1000);
-            } catch (InputMismatchException e) {
-                System.err.println(Font.useFont(Font.BOLD_RED, "Please only key in integer"));
-                input.nextLine();
-                Thread.sleep(1000);
-            }
-        } while (cartOptionError);
-        switch (cartOption) {
-            case 1:
-                clearScreen();
-                productMenu(productArrayList,cart);
-                break;
-            case 2:
-
-
-        }
-    }
-
-    public static void productMenu(ArrayList<Product> productArrayList,Cart cart) throws InterruptedException {
-        //Display product menu
-        clearScreen();
-        System.out.println("\t\t+-----------+");
-        System.out.println("\t\t|  Product  |");
-        System.out.println("\t\t+-----------+");
-        System.out.println("\n[1] Search product ");
-        System.out.println("[2] Category ");
-        System.out.println("[3] Back to previous Menu ");
-        System.out.println("[4] Back to Cart Menu");
-        // Get input for cart option
-        boolean cartOptionError = true;
-        int cartOption = 0;
-        do {
-            try {
-                System.out.print("Enter your option: ");
-                cartOption = input.nextInt();
-                Validation.validOption(cartOption, 1, 4);
-                cartOptionError = false;
-            } catch (ValidationException e) {
-                System.err.println(e.getMessage());
-                Thread.sleep(1000);
-            } catch (InputMismatchException e) {
-                System.err.println(Font.useFont(Font.BOLD_RED, "Please only key in integer"));
-                input.nextLine();
-                Thread.sleep(1000);
-            }
-        } while (cartOptionError);
-        clearScreen();
-        switch (cartOption) {
-            case 1:
-                searchProductMenu(productArrayList, cart);
-                break;
-            case 2:
-                categoryMenu(productArrayList, cart);
-                break;
-            case 3:
-                //??
-                break;
-            case 4:
-                cartMenu(productArrayList,cart);
-                break;
-        }
 
     }
 
@@ -176,8 +93,293 @@ public class ProductMixCart {
 
     }
 
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Start Search~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-    //***************Different Search Option***************//
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: Cart Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+    private static void cartMenu(ArrayList<Product> productArrayList, Cart cart) throws InterruptedException {
+        //Create a new cart
+        clearScreen();
+        System.out.println("\t\t+----------+");
+        System.out.println("\t\t|   Cart   |");
+        System.out.println("\t\t+----------+");
+        //Display cart
+        cart.displayItem();
+        System.out.println("\t[1] Add Item");
+        System.out.println("\t[2] Edit Item");
+        System.out.println("\t[3] Remove Item");
+        System.out.println("\t[4] Sort Item");
+        System.out.println("\t[5] Make Payment");
+        System.out.println("\t[6] Back to previous Menu");
+
+        // Get input for cart option
+        boolean cartOptionError = true;
+        int cartOption = 0;
+        do {
+            try {
+                System.out.print("Enter your option: ");
+                cartOption = input.nextInt();
+                Validation.validOption(cartOption, 1, 6);
+                cartOptionError = false;
+            } catch (ValidationException e) {
+                System.err.println(e.getMessage());
+                Thread.sleep(1000);
+            } catch (InputMismatchException e) {
+                System.err.println(Font.useFont(Font.BOLD_RED, "Please only key in integer"));
+                input.nextLine();
+                Thread.sleep(1000);
+            }
+        } while (cartOptionError);
+        switch (cartOption) {
+            case 1:
+                addItem(productArrayList, cart);
+                break;
+            case 2:
+                editItem(productArrayList,cart);
+                break;
+            case 3:
+                removeItem(productArrayList,cart);
+                break;
+            case 4:
+                sortItem(productArrayList,cart);
+                break;
+            case 5:
+                //payment
+                break;
+            case 6:
+                //back to previous menu
+                break;
+        }
+    }
+
+    public static void addItem(ArrayList<Product> productArrayList, Cart cart) throws InterruptedException {
+        productMenu(productArrayList,cart);
+    }
+
+    public static void editItem(ArrayList<Product> productArrayList, Cart cart) throws InterruptedException {
+        boolean itemIndexError = true;
+        int itemIndex = 0;
+        do {
+            try {
+                System.out.print("Enter the list of item that you want to change: ");
+                itemIndex = input.nextInt();
+                Validation.validOption(itemIndex, 1, cart.getCartItem().size());
+                itemIndexError = false;
+            } catch (ValidationException e) {
+                System.err.println(e.getMessage());
+                Thread.sleep(1000);
+            } catch (InputMismatchException e) {
+                System.err.println(Font.useFont(Font.BOLD_RED, "Please only key in integer"));
+                input.nextLine();
+                Thread.sleep(1000);
+            }
+        } while (itemIndexError);
+        boolean editItemError = true;
+        char editItem = 'A';
+        do {
+            try {
+                System.out.print("Do you want to change this quantity product from your cart? (Y/N) ");
+                editItem = Character.toUpperCase(input.next().charAt(0));
+                Validation.validCharYN(editItem);
+                editItemError = false;
+            } catch (ValidationException e) {
+                System.err.println(e.getMessage());
+                input.nextLine();
+                Thread.sleep(1000);
+            }
+        } while (editItemError);
+        if (editItem == 'Y') {
+            String itemName = cart.getProduct(itemIndex).getName();
+            System.out.println(itemName);
+            Product targetProduct = linearSearchByCartItemName(productArrayList, itemName);
+            System.out.println(targetProduct.getQty());
+            boolean quantityOptionError = true;
+            int quantityOption = 0;
+            do {
+                try {
+                    System.out.print("Enter the quantity of this product that you want to change to your cart: ");
+                    quantityOption = input.nextInt();
+                    Validation.validProductQuantity(quantityOption, targetProduct.getQty());
+                    quantityOptionError = false;
+                } catch (ValidationException e) {
+                    System.err.println(e.getMessage());
+                    Thread.sleep(1000);
+                } catch (InputMismatchException e) {
+                    System.err.println(Font.useFont(Font.BOLD_RED, "Please only key in integer"));
+                    input.nextLine();
+                    Thread.sleep(1000);
+                }
+            } while (quantityOptionError);
+            cart.editItem(itemIndex,quantityOption);
+            System.out.println("Press enter key to go back Cart menu");
+            pressAnyKeyToContinue();
+            cartMenu(productArrayList,cart);
+        } else{
+            System.out.println("Press enter key to go back Cart menu");
+            pressAnyKeyToContinue();
+            cartMenu(productArrayList,cart);
+        }
+
+    }
+
+    public static void removeItem(ArrayList<Product> productArrayList, Cart cart) throws InterruptedException {
+
+        boolean itemIndexError = true;
+        int itemIndex = 0;
+        do {
+            try {
+                System.out.print("Enter the list of item that you want to remove: ");
+                itemIndex = input.nextInt();
+                Validation.validOption(itemIndex, 1, cart.getCartItem().size());
+                itemIndexError = false;
+            } catch (ValidationException e) {
+                System.err.println(e.getMessage());
+                Thread.sleep(1000);
+            } catch (InputMismatchException e) {
+                System.err.println(Font.useFont(Font.BOLD_RED, "Please only key in integer"));
+                input.nextLine();
+                Thread.sleep(1000);
+            }
+        } while (itemIndexError);
+        boolean removeItemError = true;
+        char removeItem = 'A';
+        do {
+            try {
+                System.out.print("Do you want to remove this product from your cart? (Y/N) ");
+                removeItem = Character.toUpperCase(input.next().charAt(0));
+                Validation.validCharYN(removeItem);
+                removeItemError = false;
+            } catch (ValidationException e) {
+                System.err.println(e.getMessage());
+                input.nextLine();
+                Thread.sleep(1000);
+            }
+        } while (removeItemError);
+        if (removeItem == 'Y') {
+            cart.removeItem(itemIndex);
+            System.out.println("Press enter key to go back Cart menu");
+            pressAnyKeyToContinue();
+            cartMenu(productArrayList,cart);
+
+        } else{
+            System.out.println("Press enter key to go back Cart menu");
+            pressAnyKeyToContinue();
+            cartMenu(productArrayList,cart);
+        }
+    }
+
+    public static void sortItem(ArrayList<Product> productArrayList, Cart cart) throws InterruptedException {
+        clearScreen();
+        System.out.println("\t\t+----------+");
+        System.out.println("\t\t|   Sort   |");
+        System.out.println("\t\t+----------+");
+        //Interface (Comparator)
+        System.out.println("[1] Sort by name ascending");
+        System.out.println("[2] Sort by name descending");
+        System.out.println("[3] Sort by total price ascending");
+        System.out.println("[4] Sort by total price descending");
+        System.out.println("[5] Sort by quantity ascending");
+        System.out.println("[6] Sort by quantity descending");
+        System.out.println("[7] Sort by quantity and total price ascending");
+        System.out.println("[8] Sort by quantity and total price descending");
+        System.out.println("[9] Back to Cart Menu");
+
+        boolean sortOptionError = true;
+        int sortOption = 0;
+        do {
+            try {
+                System.out.println("Enter sort option: ");
+                sortOption = input.nextInt();
+                Validation.validOption(sortOption, 1, 9);
+                sortOptionError = false;
+            } catch (ValidationException e) {
+                System.err.println(e.getMessage());
+                Thread.sleep(1000);
+            } catch (InputMismatchException e) {
+                System.err.println(Font.useFont(Font.BOLD_RED, "Please only key in integer"));
+                input.nextLine();
+                Thread.sleep(1000);
+            }
+        } while (sortOptionError);
+        switch (sortOption) {
+            case 1:
+                cart.sortByNameAscending();
+                break;
+            case 2:
+                cart.sortByNameDescending();
+                break;
+            case 3:
+                cart.sortByTotalPriceAscending();
+                break;
+            case 4:
+                cart.sortByTotalPriceDescending();
+                break;
+            case 5:
+                cart.sortByQtyAscending();
+                break;
+            case 6:
+                cart.sortByQtyDescending();
+                break;
+            case 7:
+                cart.sortByQtyPriceAscending();
+                break;
+            case 8:
+                cart.sortByQtyPriceDescending();
+                break;
+        }
+        System.out.println("Press enter key to go back Cart menu");
+        pressAnyKeyToContinue();
+        cartMenu(productArrayList,cart);
+    }
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: End Cart Menu~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: Product Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+    public static void productMenu(ArrayList<Product> productArrayList,Cart cart) throws InterruptedException {
+        //Display product menu
+        clearScreen();
+        System.out.println("\t\t+-----------+");
+        System.out.println("\t\t|  Product  |");
+        System.out.println("\t\t+-----------+");
+        System.out.println("\n[1] Search product ");
+        System.out.println("[2] Category ");
+        System.out.println("[3] Back to previous Menu ");
+        System.out.println("[4] Back to Cart Menu");
+        // Get input for cart option
+        boolean cartOptionError = true;
+        int cartOption = 0;
+        do {
+            try {
+                System.out.print("Enter your option: ");
+                cartOption = input.nextInt();
+                Validation.validOption(cartOption, 1, 4);
+                cartOptionError = false;
+            } catch (ValidationException e) {
+                System.err.println(e.getMessage());
+                Thread.sleep(1000);
+            } catch (InputMismatchException e) {
+                System.err.println(Font.useFont(Font.BOLD_RED, "Please only key in integer"));
+                input.nextLine();
+                Thread.sleep(1000);
+            }
+        } while (cartOptionError);
+        clearScreen();
+        switch (cartOption) {
+            case 1:
+                searchProductMenu(productArrayList, cart);
+                break;
+            case 2:
+                categoryMenu(productArrayList, cart);
+                break;
+            case 3:
+                //??
+                break;
+            case 4:
+                cartMenu(productArrayList,cart);
+                break;
+        }
+
+    }
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: Start Search~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+    //***************TODO: Different Search Option***************//
     public static void searchProductMenu(ArrayList<Product> productArrayList, Cart cart) throws InterruptedException {
         clearScreen();
         System.out.println("\t\t+------------------+");
@@ -601,7 +803,7 @@ public class ProductMixCart {
 
     }
 
-    //***************Search Algorithm***************//
+    //***************TODO: Linear Search Algorithm***************//
     private static Product linearSearchByProductID(ArrayList<Product> productArrayList, String targetProductID, char filterProductID) {
         Product targetProduct = null;
         for (Product product : productArrayList) {
@@ -641,6 +843,15 @@ public class ProductMixCart {
         return searchResultList;
     }
 
+    private static Product linearSearchByCartItemName(ArrayList<Product> productArrayList, String targetCartItemName) {
+        for (Product product : productArrayList) {
+            if (Objects.equals(product.getName().toUpperCase(), targetCartItemName.toUpperCase())){
+                return product;
+            }
+        }
+        return null;
+    }
+
     private static ArrayList<Product> linearSearchByPriceRange(ArrayList<Product> productArrayList, double lowerPrice, double upperPrice) {
         ArrayList<Product> searchResultList = new ArrayList<>();
         for (Product product : productArrayList) {
@@ -651,9 +862,9 @@ public class ProductMixCart {
         return searchResultList;
     }
 
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~End Search~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: End Search~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Start Category & Best Sales~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: Start Category & Best Sales~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
     public static void categoryMenu(ArrayList<Product> productArrayList, Cart cart) throws InterruptedException {
         clearScreen();
         System.out.println("\t\t+------------+");
@@ -816,15 +1027,16 @@ public class ProductMixCart {
 
         return categoryResultList;
     }
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Start Category & Best Sales~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: End Category & Best Sales~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: End Product Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
     public static void clearScreen() {
-//        try{
-//            new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
-//        }
-//        catch(Exception e){
-//            System.out.println(e);
-//        }
+    //    try{
+    //        new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
+    //    }
+    //    catch(Exception e){
+    //        System.out.println(e);
+    //    }
         for (int i = 0; i < 50; i++) {
             System.out.println();
         }
@@ -834,7 +1046,6 @@ public class ProductMixCart {
         input.nextLine();
         input.nextLine();
     }
-
 
 
     }
