@@ -18,7 +18,10 @@ public class ProductMixCart {
         //Start
         setProducts(productArrayList);
         //Testing purpose
-        cart.addItem(productArrayList.get(2).clone(),2);
+//        for(Product p : productArrayList){
+//            cart.addItem(p.clone(),15);
+//        }
+        cart.addItem(productArrayList.get(2).clone(),15);
         cart.addItem(productArrayList.get(3).clone(),6);
         cart.addItem(productArrayList.get(4).clone(),4);
         cart.addItem(productArrayList.get(5).clone(),5);
@@ -97,25 +100,43 @@ public class ProductMixCart {
     private static void cartMenu(ArrayList<Product> productArrayList, Cart cart) throws InterruptedException {
         //Create a new cart
         clearScreen();
-        System.out.println("\t\t+----------+");
-        System.out.println("\t\t|   Cart   |");
-        System.out.println("\t\t+----------+");
+        System.out.print(Font.TEXT_CYAN);
+        System.out.printf(  "%60s",  "+------------+");
+        System.out.printf("%n%60s","|    Cart    |");
+        System.out.printf("%n%60s","+------------+");
+        System.out.print(Font.RESET);
+
         //Display cart
+        System.out.println();
+        System.out.println(" +=================================================================================================+   ");
+        System.out.print(" |");
+        //Setup for cart title
+        System.out.printf("%12s", "Cart No  |");
+        System.out.printf("%7s", "ID  |");
+        System.out.printf("%21s", "Name        |");
+        System.out.printf("%14s", "Price    |");
+        System.out.printf("%8s", "Qty  |");
+        System.out.printf("%13s", "Rating   |");
+        System.out.printf("%24s", "Total per Item    |\n");
+        System.out.print(" +=================================================================================================+   ");
+        System.out.println();
         cart.displayItem();
-        System.out.println("\t[1] Add Item");
-        System.out.println("\t[2] Edit Item");
-        System.out.println("\t[3] Remove Item");
-        System.out.println("\t[4] Sort Item");
-        System.out.println("\t[5] Make Payment");
-        System.out.println("\t[6] Back to previous Menu");
+        System.out.printf(  "%60s",  "[1] Add Item       ");
+        System.out.printf("%n%60s",  "[2] Edit Item      ");
+        System.out.printf("%n%60s",  "[3] Remove Item    ");
+        System.out.printf("%n%60s",  "[4] Sort Item      ");
+        System.out.printf("%n%60s",  "[5] Make Payment   ");
+        System.out.printf("%n%60s",  "[6] Back           ");
 
         // Get input for cart option
         boolean cartOptionError = true;
         int cartOption = 0;
         do {
             try {
-                System.out.print("Enter your option: ");
+                System.out.print(Font.TEXT_BLUE);
+                System.out.printf("%n%55s",  "Enter your option: ");
                 cartOption = input.nextInt();
+                System.out.print(Font.RESET);
                 Validation.validOption(cartOption, 1, 6);
                 cartOptionError = false;
             } catch (ValidationException e) {
@@ -158,6 +179,7 @@ public class ProductMixCart {
         int itemIndex = 0;
         do {
             try {
+                System.out.print(Font.TEXT_BLUE);
                 System.out.print("Enter the list of item that you want to change: ");
                 itemIndex = input.nextInt();
                 Validation.validOption(itemIndex, 1, cart.getCartItem().size());
@@ -335,19 +357,22 @@ public class ProductMixCart {
     public static void productMenu(ArrayList<Product> productArrayList,Cart cart) throws InterruptedException {
         //Display product menu
         clearScreen();
-        System.out.println("\t\t+-----------+");
-        System.out.println("\t\t|  Product  |");
-        System.out.println("\t\t+-----------+");
-        System.out.println("\n[1] Search product ");
-        System.out.println("[2] Category ");
-        System.out.println("[3] Back to previous Menu ");
-        System.out.println("[4] Back to Cart Menu");
+        System.out.print(Font.TEXT_CYAN);
+        System.out.printf(  "%65s", "+---------------+");
+        System.out.printf("%n%65s", "|    Product    |");
+        System.out.printf("%n%65s", "+---------------+");
+        System.out.print(Font.RESET);
+        System.out.println();
+        System.out.printf(  "%70s", "[1] Search product        ");
+        System.out.printf("%n%70s", "[2] Category              ");
+        System.out.printf("%n%70s", "[3] Back to previous Menu ");
+        System.out.printf("%n%70s", "[4] Back to Cart Menu     ");
         // Get input for cart option
         boolean cartOptionError = true;
         int cartOption = 0;
         do {
             try {
-                System.out.print("Enter your option: ");
+                System.out.printf("%n%57s", "Enter your option: ");
                 cartOption = input.nextInt();
                 Validation.validOption(cartOption, 1, 4);
                 cartOptionError = false;
@@ -806,6 +831,7 @@ public class ProductMixCart {
     //***************TODO: Linear Search Algorithm***************//
     private static Product linearSearchByProductID(ArrayList<Product> productArrayList, String targetProductID, char filterProductID) {
         Product targetProduct = null;
+
         for (Product product : productArrayList) {
             if (filterProductID == 'T' && product instanceof Shirt) {
                 if (Objects.equals(((Shirt) product).getShirtID(), targetProductID)) {
@@ -1046,7 +1072,6 @@ public class ProductMixCart {
         input.nextLine();
         input.nextLine();
     }
-
 
     }
 

@@ -23,14 +23,14 @@ public class Shirt extends Product implements Cloneable {
         return this.shirtID;
     }
     //Method
-    public static String generateID(){
+    private static String generateID(){
         return "T" + shirtCount;
     }
 
     //ToString
     @Override
     public String toString() {
-        return "\t" + this.shirtID + "\t\t" + super.toString();
+        return String.format("%9s",this.shirtID) + super.toString();
     }
 
     //ToEqual

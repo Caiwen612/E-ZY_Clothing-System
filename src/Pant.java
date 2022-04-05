@@ -24,14 +24,14 @@ public class Pant extends Product implements Cloneable{
     }
 
     //Method
-    public static String generateID(){
+    private static String generateID(){
         return "P" + pantCount;
     }
 
     //ToString
     @Override
     public String toString() {
-        return "\t" + this.pantID + "\t\t" + super.toString();
+        return String.format("%9s",this.pantID) + super.toString();
     }
 
     @Override

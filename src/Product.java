@@ -1,3 +1,6 @@
+import utility.Font;
+
+import java.text.DecimalFormat;
 import java.util.Comparator;
 
 public class Product implements Cloneable  {
@@ -9,6 +12,8 @@ public class Product implements Cloneable  {
     private double totalPrice;//for cart use
 
     private static int productCount = 1;
+
+    DecimalFormat df2 = new DecimalFormat("0.00");
 
     public Product(){
         this("",0,0,0);
@@ -73,10 +78,10 @@ public class Product implements Cloneable  {
     public String toString(){
         if(this.totalPrice == 0) {
             //For product use
-            return "\t\t" + this.name + "\t\t\t\t" + "RM" + this.price + "\t\t\t\t" + this.qty + "\t\t\t\t" + convertRating(this.rating);
+            return  String.format("%-15s",this.name) + "  " + String.format("%10s", ("RM" + df2.format(this.price))) + "  " + String.format("%10s", this.qty) + "  " + String.format("%10s",convertRating(this.rating));
         } else {
             //For cart use
-            return  "\t\t" + this.name + "\t\t\t\t" + "RM" + this.price + "\t\t\t\t" + this.qty + "\t\t\t\t" + convertRating(this.rating) + "\t\t\t\t" + "RM" + this.totalPrice;
+            return  String.format("%5s"," ") + String.format("%-21s",this.name) + String.format("%1s"," ") + String.format("%-13s", ("RM" + df2.format(this.price))) + " " + String.format("%-6s", this.qty) + "  " + String.format("%-23s", Font.TEXT_CYAN + convertRating(this.rating) + Font.RESET) + "  " + String.format("%-10s", "RM" + df2.format(this.totalPrice));
         }
     }
     //ToEqual

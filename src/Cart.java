@@ -1,3 +1,6 @@
+import utility.Font;
+
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,6 +9,7 @@ public class Cart {
     private double totalPrice;
     private int itemCount;
 
+    DecimalFormat df2 = new DecimalFormat("0.00");
 
     public Cart(){
         this.cartItem = new ArrayList<Product>();
@@ -21,6 +25,10 @@ public class Cart {
         this.totalPrice = totalPrice;
     }
 
+    public double getTotalPrice() {
+        return this.totalPrice;
+    }
+
     //Method
     public Product getProduct(int index){
         return cartItem.get(index-1);
@@ -29,13 +37,18 @@ public class Cart {
     public void displayItem(){
         if(cartItem.size() != 0){
             for(int i=0; i<cartItem.size(); i++){
-                System.out.println((i+1) + cartItem.get(i).toString());
+                System.out.printf("%9s",(i+1));
+                System.out.print(cartItem.get(i).toString());
+                System.out.println();
             }
         } else {
             System.out.println("Cart is empty");
         }
-        System.out.println("Item count: " + itemCount);
-        System.out.println("Total price: " + totalPrice);
+        System.out.println(Font.TEXT_PURPLE);
+        System.out.print("Total Item : " + itemCount);
+        System.out.printf("%64s"," ");
+        System.out.printf("%-20s","Total price: RM" + df2.format(totalPrice));
+        System.out.println(Font.RESET);
     }
 
     public void addItem(Product product, int quantity){

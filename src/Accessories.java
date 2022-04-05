@@ -24,14 +24,14 @@ public class Accessories extends Product implements Cloneable{
     }
 
     //Method
-    public static String generateID(){
+    private static String generateID(){
         return "A" + accessoriesCount;
     }
 
     //ToString
     @Override
     public String toString() {
-        return "\t" + this.accessoriesID + "\t\t" + super.toString();
+        return String.format("%9s",this.accessoriesID ) + super.toString();
     }
 
     @Override

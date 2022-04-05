@@ -25,13 +25,13 @@ public class Shoe extends Product implements Cloneable{
     }
 
     //Method
-    public static String generateID(){
+    private static String generateID(){
         return "S" + shoeCount;
     }
 
     @Override
     public String toString() {
-        return "\t" + this.shoeID + "\t\t" + super.toString();
+        return String.format("%9s",this.shoeID) + super.toString();
     }
 
 
