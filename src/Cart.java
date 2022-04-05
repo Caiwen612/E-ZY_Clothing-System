@@ -3,14 +3,22 @@ import java.util.List;
 
 public class Cart {
     private List<Product> cartItem;
+    private double totalPrice;
+    private int itemCount;
+
 
     public Cart(){
         this.cartItem = new ArrayList<Product>();
+        this.totalPrice = 0;
     }
 
     //Getter and Setter
     public List<Product> getCartItem() {
         return cartItem;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     //Method
@@ -26,16 +34,34 @@ public class Cart {
         } else {
             System.out.println("Cart is empty");
         }
-
+        System.out.println("Item count: " + itemCount);
+        System.out.println("Total price: " + totalPrice);
     }
 
     public void addItem(Product product, int quantity){
-        //Check simmilar
-        product.setQty(quantity);
-        product.setTotalPrice(product.getPrice() * quantity);
-        this.cartItem.add(product);
-        displayItem();
-        System.out.println("Product with " + quantity + " added to cart");
+        //Check similar
+        if (checkSimilar(product)){
+            System.out.println("Product already exist in cart");
+        } else{
+            product.setQty(quantity);
+            product.setTotalPrice(product.getPrice() * quantity);
+            this.cartItem.add(product);
+            itemCount++;
+            calculateTotalPrice();
+            displayItem();
+            System.out.println("Product with " + quantity + " added to cart");
+        }
+    }
+
+    private boolean checkSimilar(Product product) {
+        boolean isExist = false;
+        for (Product cartItem : cartItem) {
+            if (cartItem.getName().equals(product.getName())) {
+                isExist = true;
+                break;
+            }
+        }
+        return isExist;
     }
 
     public void editItem(int index,int quantity){
@@ -46,6 +72,15 @@ public class Cart {
     public void removeItem(int index){
         this.cartItem.remove(index-1);
         System.out.println("Product removed from cart");
+    }
+
+    public double calculateTotalPrice(){
+        totalPrice = 0;
+        for (Product product : cartItem) {
+            totalPrice += product.getTotalPrice();
+        }
+        this.setTotalPrice(totalPrice);
+        return totalPrice;
     }
 
     public void sortByNameAscending(){
