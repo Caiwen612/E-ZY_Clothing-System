@@ -79,12 +79,14 @@ public class Cart {
 
     public void editItem(int index,int quantity){
         this.cartItem.get(index-1).setQty(quantity);
-        System.out.println("Quantity of product has successfully updated.");
+        System.out.print(Font.TEXT_YELLOW);
+        System.out.printf("%n%68s","Quantity of product has successfully updated.");
     }
 
     public void removeItem(int index){
         this.cartItem.remove(index-1);
-        System.out.println("Product removed from cart");
+        System.out.print(Font.TEXT_YELLOW);
+        System.out.printf("%n%58s","Product removed from cart");
     }
 
     public double calculateTotalPrice(){

@@ -1,7 +1,6 @@
 import utility.Font;
 import utility.Validation;
 import utility.ValidationException;
-
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Objects;
@@ -27,6 +26,11 @@ public class ProductMixCart {
         cart.addItem(productArrayList.get(5).clone(),5);
         cart.addItem(productArrayList.get(6).clone(),2);
         cart.addItem(productArrayList.get(7).clone(),6);
+
+        //Testing
+        productMenu(productArrayList,cart);
+        searchProductByProductID(productArrayList, cart);
+
         cartMenu(productArrayList,cart);
 
     }
@@ -91,9 +95,6 @@ public class ProductMixCart {
         productArrayList.add(p25);
         productArrayList.add(p26);
 
-
-
-
     }
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: Cart Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
@@ -101,9 +102,9 @@ public class ProductMixCart {
         //Create a new cart
         clearScreen();
         System.out.print(Font.TEXT_CYAN);
-        System.out.printf(  "%60s",  "+------------+");
-        System.out.printf("%n%60s","|    Cart    |");
-        System.out.printf("%n%60s","+------------+");
+        System.out.printf(  "%55s",  "+------------+");
+        System.out.printf("%n%55s","|    Cart    |");
+        System.out.printf("%n%55s","+------------+");
         System.out.print(Font.RESET);
 
         //Display cart
@@ -134,7 +135,7 @@ public class ProductMixCart {
         do {
             try {
                 System.out.print(Font.TEXT_BLUE);
-                System.out.printf("%n%55s",  "Enter your option: ");
+                System.out.printf("%n%54s",  "Enter your option: ");
                 cartOption = input.nextInt();
                 System.out.print(Font.RESET);
                 Validation.validOption(cartOption, 1, 6);
@@ -175,12 +176,14 @@ public class ProductMixCart {
     }
 
     public static void editItem(ArrayList<Product> productArrayList, Cart cart) throws InterruptedException {
+        System.out.println(Font.TEXT_YELLOW);
+        System.out.printf("%75s","Key in the cart no which you wish to edit the quantity. ^-^");
         boolean itemIndexError = true;
         int itemIndex = 0;
         do {
             try {
                 System.out.print(Font.TEXT_BLUE);
-                System.out.print("Enter the list of item that you want to change: ");
+                System.out.printf("%n%54s",  "Enter the cart no: ");
                 itemIndex = input.nextInt();
                 Validation.validOption(itemIndex, 1, cart.getCartItem().size());
                 itemIndexError = false;
@@ -197,7 +200,8 @@ public class ProductMixCart {
         char editItem = 'A';
         do {
             try {
-                System.out.print("Do you want to change this quantity product from your cart? (Y/N) ");
+                System.out.print(Font.TEXT_BLUE);
+                System.out.printf("%62s","Do you want to change this? (Y/N) ");
                 editItem = Character.toUpperCase(input.next().charAt(0));
                 Validation.validCharYN(editItem);
                 editItemError = false;
@@ -209,14 +213,15 @@ public class ProductMixCart {
         } while (editItemError);
         if (editItem == 'Y') {
             String itemName = cart.getProduct(itemIndex).getName();
-            System.out.println(itemName);
+            System.out.println(Font.TEXT_YELLOW);
             Product targetProduct = linearSearchByCartItemName(productArrayList, itemName);
-            System.out.println(targetProduct.getQty());
+            System.out.printf("%62s",("Available quantity for " + itemName +" :" +  targetProduct.getQty()));
             boolean quantityOptionError = true;
             int quantityOption = 0;
             do {
                 try {
-                    System.out.print("Enter the quantity of this product that you want to change to your cart: ");
+                    System.out.println(Font.TEXT_BLUE);
+                    System.out.printf("%55s","Enter the new quantity: ");
                     quantityOption = input.nextInt();
                     Validation.validProductQuantity(quantityOption, targetProduct.getQty());
                     quantityOptionError = false;
@@ -230,11 +235,12 @@ public class ProductMixCart {
                 }
             } while (quantityOptionError);
             cart.editItem(itemIndex,quantityOption);
-            System.out.println("Press enter key to go back Cart menu");
+            System.out.printf("%n%63s","Press enter key to go back Cart menu");
             pressAnyKeyToContinue();
             cartMenu(productArrayList,cart);
         } else{
-            System.out.println("Press enter key to go back Cart menu");
+            System.out.println(Font.TEXT_YELLOW);
+            System.out.printf("%63s","Press enter key to go back Cart menu");
             pressAnyKeyToContinue();
             cartMenu(productArrayList,cart);
         }
@@ -242,12 +248,14 @@ public class ProductMixCart {
     }
 
     public static void removeItem(ArrayList<Product> productArrayList, Cart cart) throws InterruptedException {
-
+        System.out.println(Font.TEXT_YELLOW);
+        System.out.printf("%70s","Key in the cart no which you wish to remove. ^-^");
         boolean itemIndexError = true;
         int itemIndex = 0;
         do {
             try {
-                System.out.print("Enter the list of item that you want to remove: ");
+                System.out.print(Font.TEXT_BLUE);
+                System.out.printf("%n%54s",  "Enter the cart no: ");
                 itemIndex = input.nextInt();
                 Validation.validOption(itemIndex, 1, cart.getCartItem().size());
                 itemIndexError = false;
@@ -264,7 +272,8 @@ public class ProductMixCart {
         char removeItem = 'A';
         do {
             try {
-                System.out.print("Do you want to remove this product from your cart? (Y/N) ");
+                System.out.print(Font.TEXT_BLUE);
+                System.out.printf("%62s","Do you want to remove this? (Y/N) ");
                 removeItem = Character.toUpperCase(input.next().charAt(0));
                 Validation.validCharYN(removeItem);
                 removeItemError = false;
@@ -276,12 +285,13 @@ public class ProductMixCart {
         } while (removeItemError);
         if (removeItem == 'Y') {
             cart.removeItem(itemIndex);
-            System.out.println("Press enter key to go back Cart menu");
+            System.out.printf("%n%63s","Press enter key to go back Cart menu");
             pressAnyKeyToContinue();
             cartMenu(productArrayList,cart);
 
         } else{
-            System.out.println("Press enter key to go back Cart menu");
+            System.out.println(Font.TEXT_YELLOW);
+            System.out.printf("%63s","Press enter key to go back Cart menu");
             pressAnyKeyToContinue();
             cartMenu(productArrayList,cart);
         }
@@ -289,25 +299,32 @@ public class ProductMixCart {
 
     public static void sortItem(ArrayList<Product> productArrayList, Cart cart) throws InterruptedException {
         clearScreen();
-        System.out.println("\t\t+----------+");
-        System.out.println("\t\t|   Sort   |");
-        System.out.println("\t\t+----------+");
+        System.out.print(Font.TEXT_CYAN);
+        System.out.printf(  "%55s",  "+------------+");
+        System.out.printf("%n%55s","|    Sort    |");
+        System.out.printf("%n%55s","+------------+");
+        System.out.print(Font.RESET);
         //Interface (Comparator)
-        System.out.println("[1] Sort by name ascending");
-        System.out.println("[2] Sort by name descending");
-        System.out.println("[3] Sort by total price ascending");
-        System.out.println("[4] Sort by total price descending");
-        System.out.println("[5] Sort by quantity ascending");
-        System.out.println("[6] Sort by quantity descending");
-        System.out.println("[7] Sort by quantity and total price ascending");
-        System.out.println("[8] Sort by quantity and total price descending");
-        System.out.println("[9] Back to Cart Menu");
+        System.out.println(Font.TEXT_YELLOW);
+        System.out.printf("%n%67s","[ASC] Ascending     [DESC] Descending");
+        System.out.print(Font.RESET);
+        System.out.println();
+        System.out.printf("%n%70s", ("[1] Sort by name " + Font.TEXT_YELLOW + "[ASC]" + Font.RESET));
+        System.out.printf("%n%71s",("[2] Sort by name " + Font.TEXT_YELLOW + "[DESC]" + Font.RESET));
+        System.out.printf("%n%71s",("[3] Sort by price " + Font.TEXT_YELLOW + "[ASC]" + Font.RESET));
+        System.out.printf("%n%72s",("[4] Sort by price " + Font.TEXT_YELLOW + "[DESC]" + Font.RESET));
+        System.out.printf("%n%74s",("[5] Sort by quantity " + Font.TEXT_YELLOW + "[ASC]" + Font.RESET));
+        System.out.printf("%n%75s",("[6] Sort by quantity " + Font.TEXT_YELLOW + "[DESC]" + Font.RESET));
+        System.out.printf("%n%85s",("[7] Sort by qty and total price " + Font.TEXT_YELLOW + "[ASC]" + Font.RESET));
+        System.out.printf("%n%86s",("[8] Sort by qty and total price " + Font.TEXT_YELLOW + "[DESC]" + Font.RESET));
+        System.out.printf("%n%61s","[9] Back to Cart Menu ");
 
         boolean sortOptionError = true;
         int sortOption = 0;
         do {
             try {
-                System.out.println("Enter sort option: ");
+                System.out.print(Font.TEXT_BLUE);
+                System.out.printf("%n%n%58s",  "Enter sort option: ");
                 sortOption = input.nextInt();
                 Validation.validOption(sortOption, 1, 9);
                 sortOptionError = false;
@@ -346,7 +363,8 @@ public class ProductMixCart {
                 cart.sortByQtyPriceDescending();
                 break;
         }
-        System.out.println("Press enter key to go back Cart menu");
+        System.out.println(Font.TEXT_YELLOW);
+        System.out.printf("%67s","Press enter key to go back Cart menu");
         pressAnyKeyToContinue();
         cartMenu(productArrayList,cart);
     }
@@ -358,21 +376,22 @@ public class ProductMixCart {
         //Display product menu
         clearScreen();
         System.out.print(Font.TEXT_CYAN);
-        System.out.printf(  "%65s", "+---------------+");
-        System.out.printf("%n%65s", "|    Product    |");
-        System.out.printf("%n%65s", "+---------------+");
+        System.out.printf(  "%59s", "+---------------+");
+        System.out.printf("%n%59s", "|    Product    |");
+        System.out.printf("%n%59s", "+---------------+");
         System.out.print(Font.RESET);
         System.out.println();
-        System.out.printf(  "%70s", "[1] Search product        ");
-        System.out.printf("%n%70s", "[2] Category              ");
-        System.out.printf("%n%70s", "[3] Back to previous Menu ");
-        System.out.printf("%n%70s", "[4] Back to Cart Menu     ");
+        System.out.printf(  "%64s", "[1] Search product        ");
+        System.out.printf("%n%64s", "[2] Category              ");
+        System.out.printf("%n%64s", "[3] Back to previous Menu ");
+        System.out.printf("%n%64s", "[4] Back to Cart Menu     ");
         // Get input for cart option
         boolean cartOptionError = true;
         int cartOption = 0;
         do {
             try {
-                System.out.printf("%n%57s", "Enter your option: ");
+                System.out.print(Font.TEXT_BLUE);
+                System.out.printf("%n%51s", "Enter your option: ");
                 cartOption = input.nextInt();
                 Validation.validOption(cartOption, 1, 4);
                 cartOptionError = false;
@@ -407,20 +426,23 @@ public class ProductMixCart {
     //***************TODO: Different Search Option***************//
     public static void searchProductMenu(ArrayList<Product> productArrayList, Cart cart) throws InterruptedException {
         clearScreen();
-        System.out.println("\t\t+------------------+");
-        System.out.println("\t\t|  Search Product  |");
-        System.out.println("\t\t+------------------+");
-        System.out.println("[1] Product ID");
-        System.out.println("[2] Product Name");
-        System.out.println("[3] Price Range");
-        System.out.println("[4] Back to previous menu");
+        System.out.print(Font.TEXT_CYAN);
+        System.out.printf(  "%66s", "+----------------------+");
+        System.out.printf("%n%66s", "|    Search Product    |");
+        System.out.printf("%n%66s", "+----------------------+");
+        System.out.print(Font.RESET);
+        System.out.printf("%n%71s", "[1] Product ID            ");
+        System.out.printf("%n%71s", "[2] Product Name          ");
+        System.out.printf("%n%71s", "[3] Price Range           ");
+        System.out.printf("%n%71s", "[4] Back to previous      ");
         System.out.println();
         // Get input for cart option
         boolean searchOptionError = true;
         int searchOption = 0;
         do {
             try {
-                System.out.print("Enter your option: ");
+                System.out.print(Font.TEXT_BLUE);
+                System.out.printf("%n%58s", "Enter your option: ");
                 searchOption = input.nextInt();
                 Validation.validOption(searchOption, 1, 4);
                 searchOptionError = false;
@@ -453,29 +475,38 @@ public class ProductMixCart {
 
     private static void searchProductByProductID(ArrayList<Product> productArrayList, Cart cart) throws InterruptedException {
         clearScreen();
-        System.out.println("T For Shirt");
-        System.out.println("P For Pant");
-        System.out.println("A For Accessories");
-        System.out.println("S For Shoe");
-        System.out.println("Format: T/P/A/S + Product ID");
+        System.out.print(Font.TEXT_YELLOW);
+        System.out.printf("%n%68s", "T For Shirt               ");
+        System.out.printf("%n%68s", "P For Pant                ");
+        System.out.printf("%n%68s", "A For Accessories         ");
+        System.out.printf("%n%68s", "S For Shoe                ");
+        System.out.printf("%n%83s", "Format: T/P/A/S + Product ID             ");
+        System.out.print(Font.RESET);
         input.nextLine();
-        System.out.print("Enter the ID that you want to search: ");
+        System.out.print(Font.TEXT_BLUE);
+        System.out.printf("%n%75s","Enter the ID that you want to search: ");
+        System.out.print(Font.RESET);
         String targetProductID = input.nextLine().toUpperCase();
         char filterProductID = targetProductID.charAt(0);
         while (!Validation.validProductID(filterProductID)) {
-            System.out.print("Enter the ID that you want to search: ");
+            System.out.print(Font.TEXT_BLUE);
+            System.out.printf("%n%75s","Enter the ID that you want to search: ");
+            System.out.print(Font.RESET);
             targetProductID = input.nextLine().toUpperCase();
             filterProductID = targetProductID.charAt(0);
         }
         //Perform fast linear search with filter id
         Product targetProduct = linearSearchByProductID(productArrayList, targetProductID, filterProductID);
         if (targetProduct == null) {
-            System.out.println("Product not found");
+            System.out.print(Font.TEXT_RED);
+            System.out.printf("%n%64s", "Product ID not found");
+            System.out.print(Font.RESET);
             boolean searchAgainError = true;
             char searchAgain = 'A';
             do {
                 try {
-                    System.out.print("Do you want to search again? (Y/N) ");
+                    System.out.print(Font.TEXT_BLUE);
+                    System.out.printf("%n%72s", "Do you want to search again? (Y/N) ");
                     searchAgain = Character.toUpperCase(input.next().charAt(0));
                     Validation.validCharYN(searchAgain);
                     searchAgainError = false;
@@ -491,7 +522,9 @@ public class ProductMixCart {
                 searchProductMenu(productArrayList, cart);
             }
         } else {
+            System.out.println(Font.TEXT_YELLOW);
             System.out.println(targetProduct);
+            System.out.println(Font.RESET);
             //valid user choices
             boolean addToCartError = true;
             char addToCart = 'A';
