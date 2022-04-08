@@ -1,3 +1,4 @@
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -118,6 +119,19 @@ public class People {
         }
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        People people = (People) o;
+        return Objects.equals(name, people.name) && Objects.equals(email, people.email) && Objects.equals(password, people.password) && Objects.equals(phoneNo, people.phoneNo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, email, password, phoneNo);
+    }
 
     @Override
     public String toString() {
