@@ -11,6 +11,7 @@ public class LoginSignupMenu {
 
         ArrayList<Customer> customerArrList = new ArrayList<>();
         ArrayList<Admin> adminArrList = new ArrayList<>();
+        ArrayList<Product> productArrayList = new ArrayList<>();
 
         // calling customer constructors
         Customer customer1 = new Customer("Kelvin", "kelvin@gmail.com", "a123", "012-34567890", "12, Jalan AhKao, Bandar ABC", new Cart(), new Order());
@@ -28,9 +29,12 @@ public class LoginSignupMenu {
         customerArrList.add(customer1);
         customerArrList.add(customer2);
 
-        //creating arrayList of admin
+        // creating arrayList of admin
         adminArrList.add(admin1);
         adminArrList.add(admin2);
+
+        // array list of product
+//        productArrayList.add(ProductMixCart.productArraylist.get(1).clone());
 
         menu(adminArrList, customerArrList);
     }
@@ -57,20 +61,15 @@ public class LoginSignupMenu {
                 loginOrSignup = scanner.nextInt();
 
                 switch (loginOrSignup) {
-                    case 1:
-                        login(adminArrList, customerArrList);
-                        break;
-                    case 2:
-                        signup(adminArrList, customerArrList);
-                        break;
-                    case 3:
-                        System.exit(0);
-                        break;
-                    default:
+                    case 1 -> login(adminArrList, customerArrList);
+                    case 2 -> signup(adminArrList, customerArrList);
+                    case 3 -> System.exit(0);
+                    default -> {
                         optionVld = false;
                         System.out.println(Font.BOLD_RED + "Please Enter the Valid Option.");
                         System.out.print(Font.RESET);
                         Thread.sleep(1000);
+                    }
                 }
             } catch (InputMismatchException inputMismatchException) {
                 optionVld = false;
@@ -106,23 +105,16 @@ public class LoginSignupMenu {
                 adminOrCust = scanner.nextInt();
 
                 switch (adminOrCust) {
-                    case 1:
-                        adminLogin(adminArrList);
-                        break;
-                    case 2:
-                        custLogin(customerArrList);
-                        break;
-                    case 3:
-                        menu(adminArrList, customerArrList);
-                        break;
-                    case 4:
-                        System.exit(0);
-                        break;
-                    default:
+                    case 1 -> adminLogin(adminArrList, customerArrList);
+                    case 2 -> custLogin(adminArrList, customerArrList);
+                    case 3 -> menu(adminArrList, customerArrList);
+                    case 4 -> System.exit(0);
+                    default -> {
                         vldOpt = false;
                         System.out.println(Font.BOLD_RED + "Please Enter the Valid Option.");
                         System.out.print(Font.RESET);
                         Thread.sleep(1000);
+                    }
                 }
              } catch (InputMismatchException inputMismatchException) {
                 vldOpt = false;
@@ -134,7 +126,8 @@ public class LoginSignupMenu {
         } while (!vldOpt);
     }
 
-    private static void adminLogin(ArrayList<Admin> adminArrList) throws InterruptedException {
+    private static void adminLogin(ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList) throws InterruptedException {
+        int index = 0;
         String adminInputEmail;
         String adminInputPassword;
         boolean loginSuccess = false;
@@ -149,9 +142,10 @@ public class LoginSignupMenu {
             System.out.print(Font.RESET);
             adminInputPassword = scanner.next();
 
-            for (Admin admin : adminArrList) {
-                if (admin.getEmail().equals(adminInputEmail) && admin.getPassword().equals(adminInputPassword)) {
+            for (int i = 0; i < adminArrList.size(); i++) {
+                if (adminArrList.get(i).getEmail().equals(adminInputEmail) && adminArrList.get(i).getPassword().equals(adminInputPassword)) {
                     loginSuccess = true;
+                    index = i;
                     break;
                 }
             }
@@ -159,7 +153,7 @@ public class LoginSignupMenu {
                 System.out.println(Font.BOLD_GREEN + "Login Successfully");
                 System.out.print(Font.RESET);
                 Thread.sleep(1000);
-                adminMenu();
+                adminMenu(adminArrList, customerArrList, adminArrList.get(index));
             }
             else {
                 System.out.println(Font.BOLD_RED + "Wrong Credentials, Please Try Again.");
@@ -170,7 +164,8 @@ public class LoginSignupMenu {
         } while (!loginSuccess);
     }
 
-    private static void custLogin(ArrayList<Customer> customerArrList) throws InterruptedException {
+    private static void custLogin(ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList) throws InterruptedException {
+        int index = 0;
         String custInputEmail;
         String custInputPassword;
         boolean loginSuccess = false;
@@ -185,9 +180,10 @@ public class LoginSignupMenu {
             System.out.print(Font.RESET);
             custInputPassword = scanner.next();
 
-            for (Customer customer : customerArrList) {
-                if (customer.getEmail().equals(custInputEmail) && customer.getPassword().equals(custInputPassword)) {
+            for (int i = 0; i < customerArrList.size(); i++) {
+                if (customerArrList.get(i).getEmail().equals(custInputEmail) && customerArrList.get(i).getPassword().equals(custInputPassword)) {
                     loginSuccess = true;
+                    index = i;
                     break;
                 }
             }
@@ -195,7 +191,7 @@ public class LoginSignupMenu {
                 System.out.println(Font.BOLD_GREEN + "Login Successfully");
                 System.out.print(Font.RESET);
                 Thread.sleep(1000);
-                custMenu();
+                custMenu(adminArrList, customerArrList, customerArrList.get(index));
             }
             else {
                 System.out.println(Font.BOLD_RED + "Wrong Credentials, Please Try Again.");
@@ -230,23 +226,16 @@ public class LoginSignupMenu {
                 adminOrCust = scanner.nextInt();
 
                 switch (adminOrCust) {
-                    case 1:
-                        adminSignUp(adminArrList);
-                        break;
-                    case 2:
-                        customerSignUp();
-                        break;
-                    case 3:
-                        menu(adminArrList, customerArrList);
-                        break;
-                    case 4:
-                        System.exit(0);
-                        break;
-                    default:
+                    case 1 -> adminSignUp(adminArrList, customerArrList);
+                    case 2 -> customerSignUp(adminArrList, customerArrList);
+                    case 3 -> menu(adminArrList, customerArrList);
+                    case 4 -> System.exit(0);
+                    default -> {
                         vldOpt = false;
                         System.out.println(Font.BOLD_RED + "Please Enter the Valid Option.");
                         System.out.print(Font.RESET);
                         Thread.sleep(1000);
+                    }
                 }
             } catch (InputMismatchException inputMismatchException) {
                 vldOpt = false;
@@ -441,12 +430,247 @@ public class LoginSignupMenu {
         login(adminArrList, customerArrList);
     }
 
-    private static void adminMenu() {
-        System.out.println("admin menu");
+    public static void adminMenu(ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList, Admin admin) throws InterruptedException {
+        Scanner scanner = new Scanner(System.in);
+        int selection;
+        boolean optionVld = true;
+        String productID;
+        char productFilter;
+
+        do {
+            clearScreen();
+            System.out.print(Font.TEXT_CYAN);
+            System.out.printf(  "%55s", "+------------------+");
+            System.out.printf("%n%55s", "|    Admin Menu    |");
+            System.out.printf("%n%55s%n", "+------------------+");
+            System.out.print(Font.RESET);
+            System.out.println("Currently Logged In As " + Font.BOLD_YELLOW + admin.getName());
+            System.out.print(Font.RESET);
+            System.out.println("Staff ID: " + Font.BOLD_YELLOW + admin.getStaffID());
+            System.out.print(Font.RESET);
+            System.out.println();
+
+            System.out.println("1. Edit Products");
+            System.out.println("2. Order Products From Supplier");
+            System.out.println("3. Check Stock Quantity");
+            System.out.println("4. Sign Out");
+            System.out.println("5. Exit");
+
+            System.out.print("Selection: ");
+            try {
+                selection = scanner.nextInt();
+                scanner.nextLine();
+
+
+                switch (selection) {
+                    case 1:
+                        // edit products
+                        System.out.print("Please Enter Product ID: ");
+                        productID = scanner.next();
+                        scanner.nextLine();
+
+                        productFilter = productID.charAt(0);
+
+//                        ProductMixCart.linearSearchByProductID(productArrayList, productID, productFilter);
+                        break;
+                    case 2:
+                        // increment by id or name
+                        break;
+                    case 3:
+                        // check stock qty
+                        break;
+                    case 4:
+                        System.out.println(Font.TEXT_CYAN + "You Are Signed Out.");
+                        Thread.sleep(1000);
+                        menu(adminArrList, customerArrList);
+                        break;
+                    case 5:
+                        System.exit(0);
+                        break;
+                    default:
+                        optionVld = false;
+                        System.out.println(Font.BOLD_RED + "Please Enter the Valid Option.");
+                        System.out.print(Font.RESET);
+                        Thread.sleep(1000);
+                }
+            } catch (InputMismatchException inputMismatchException) {
+                optionVld = false;
+                System.out.println(Font.BOLD_RED + "Please Enter Only Integer.");
+                System.out.print(Font.RESET);
+                scanner.nextLine();
+                Thread.sleep(1000);
+            }
+        } while (!optionVld);
+
     }
 
-    private static void custMenu() {
-        System.out.println("Customer Menu");
+    public static void custMenu(ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList, Customer customer) throws InterruptedException {
+        int selection;
+        boolean vldOpt = true;
+        Scanner scanner = new Scanner(System.in);
+
+        do {
+            clearScreen();
+            System.out.print(Font.TEXT_CYAN);
+            System.out.printf(  "%55s", "+--------------------+");
+            System.out.printf("%n%55s", "|    Customer Menu   |");
+            System.out.printf("%n%55s%n", "+-------------------+");
+            System.out.print(Font.RESET);
+
+            System.out.println("1. Profile");
+            System.out.println("2. Make Order");
+            System.out.println("3. Cart");
+            System.out.println("4. Order History");
+            System.out.println("5. Payment");
+            System.out.println("6. Sign Out");
+            System.out.println("7. Exit");
+
+            System.out.print("Selection: ");
+            try {
+                selection = scanner.nextInt();
+
+                switch (selection) {
+                    case 1 -> custProfile(adminArrList, customerArrList, customer);
+//                    case 2 -> ProductMixCart.productMenu(productArrayList, cart);
+//                    case 3 -> menu(adminArrList, customerArrList);
+                    case 4 -> System.exit(0);
+                    default -> {
+                        vldOpt = false;
+                        System.out.println(Font.BOLD_RED + "Please Enter the Valid Option.");
+                        System.out.print(Font.RESET);
+                        Thread.sleep(1000);
+                    }
+                }
+            } catch (InputMismatchException inputMismatchException) {
+                vldOpt = false;
+                System.out.println(Font.BOLD_RED + "Please Enter Only Integer.");
+                System.out.print(Font.RESET);
+                scanner.nextLine();
+                Thread.sleep(1000);
+            }
+        } while (!vldOpt);
+    }
+
+    public static void custProfile(ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList, Customer customer) throws InterruptedException {
+        int option = 0;
+        boolean optionVld = true;
+        Scanner scanner = new Scanner(System.in);
+
+        do {
+            LoginSignupMenu.clearScreen();
+            System.out.print(Font.TEXT_CYAN);
+            System.out.printf(  "%55s", "+-------------+");
+            System.out.printf("%n%55s", "|    Profile    |");
+            System.out.printf("%n%55s%n", "+-----------+");
+            System.out.print(Font.RESET);
+
+            System.out.println();
+            System.out.println("Customer ID: " + Font.BOLD_YELLOW + customer.getCustomerID() + Font.RESET);
+            System.out.println("Name: " + Font.BOLD_YELLOW + customer.getName() + Font.RESET);
+            System.out.println("Email: " + Font.BOLD_YELLOW + customer.getEmail() + Font.RESET);
+            System.out.println("Phone No: " + Font.BOLD_YELLOW + customer.getPhoneNo() + Font.RESET);
+            System.out.println("Address: " + Font.BOLD_YELLOW + customer.getAddress() + Font.RESET);
+
+            System.out.println();
+            System.out.println("1. Edit Name");
+            System.out.println("2. Edit Email");
+            System.out.println("3. Edit Password");
+            System.out.println("4. Edit Phone No");
+            System.out.println("5. Edit Address");
+            System.out.println("6. Back to Previous Page");
+            System.out.println("7. Exit");
+
+            try {
+                option = scanner.nextInt();
+
+                switch (option) {
+                    case 1 -> editCustName(customer);
+                    case 2 -> editCustEmail(customer);
+                    case 3 -> editCustPassword(customer);
+//                    case 4 -> editPhoneNo();
+//                    case 5 -> editAddress();
+                    case 7 -> LoginSignupMenu.custMenu(adminArrList, customerArrList, customer);
+                    default -> {
+                        optionVld = false;
+                        System.out.println(Font.BOLD_RED + "Please Enter the Valid Option.");
+                        System.out.print(Font.RESET);
+                        Thread.sleep(1000);
+                    }
+                }
+            } catch (InputMismatchException inputMismatchException) {
+                optionVld = false;
+                System.out.println(Font.BOLD_RED + "Please Enter Only Integer.");
+                System.out.print(Font.RESET);
+                scanner.nextLine();
+                Thread.sleep(1000);
+            }
+        } while (!optionVld);
+
+    }
+
+    public static void editCustName(Customer customer) throws InterruptedException {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("New Customer Name: ");
+        customer.setName(scanner.nextLine());
+        System.out.println(Font.BOLD_GREEN + "Name Changed." + Font.RESET);
+        Thread.sleep(1000);
+    }
+
+    public static void editCustEmail(Customer customer) throws InterruptedException {
+        String email;
+        boolean emailVld = true;
+        Scanner scanner = new Scanner(System.in);
+
+        do {
+            System.out.print("New Customer Email: ");
+            email = scanner.next();
+            scanner.nextLine();
+
+            if (People.vldEmail(email)) {
+                customer.setEmail(email);
+                System.out.println(Font.BOLD_GREEN + "Email Changed." + Font.RESET);
+                Thread.sleep(1000);
+            }
+            else {
+                emailVld = false;
+                System.out.println(Font.BOLD_RED + "Please Enter A Valid Email");
+                System.out.print(Font.RESET);
+                scanner.nextLine();
+                Thread.sleep(1000);
+            }
+        } while (!emailVld);
+
+    }
+
+    public static void editCustPassword(Customer customer) throws InterruptedException {
+        String password;
+        String authCode;
+        boolean passwordVld = true;
+        boolean authCodeVld = true;
+        Scanner scanner = new Scanner(System.in);
+
+
+
+        do {
+            System.out.print("New Customer Password: ");
+            password = scanner.next();
+            scanner.nextLine();
+
+            if (People.vldPassword(password)) {
+                customer.setEmail(password);
+                System.out.println(Font.BOLD_GREEN + "Password Changed." + Font.RESET);
+                Thread.sleep(1000);
+            }
+            else {
+                passwordVld = false;
+                System.out.println(Font.BOLD_RED + "");
+                System.out.print(Font.RESET);
+                scanner.nextLine();
+                Thread.sleep(1000);
+            }
+        } while (!passwordVld);
+
     }
 
     public static void clearScreen() {
@@ -460,11 +684,4 @@ public class LoginSignupMenu {
             System.out.println();
         }
     }
-
-    public static void pressAnyKeyToContinue(){
-        Scanner scanner = new Scanner("System.in");
-        scanner.nextLine();
-        scanner.nextLine();
-    }
-
 }

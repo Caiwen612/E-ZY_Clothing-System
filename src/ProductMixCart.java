@@ -862,7 +862,7 @@ public class ProductMixCart {
     }
 
     //***************TODO: Linear Search Algorithm***************//
-    private static Product linearSearchByProductID(ArrayList<Product> productArrayList, String targetProductID, char filterProductID) {
+    public static Product linearSearchByProductID(ArrayList<Product> productArrayList, String targetProductID, char filterProductID) {
         Product targetProduct = null;
 
         for (Product product : productArrayList) {

@@ -1,11 +1,17 @@
+import utility.Font;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class Admin extends People {
     private static String doubleAuthCode;
     private static int staffCount = 0;
     private String staffID;
+
 
     public Admin() {
         this("", "", "", "");
@@ -67,36 +73,169 @@ public class Admin extends People {
 
     // modify, add, edit products
 
-//    public void modifyProduct(Object obj) {
-//        int selection;
-//        String productID;
-//        String productName;
-//
-//        Scanner scanner = new Scanner("System.in");
-//        System.out.println("Modify Product");
-//        System.out.println("-----------------");
-//        System.out.println("Do you wish to search the product by ID or name?");
-//        System.out.println("1. Product ID");
-//        System.out.println("2. Product Name");
-//        System.out.print("Selection: ");
-//        selection = scanner.nextInt();
-//
-//        switch (selection) {
-//            case 1:
-//                System.out.print("Please Enter Product ID: ");
-//                productID = scanner.next();
-//
-//                for (product:ProductMixCart.productArrayList)
-//
-//                if (obj instanceof Shirt) {
-//                }
-//
-//
-//            case 2:
-//                System.out.println("Please Enter Product Name: ");
-//                productName = scanner.nextLine();
-//        }
-//    }
+    public void modifyProduct(Object obj, ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList, Admin admin) throws InterruptedException {
+        int option = 0;
+        boolean optionVld = true;
+        Scanner scanner = new Scanner(System.in);
+
+        do {
+            LoginSignupMenu.clearScreen();
+            System.out.print(Font.TEXT_CYAN);
+            System.out.printf(  "%55s", "+-----------------------+");
+            System.out.printf("%n%55s", "|    Modify Products    |");
+            System.out.printf("%n%55s%n", "+----------------------+");
+            System.out.print(Font.RESET);
+
+            System.out.println("What do you wish to modify?");
+            System.out.println("1. Product Name");
+            System.out.println("2. Price");
+            System.out.println("3. Quantity");
+            System.out.println("4. Back to Previous Page");
+            System.out.println("5. Exit");
+
+            System.out.println();
+            System.out.print("Selection: ");
+            try {
+                option = scanner.nextInt();
+                scanner.nextLine();
+
+                switch (option) {
+                    case 1:
+                        if (obj instanceof Accessories) {
+                            System.out.println();
+                            System.out.println("Original Name: " + Font.BOLD_YELLOW + ((Accessories) obj).getName());
+                            System.out.print(Font.RESET);
+                            System.out.print("New Name: ");
+                            ((Accessories) obj).setName(scanner.nextLine());
+                        }
+                        else if (obj instanceof Pant) {
+                            System.out.println();
+                            System.out.println("Original Name: " + Font.BOLD_YELLOW + ((Pant) obj).getName());
+                            System.out.print(Font.RESET);
+                            System.out.print("New Name: ");
+                            ((Pant) obj).setName(scanner.nextLine());
+
+                        }
+                        else if (obj instanceof Shirt) {
+                            System.out.println();
+                            System.out.println("Original Name: " + Font.BOLD_YELLOW + ((Shirt) obj).getName());
+                            System.out.print(Font.RESET);
+                            System.out.print("New Name: ");
+                            ((Shirt) obj).setName(scanner.nextLine());
+
+                        }
+                        else if (obj instanceof Shoe) {
+                            System.out.println();
+                            System.out.println("Original Name: " + Font.BOLD_YELLOW + ((Shoe) obj).getName());
+                            System.out.print(Font.RESET);
+                            System.out.print("New Name: ");
+                            ((Shoe) obj).setName(scanner.nextLine());
+
+                        }
+                        else {
+                            System.out.println(Font.BOLD_RED + "No Product Found.");
+                            System.out.print(Font.RESET);
+                        }
+                        break;
+
+                    case 2:
+                        if (obj instanceof Accessories) {
+                            System.out.println();
+                            System.out.println("Original Price: " + Font.BOLD_YELLOW + ((Accessories) obj).getPrice());
+                            System.out.print(Font.RESET);
+                            System.out.print("New Price: RM");
+                            ((Accessories) obj).setPrice(scanner.nextDouble());
+                            scanner.nextLine();
+                        }
+                        else if (obj instanceof Pant) {
+                            System.out.println();
+                            System.out.println("Original Price: " + Font.BOLD_YELLOW + ((Pant) obj).getPrice());
+                            System.out.print(Font.RESET);
+                            System.out.print("New Price: RM");
+                            ((Pant) obj).setPrice(scanner.nextDouble());
+                            scanner.nextLine();
+                        }
+                        else if (obj instanceof Shirt) {
+                            System.out.println();
+                            System.out.println("Original Price: " + Font.BOLD_YELLOW + ((Shirt) obj).getPrice());
+                            System.out.print(Font.RESET);
+                            System.out.print("New Price: RM");
+                            ((Shirt) obj).setPrice(scanner.nextDouble());
+                            scanner.nextLine();
+                        }
+                        else if (obj instanceof Shoe) {
+                            System.out.println();
+                            System.out.println("Original Price: " + Font.BOLD_YELLOW + ((Shoe) obj).getPrice());
+                            System.out.print(Font.RESET);
+                            System.out.print("New Price: RM");
+                            ((Shoe) obj).setPrice(scanner.nextDouble());
+                            scanner.nextLine();
+                        }
+                        else {
+                            System.out.println(Font.BOLD_RED + "No Product Found.");
+                            System.out.print(Font.RESET);
+                        }
+                        break;
+                    case 3:
+                        if (obj instanceof Accessories) {
+                            System.out.println();
+                            System.out.println("Original Quantity: " + Font.BOLD_YELLOW + ((Accessories) obj).getQty());
+                            System.out.print(Font.RESET);
+                            System.out.print("New Quantity: ");
+                            ((Accessories) obj).setQty(scanner.nextInt());
+                            scanner.nextLine();
+                        }
+                        else if (obj instanceof Pant) {
+                            System.out.println();
+                            System.out.println("Original Price: " + Font.BOLD_YELLOW + ((Pant) obj).getPrice());
+                            System.out.print(Font.RESET);
+                            System.out.print("New Price: RM");
+                            ((Pant) obj).setPrice(scanner.nextInt());
+                            scanner.nextLine();
+                        }
+                        else if (obj instanceof Shirt) {
+                            System.out.println();
+                            System.out.println("Original Price: " + Font.BOLD_YELLOW + ((Shirt) obj).getPrice());
+                            System.out.print(Font.RESET);
+                            System.out.print("New Price: RM");
+                            ((Shirt) obj).setPrice(scanner.nextInt());
+                            scanner.nextLine();
+                        }
+                        else if (obj instanceof Shoe) {
+                            System.out.println();
+                            System.out.println("Original Price: " + Font.BOLD_YELLOW + ((Shoe) obj).getPrice());
+                            System.out.print(Font.RESET);
+                            System.out.print("New Price: RM");
+                            ((Shoe) obj).setPrice(scanner.nextInt());
+                            scanner.nextLine();
+                        }
+                        else {
+                            System.out.println(Font.BOLD_RED + "No Product Found.");
+                            System.out.print(Font.RESET);
+                        }
+                        break;
+                    case 4:
+                        LoginSignupMenu.adminMenu(adminArrList, customerArrList, admin);
+                        break;
+                    case 5:
+                        System.exit(0);
+                        break;
+                    default:
+                        optionVld = false;
+                        System.out.println(Font.BOLD_RED + "Please Enter the Valid Option.");
+                        System.out.print(Font.RESET);
+                        Thread.sleep(1000);
+                }
+            } catch (InputMismatchException inputMismatchException) {
+                optionVld = false;
+                System.out.println(Font.BOLD_RED + "Please Enter Only Integer.");
+                System.out.print(Font.RESET);
+                scanner.nextLine();
+                Thread.sleep(1000);
+            }
+        } while (!optionVld);
+    }
+
 
 
     // report feature

@@ -60,7 +60,6 @@ public class Customer extends People{
         setCustomerID("C" + custCount);
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

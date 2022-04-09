@@ -62,7 +62,6 @@ public class People {
             return true;
         }
         else {
-            System.out.println("The email is not valid.");
             return false;
         }
     }

@@ -37,12 +37,20 @@ public class Product implements Cloneable  {
         return this.name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public int getRating() {
         return this.rating;
     }
 
     public double getPrice() {
         return this.price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public int getQty() {
