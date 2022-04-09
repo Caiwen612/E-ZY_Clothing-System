@@ -4,23 +4,23 @@ public class Customer extends People{
     private String customerID;
     private String address;
     private Cart cart;
-//    private Order orderHistory;
+    private Order orderHistory;
     private static int custCount = 0;
 
-    public Customer(String address, Cart cart) {
-        this("", "", "", "", "", null);
+    public Customer(String address, Cart cart, Order orderHistory) {
+        this("", "", "", "", "", new Cart(), new Order());
         custCount++;
     }
 
-    public Customer(String name, String email, String password, String phoneNo, String address, Cart cart) {
+    public Customer(String name, String email, String password, String phoneNo, String address, Cart cart, Order orderHistory) {
         super(name, email, password, phoneNo);
         this.address = address;
         this.cart = cart;
+        this.orderHistory = orderHistory;
         custCount++;
     }
 
     // getter and setter
-
     public String getCustomerID() {
         return customerID;
     }

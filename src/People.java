@@ -110,16 +110,6 @@ public class People {
         }
     }
 
-    public boolean vldLoginCred(String email, String password) {
-        if (email.equals(this.email) && password.equals(this.password)) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
