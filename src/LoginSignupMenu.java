@@ -231,7 +231,7 @@ public class LoginSignupMenu {
 
                 switch (adminOrCust) {
                     case 1:
-                        adminSignUp();
+                        adminSignUp(adminArrList);
                         break;
                     case 2:
                         customerSignUp();
@@ -258,8 +258,9 @@ public class LoginSignupMenu {
         } while (!vldOpt);
     }
 
-    private static void adminSignUp() {
-        boolean authValid = false;
+    private static void adminSignUp(ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList) throws InterruptedException {
+        boolean authValid = false, emailValid = false, passwordValid = false, phoneNoValid = false, confirmPwVld = false;
+        String adminName, adminEmail, adminPassword, adminPhoneNo, adminPwConfirm;
         String authCodeInput;
         Scanner scanner = new Scanner(System.in);
 
@@ -270,17 +271,174 @@ public class LoginSignupMenu {
             authCodeInput = scanner.next();
             // clear buffer
             scanner.nextLine();
-            
+
             if (authCodeInput.equals(Integer.toString(AuthCodeMultithreading.authCode))) {
                 authValid = true;
             }
-
+            else {
+                System.out.println(Font.BOLD_RED + "Wrong Auth Code Entered, Please Try again.");
+                System.out.print(Font.RESET);
+                System.out.println();
+                Thread.sleep(1000);
+            }
         } while (!authValid);
 
+        System.out.print("Name: ");
+        adminName = scanner.nextLine();
+
+        do {
+            System.out.print("Email: ");
+            adminEmail = scanner.next();
+            scanner.nextLine();
+            if (People.vldEmail(adminEmail)) {
+                emailValid = true;
+            }
+            else {
+                System.out.println(Font.BOLD_RED + "Please Enter A Valid Email.");
+                System.out.print(Font.RESET);
+                System.out.println();
+                Thread.sleep(1000);
+            }
+        } while (!emailValid);
+
+        do {
+            System.out.print("Password: ");
+            adminPassword = scanner.next();
+            scanner.nextLine();
+
+            if (People.vldPassword(adminPassword)) {
+                passwordValid = true;
+            }
+            else {
+                System.out.println(Font.BOLD_RED + "Password Must Include Alphabet, Number and At Least 6 Characters.");
+                System.out.print(Font.RESET);
+                System.out.println();
+                Thread.sleep(1000);
+            }
+        } while (!passwordValid);
+
+
+        do {
+            System.out.print("Confirm Password: ");
+            adminPwConfirm = scanner.next();
+            scanner.nextLine();
+            if (adminPwConfirm.equals(adminPassword)) {
+                confirmPwVld = true;
+            }
+            else {
+                System.out.println(Font.BOLD_RED + "The Password Does Not Match with Previous Input");
+                System.out.print(Font.RESET);
+                System.out.println();
+                Thread.sleep(1000);
+            }
+        } while (!confirmPwVld);
+
+        do {
+            System.out.print("Phone Number (999-9999999(9): ");
+            adminPhoneNo = scanner.next();
+            scanner.nextLine();
+
+            if (People.vldPhoneNo(adminPhoneNo)) {
+                phoneNoValid = true;
+            }
+            else {
+                System.out.println(Font.BOLD_RED + "Phone Number Must be in the Format 999-9999999(9)");
+                System.out.print(Font.RESET);
+                System.out.println();
+                Thread.sleep(1000);
+            }
+        } while (!phoneNoValid);
+
+
+        Admin newAdmin = new Admin(adminName, adminEmail, adminPassword, adminPhoneNo);
+        newAdmin.generateStaffID();
+        adminArrList.add(newAdmin);
+
+        // back to login
+        login(adminArrList, customerArrList);
     }
 
-    private static void customerSignUp() {
+    private static void customerSignUp(ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList) throws InterruptedException {
+        boolean emailValid = false, passwordValid = false, phoneNoValid = false, confirmPwVld = false;
+        String custName, custEmail, custPassword, custPhoneNo, custPwConfirm, custAddress;
+        Scanner scanner = new Scanner(System.in);
 
+        System.out.print("Name: ");
+        custName = scanner.nextLine();
+
+        do {
+            System.out.print("Email: ");
+            custEmail = scanner.next();
+            scanner.nextLine();
+            if (People.vldEmail(custEmail)) {
+                emailValid = true;
+            }
+            else {
+                System.out.println(Font.BOLD_RED + "Please Enter A Valid Email.");
+                System.out.print(Font.RESET);
+                System.out.println();
+                Thread.sleep(1000);
+            }
+        } while (!emailValid);
+
+        do {
+            System.out.print("Password: ");
+            custPassword = scanner.next();
+            scanner.nextLine();
+
+            if (People.vldPassword(custPassword)) {
+                passwordValid = true;
+            }
+            else {
+                System.out.println(Font.BOLD_RED + "Password Must Include Alphabet, Number and At Least 6 Characters.");
+                System.out.print(Font.RESET);
+                System.out.println();
+                Thread.sleep(1000);
+            }
+        } while (!passwordValid);
+
+
+        do {
+            System.out.print("Confirm Password: ");
+            custPwConfirm = scanner.next();
+            scanner.nextLine();
+            if (custPwConfirm.equals(custPassword)) {
+                confirmPwVld = true;
+            }
+            else {
+                System.out.println(Font.BOLD_RED + "The Password Does Not Match with Previous Input");
+                System.out.print(Font.RESET);
+                System.out.println();
+                Thread.sleep(1000);
+            }
+        } while (!confirmPwVld);
+
+        do {
+            System.out.print("Phone Number (999-9999999(9): ");
+            custPhoneNo = scanner.next();
+            scanner.nextLine();
+
+            if (People.vldPhoneNo(custPhoneNo)) {
+                phoneNoValid = true;
+            }
+            else {
+                System.out.println(Font.BOLD_RED + "Phone Number Must be in the Format 999-9999999(9)");
+                System.out.print(Font.RESET);
+                System.out.println();
+                Thread.sleep(1000);
+            }
+        } while (!phoneNoValid);
+
+        System.out.print("Address: ");
+        custAddress = scanner.nextLine();
+
+
+        Customer newCust = new Customer(custName, custEmail, custPassword, custPhoneNo, custAddress, new Cart(), new Order());
+        newCust.generateCustID();
+        customerArrList.add(newCust);
+
+        // back to login
+        login(adminArrList, customerArrList);
     }
 
     private static void adminMenu() {

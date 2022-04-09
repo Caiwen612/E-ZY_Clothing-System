@@ -54,9 +54,9 @@ public class People {
 
 
     // methods
-    public boolean vldEmail() {
+    public static boolean vldEmail(String email) {
         Pattern emailPtn = Pattern.compile("^(.+)@(.+)$");
-        Matcher emailMatch = emailPtn.matcher(this.email);
+        Matcher emailMatch = emailPtn.matcher(email);
 
         if (emailMatch.matches()) {
             return true;
@@ -67,24 +67,24 @@ public class People {
         }
     }
 
-    public boolean vldPassword() {
+    public static boolean vldPassword(String password) {
         boolean hasAlpha = false;
         boolean hasNum = false;
         boolean enoughLength = false;
 
-        if (this.password.length() >= 6) {
+        if (password.length() >= 6) {
             enoughLength = true;
         }
 
-        for (int i = 0; i < this.password.length(); i++) {
-            if (Character.isDigit(this.password.charAt(i))) {
+        for (int i = 0; i < password.length(); i++) {
+            if (Character.isDigit(password.charAt(i))) {
                 hasNum = true;
                 break;
             }
         }
 
-        for (int j = 0; j < this.password.length(); j++) {
-            if (Character.isLetter(this.password.charAt(j))) {
+        for (int j = 0; j < password.length(); j++) {
+            if (Character.isLetter(password.charAt(j))) {
                 hasAlpha = true;
                 break;
             }
@@ -98,9 +98,9 @@ public class People {
         }
     }
 
-    public boolean vldPhoneNo() {
+    public static boolean vldPhoneNo(String phoneNo) {
         Pattern phonePtn = Pattern.compile("[0-9]{3}-[0-9]{7,8}");
-        Matcher phoneNoMatch = phonePtn.matcher(this.phoneNo);
+        Matcher phoneNoMatch = phonePtn.matcher(phoneNo);
 
         if (phoneNoMatch.matches()) {
             return true;
