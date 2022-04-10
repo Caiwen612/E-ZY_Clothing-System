@@ -521,7 +521,6 @@ public class DriverProgram {
         login(adminArrList, customerArrList);
     }
 
-    // incomplete
     public static void adminMenu(ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList, Admin admin) throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
         int selection;
@@ -566,21 +565,26 @@ public class DriverProgram {
                         productFilter = productID.charAt(0);
                         obj = linearSearchByProductID(productArrayList, productID, productFilter);
                         admin.modifyProduct(obj,adminArrList, customerArrList,admin);
-                        System.out.println("1. ");
                         break;
                     case 2:
-                        // edit products
+                        // increment quantity
                         System.out.print("Please Enter Product ID: " + Font.TEXT_YELLOW);
                         productID = scanner.next();
                         System.out.print(Font.RESET);
                         scanner.nextLine();
                         productFilter = productID.charAt(0);
                         obj = linearSearchByProductID(productArrayList, productID, productFilter);
-
-                        // increment by id or name
+                        admin.addStock(obj, adminArrList, customerArrList, admin);
                         break;
                     case 3:
                         // check stock qty
+                        System.out.print("Please Enter Product ID: " + Font.TEXT_YELLOW);
+                        productID = scanner.next();
+                        System.out.print(Font.RESET);
+                        scanner.nextLine();
+                        productFilter = productID.charAt(0);
+                        obj = linearSearchByProductID(productArrayList, productID, productFilter);
+                        Admin.checkQuantity(obj, adminArrList, customerArrList, admin);
                         break;
                     case 4:
                         System.out.println(Font.TEXT_CYAN + "You Are Signed Out.");
@@ -638,8 +642,8 @@ public class DriverProgram {
                     case 1 -> custProfile(adminArrList, customerArrList, customer);
                     case 2 -> productMenu(productArrayList, cart,customer);
                     case 3 -> cartMenu(productArrayList, cart,customer);
-//                    case 4 -> customer.getOrderHistory();
-//                    case 5 -> PaymentMenu.paymentMenu(cart, payment);
+                    case 4 -> orderHistory(customer);
+                    case 5 -> PaymentMenu.paymentMenu(cart, payment);
                     case 6 -> login(adminArrList, customerArrList);
                     case 7 -> System.exit(0);
                     default -> {

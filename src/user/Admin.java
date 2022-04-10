@@ -1,6 +1,7 @@
 package user;
 
 
+import driver.DriverProgram;
 import product.Accessories;
 import product.Pant;
 import product.Shirt;
@@ -84,20 +85,20 @@ public class Admin extends People {
 
     public void modifyProduct(Object obj, ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList, Admin admin) throws InterruptedException {
         int option = 0;
-        boolean optionVld = true;
+        boolean optionVld = true, productVld = true;
         Scanner scanner = new Scanner(System.in);
 
         do {
-
+            productVld = true;
             utility.utility.clearScreen();
             System.out.print(Font.TEXT_CYAN);
-            System.out.printf(  "%55s", "+-----------------------+");
-            System.out.printf("%n%55s", "|    Modify Products    |");
-            System.out.printf("%n%55s%n", "+----------------------+");
+            System.out.printf(  "%55s", "+---------------------+");
+            System.out.printf("%n%55s", "|    Edit Products    |");
+            System.out.printf("%n%55s%n", "+--------------------+");
             System.out.print(Font.RESET);
 
             System.out.println("What do you wish to modify?");
-            System.out.println("1. product.Product Name");
+            System.out.println("1. Product Name");
             System.out.println("2. Price");
             System.out.println("3. Quantity");
             System.out.println("4. Back to Previous Page");
@@ -143,7 +144,8 @@ public class Admin extends People {
 
                         }
                         else {
-                            System.out.println(Font.BOLD_RED + "No product.Product Found.");
+                            productVld = false;
+                            System.out.println(Font.BOLD_RED + "No Product Found.");
                             System.out.print(Font.RESET);
                         }
                         break;
@@ -182,7 +184,8 @@ public class Admin extends People {
                             scanner.nextLine();
                         }
                         else {
-                            System.out.println(Font.BOLD_RED + "No product.Product Found.");
+                            productVld = false;
+                            System.out.println(Font.BOLD_RED + "No Product Found.");
                             System.out.print(Font.RESET);
                         }
                         break;
@@ -220,7 +223,8 @@ public class Admin extends People {
                             scanner.nextLine();
                         }
                         else {
-                            System.out.println(Font.BOLD_RED + "No product.Product Found.");
+                            productVld = false;
+                            System.out.println(Font.BOLD_RED + "No Product Found.");
                             System.out.print(Font.RESET);
                         }
                         break;
@@ -244,10 +248,89 @@ public class Admin extends People {
                 scanner.nextLine();
                 Thread.sleep(1000);
             }
-        } while (!optionVld);
+        } while (!optionVld && !productVld);
+
+        adminMenu(adminArrList, customerArrList, admin);
     }
 
+    // increment quantity
+    public void addStock(Object obj, ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList, Admin admin) throws InterruptedException {
+        boolean qtyVld = true, productVld = true;
+        int qty;
+        Scanner scanner = new Scanner(System.in);
 
+        do {
+            productVld = true;
+            System.out.print("How Much Quantity Do You Want to Add: " + Font.TEXT_YELLOW);
+            try {
+                qty = scanner.nextInt();
+                scanner.nextLine();
 
+                if (qty <= 0) {
+                    qtyVld = false;
+                    System.out.println(Font.BOLD_RED + "Please Enter Only Positive Numbers." + Font.RESET);
+                    Thread.sleep(1000);
+                }
+                else {
+                    qtyVld = true;
+
+                    if (obj instanceof Accessories) {
+                        ((Accessories) obj).setQty(qty);
+                    }
+                    else if (obj instanceof Pant) {
+                        ((Pant) obj).setQty(qty);
+                    }
+                    else if (obj instanceof Shirt) {
+                        ((Shirt) obj).setQty(qty);
+                    }
+                    else if (obj instanceof Shoe) {
+                        ((Shoe) obj).setQty(qty);
+                    }
+                    else {
+                        productVld = false;
+                        System.out.println(Font.BOLD_RED + "No Product Found.");
+                        System.out.print(Font.RESET);
+                    }
+
+                }
+            } catch (InputMismatchException inputMismatchException) {
+                qtyVld = false;
+                System.out.println(Font.BOLD_RED + "Please Enter Only Integer.");
+                System.out.print(Font.RESET);
+                scanner.nextLine();
+                Thread.sleep(1000);
+            }
+        } while (!qtyVld && !productVld);
+
+        adminMenu(adminArrList, customerArrList, admin);
+    }
+
+    // check quantity
+    public static void checkQuantity(Object obj, ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList, Admin admin) throws InterruptedException {
+        int qty;
+
+        if (obj instanceof Accessories) {
+            qty = ((Accessories) obj).getQty();
+            System.out.println("Quantity: " + Font.TEXT_YELLOW + qty);
+        }
+        else if (obj instanceof Pant) {
+            qty = ((Pant) obj).getQty();
+            System.out.println("Quantity: " + Font.TEXT_YELLOW + qty);
+        }
+        else if (obj instanceof Shirt) {
+            qty = ((Shirt) obj).getQty();
+            System.out.println("Quantity: " + Font.TEXT_YELLOW + qty);
+        }
+        else if (obj instanceof Shoe) {
+            qty = ((Shoe) obj).getQty();
+            System.out.println("Quantity: " + Font.TEXT_YELLOW + qty);
+        }
+        else {
+            System.out.println(Font.BOLD_RED + "No Product Found.");
+            System.out.print(Font.RESET);
+        }
+        DriverProgram.pressAnyKeyToContinue();
+        adminMenu(adminArrList, customerArrList, admin);
+    }
     // report feature
 }
