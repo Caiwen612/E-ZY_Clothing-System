@@ -1,6 +1,11 @@
+package user;
+
+import cart.Cart;
+import order.Order;
+
 import java.util.Objects;
 
-public class Customer extends People{
+public class Customer extends People {
     private String customerID;
     private String address;
     private Cart cart;
@@ -76,7 +81,7 @@ public class Customer extends People{
 
     @Override
     public String toString() {
-        return "Customer{" +
+        return "user.Customer{" +
                 "customerID='" + customerID + '\'' +
                 ", address='" + address + '\'' +
                 ", cart=" + cart +

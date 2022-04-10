@@ -1,3 +1,11 @@
+package driver;
+
+import cart.Cart;
+import payment.Bank;
+import payment.DebitCredit;
+import payment.EWallet;
+import payment.Payment;
+import product.*;
 import utility.Font;
 import utility.Validation;
 import utility.ValidationException;
@@ -26,13 +34,13 @@ public class PaymentMenu {
         clearScreen();
         System.out.print(Font.TEXT_CYAN);
         System.out.printf("%55s",  "+-------------+");
-        System.out.printf("%n%55s","|   Payment   |");
+        System.out.printf("%n%55s","|   payment.Payment   |");
         System.out.printf("%n%55s","+-------------+");
         System.out.print(Font.RESET);
         System.out.println(Font.TEXT_BRIGHT_MAGENTA);
-        System.out.printf("%59s","Choose A Payment Method");
+        System.out.printf("%59s","Choose A payment.Payment Method");
         System.out.print(Font.RESET);
-        System.out.printf("%n%61s","[1] Bank             ");
+        System.out.printf("%n%61s","[1] payment.Bank             ");
         System.out.printf("%n%61s","[2] E-Wallet         ");
         System.out.printf("%n%61s","[3] Debit/Credit     ");
 
@@ -80,15 +88,15 @@ public class PaymentMenu {
     }
 
     private static void setProducts(ArrayList<Product> productArrayList) {
-        //Shirt
+        //product.Shirt
         Product p1 = new Shirt("Crew Tee", 25.30, 20, 3);
         Product p2 = new Shirt("Hoodie", 50.20, 10, 4);
         Product p3 = new Shirt("Jacket", 67.70, 30, 2);
-        Product p4 = new Shirt("Poplin Shirt", 43.80, 40, 4);
+        Product p4 = new Shirt("Poplin product.Shirt", 43.80, 40, 4);
         Product p5 = new Shirt("Dress", 40.50, 30, 5);
         Product p6 = new Shirt("Jumpsuit", 70.60, 25, 3);
         Product p7 = new Shirt("Sport wear", 80.30, 66, 5);
-        //Pant
+        //product.Pant
         Product p8 = new Pant("Jeans", 30.50, 12, 5);
         Product p9 = new Pant("Trousers", 40.20, 5, 5);
         Product p10 = new Pant("Cotton pants", 35.30, 20, 4);
@@ -96,14 +104,14 @@ public class PaymentMenu {
         Product p12 = new Pant("Ripped pants", 43.20, 19, 2);
         Product p13 = new Pant("Sport pan", 30.60, 45, 4);
         Product p14 = new Pant("Cropped pant", 39.20, 45, 1);
-        //Accessories
+        //product.Accessories
         Product p15 = new Accessories("Cap", 14.60, 30, 2);
         Product p16 = new Accessories("Short wallet", 20.60, 25, 3);
         Product p17 = new Accessories("Long wallet", 30.60, 17, 2);
         Product p18 = new Accessories("Earring", 10.30, 30, 5);
         Product p19 = new Accessories("Headband", 15.40, 50, 4);
         Product p20 = new Accessories("Sunglasses", 12.50, 45, 3);
-        //Shoe
+        //product.Shoe
         Product p21 = new Shoe("Running shoe", 60, 25, 4);
         Product p22 = new Shoe("Leather shoe", 300, 10, 5);
         Product p23 = new Shoe("Basketball shoe", 200, 25, 3);
@@ -140,12 +148,12 @@ public class PaymentMenu {
         productArrayList.add(p26);
     }
 
-    // Receive Bank details
+    // Receive payment.Bank details
     public static void bank(Payment bank, Cart cart) {
         clearScreen();
         bank.setTotalPrice(cart.getTotalPrice());
         System.out.println(Font.TEXT_BRIGHT_MAGENTA);
-        System.out.printf("%67s","You have chose Bank as payment method");
+        System.out.printf("%67s","You have chose payment.Bank as payment method");
         System.out.println(Font.RESET);
         System.out.printf("%59s","Total Price (RM): " + cart.getTotalPrice());
 

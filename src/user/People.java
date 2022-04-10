@@ -1,3 +1,5 @@
+package user;
+
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -124,7 +126,7 @@ public class People {
 
     @Override
     public String toString() {
-        return "People{" +
+        return "user.People{" +
                 "name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +

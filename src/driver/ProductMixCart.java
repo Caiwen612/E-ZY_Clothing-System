@@ -1,3 +1,7 @@
+package driver;
+
+import cart.Cart;
+import product.*;
 import utility.Font;
 import utility.Validation;
 import utility.ValidationException;
@@ -17,7 +21,7 @@ public class ProductMixCart {
         //Start
         setProducts(productArrayList);
         //Testing purpose
-//        for(Product p : productArrayList){
+//        for(product.Product p : productArrayList){
 //            cart.addItem(p.clone(),15);
 //        }
         cart.addItem(productArrayList.get(2).clone(),15);
@@ -36,15 +40,15 @@ public class ProductMixCart {
     }
 
     private static void setProducts(ArrayList<Product> productArrayList) {
-        //Shirt
+        //product.Shirt
         Product p1 = new Shirt("Crew Tee", 25.30, 20, 3);
         Product p2 = new Shirt("Hoodie", 50.20, 10, 4);
         Product p3 = new Shirt("Jacket", 67.70, 30, 2);
-        Product p4 = new Shirt("Poplin Shirt", 43.80, 40, 4);
+        Product p4 = new Shirt("Poplin product.Shirt", 43.80, 40, 4);
         Product p5 = new Shirt("Dress", 40.50, 30, 5);
         Product p6 = new Shirt("Jumpsuit", 70.60, 25, 3);
         Product p7 = new Shirt("Sport wear", 80.30, 66, 5);
-        //Pant
+        //product.Pant
         Product p8 = new Pant("Jeans", 30.50, 12, 5);
         Product p9 = new Pant("Trousers", 40.20, 5, 5);
         Product p10 = new Pant("Cotton pants", 35.30, 20, 4);
@@ -52,14 +56,14 @@ public class ProductMixCart {
         Product p12 = new Pant("Ripped pants", 43.20, 19, 2);
         Product p13 = new Pant("Sport pan", 30.60, 45, 4);
         Product p14 = new Pant("Cropped pant", 39.20, 45, 1);
-        //Accessories
+        //product.Accessories
         Product p15 = new Accessories("Cap", 14.60, 30, 2);
         Product p16 = new Accessories("Short wallet", 20.60, 25, 3);
         Product p17 = new Accessories("Long wallet", 30.60, 17, 2);
         Product p18 = new Accessories("Earring", 10.30, 30, 5);
         Product p19 = new Accessories("Headband", 15.40, 50, 4);
         Product p20 = new Accessories("Sunglasses", 12.50, 45, 3);
-        //Shoe
+        //product.Shoe
         Product p21 = new Shoe("Running shoe", 60, 25, 4);
         Product p22 = new Shoe("Leather shoe", 300, 10, 5);
         Product p23 = new Shoe("Basketball shoe", 200, 25, 3);
@@ -97,13 +101,13 @@ public class ProductMixCart {
 
     }
 
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: Cart Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: cart.Cart Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
     private static void cartMenu(ArrayList<Product> productArrayList, Cart cart) throws InterruptedException {
         //Create a new cart
         clearScreen();
         System.out.print(Font.TEXT_CYAN);
         System.out.printf(  "%55s",  "+------------+");
-        System.out.printf("%n%55s","|    Cart    |");
+        System.out.printf("%n%55s","|    cart.Cart    |");
         System.out.printf("%n%55s","+------------+");
         System.out.print(Font.RESET);
 
@@ -112,7 +116,7 @@ public class ProductMixCart {
         System.out.println(" +=================================================================================================+   ");
         System.out.print(" |");
         //Setup for cart title
-        System.out.printf("%12s", "Cart No  |");
+        System.out.printf("%12s", "cart.Cart No  |");
         System.out.printf("%7s", "ID  |");
         System.out.printf("%21s", "Name        |");
         System.out.printf("%14s", "Price    |");
@@ -126,7 +130,7 @@ public class ProductMixCart {
         System.out.printf("%n%60s",  "[2] Edit Item      ");
         System.out.printf("%n%60s",  "[3] Remove Item    ");
         System.out.printf("%n%60s",  "[4] Sort Item      ");
-        System.out.printf("%n%60s",  "[5] Make Payment   ");
+        System.out.printf("%n%60s",  "[5] Make payment.Payment   ");
         System.out.printf("%n%60s",  "[6] Back           ");
 
         // Get input for cart option
@@ -235,12 +239,12 @@ public class ProductMixCart {
                 }
             } while (quantityOptionError);
             cart.editItem(itemIndex,quantityOption);
-            System.out.printf("%n%63s","Press enter key to go back Cart menu");
+            System.out.printf("%n%63s","Press enter key to go back cart.Cart menu");
             pressAnyKeyToContinue();
             cartMenu(productArrayList,cart);
         } else{
             System.out.println(Font.TEXT_YELLOW);
-            System.out.printf("%63s","Press enter key to go back Cart menu");
+            System.out.printf("%63s","Press enter key to go back cart.Cart menu");
             pressAnyKeyToContinue();
             cartMenu(productArrayList,cart);
         }
@@ -285,13 +289,13 @@ public class ProductMixCart {
         } while (removeItemError);
         if (removeItem == 'Y') {
             cart.removeItem(itemIndex);
-            System.out.printf("%n%63s","Press enter key to go back Cart menu");
+            System.out.printf("%n%63s","Press enter key to go back cart.Cart menu");
             pressAnyKeyToContinue();
             cartMenu(productArrayList,cart);
 
         } else{
             System.out.println(Font.TEXT_YELLOW);
-            System.out.printf("%63s","Press enter key to go back Cart menu");
+            System.out.printf("%63s","Press enter key to go back cart.Cart menu");
             pressAnyKeyToContinue();
             cartMenu(productArrayList,cart);
         }
@@ -317,7 +321,7 @@ public class ProductMixCart {
         System.out.printf("%n%75s",("[6] Sort by quantity " + Font.TEXT_YELLOW + "[DESC]" + Font.RESET));
         System.out.printf("%n%85s",("[7] Sort by qty and total price " + Font.TEXT_YELLOW + "[ASC]" + Font.RESET));
         System.out.printf("%n%86s",("[8] Sort by qty and total price " + Font.TEXT_YELLOW + "[DESC]" + Font.RESET));
-        System.out.printf("%n%61s","[9] Back to Cart Menu ");
+        System.out.printf("%n%61s","[9] Back to cart.Cart Menu ");
 
         boolean sortOptionError = true;
         int sortOption = 0;
@@ -364,27 +368,27 @@ public class ProductMixCart {
                 break;
         }
         System.out.println(Font.TEXT_YELLOW);
-        System.out.printf("%67s","Press enter key to go back Cart menu");
+        System.out.printf("%67s","Press enter key to go back cart.Cart menu");
         pressAnyKeyToContinue();
         cartMenu(productArrayList,cart);
     }
 
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: End Cart Menu~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: End cart.Cart Menu~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: Product Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: product.Product Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
     public static void productMenu(ArrayList<Product> productArrayList,Cart cart) throws InterruptedException {
         //Display product menu
         clearScreen();
         System.out.print(Font.TEXT_CYAN);
         System.out.printf(  "%59s", "+---------------+");
-        System.out.printf("%n%59s", "|    Product    |");
+        System.out.printf("%n%59s", "|    product.Product    |");
         System.out.printf("%n%59s", "+---------------+");
         System.out.print(Font.RESET);
         System.out.println();
         System.out.printf(  "%64s", "[1] Search product        ");
         System.out.printf("%n%64s", "[2] Category              ");
         System.out.printf("%n%64s", "[3] Back to previous Menu ");
-        System.out.printf("%n%64s", "[4] Back to Cart Menu     ");
+        System.out.printf("%n%64s", "[4] Back to cart.Cart Menu     ");
         // Get input for cart option
         boolean cartOptionError = true;
         int cartOption = 0;
@@ -428,11 +432,11 @@ public class ProductMixCart {
         clearScreen();
         System.out.print(Font.TEXT_CYAN);
         System.out.printf(  "%66s", "+----------------------+");
-        System.out.printf("%n%66s", "|    Search Product    |");
+        System.out.printf("%n%66s", "|    Search product.Product    |");
         System.out.printf("%n%66s", "+----------------------+");
         System.out.print(Font.RESET);
-        System.out.printf("%n%71s", "[1] Product ID            ");
-        System.out.printf("%n%71s", "[2] Product Name          ");
+        System.out.printf("%n%71s", "[1] product.Product ID            ");
+        System.out.printf("%n%71s", "[2] product.Product Name          ");
         System.out.printf("%n%71s", "[3] Price Range           ");
         System.out.printf("%n%71s", "[4] Back to previous      ");
         System.out.println();
@@ -476,11 +480,11 @@ public class ProductMixCart {
     private static void searchProductByProductID(ArrayList<Product> productArrayList, Cart cart) throws InterruptedException {
         clearScreen();
         System.out.print(Font.TEXT_YELLOW);
-        System.out.printf("%n%68s", "T For Shirt               ");
-        System.out.printf("%n%68s", "P For Pant                ");
-        System.out.printf("%n%68s", "A For Accessories         ");
-        System.out.printf("%n%68s", "S For Shoe                ");
-        System.out.printf("%n%83s", "Format: T/P/A/S + Product ID             ");
+        System.out.printf("%n%68s", "T For product.Shirt               ");
+        System.out.printf("%n%68s", "P For product.Pant                ");
+        System.out.printf("%n%68s", "A For product.Accessories         ");
+        System.out.printf("%n%68s", "S For product.Shoe                ");
+        System.out.printf("%n%83s", "Format: T/P/A/S + product.Product ID             ");
         System.out.print(Font.RESET);
         input.nextLine();
         System.out.print(Font.TEXT_BLUE);
@@ -499,7 +503,7 @@ public class ProductMixCart {
         Product targetProduct = linearSearchByProductID(productArrayList, targetProductID, filterProductID);
         if (targetProduct == null) {
             System.out.print(Font.TEXT_RED);
-            System.out.printf("%n%64s", "Product ID not found");
+            System.out.printf("%n%64s", "product.Product ID not found");
             System.out.print(Font.RESET);
             boolean searchAgainError = true;
             char searchAgain = 'A';
@@ -611,7 +615,7 @@ public class ProductMixCart {
         String targetProductName = input.nextLine().toUpperCase();
         ArrayList<Product> searchResultList = linearSearchByProductName(productArrayList, targetProductName);
         if (searchResultList.size() == 0) {
-            System.out.println("Product not found");
+            System.out.println("product.Product not found");
             boolean searchAgainError = true;
             char searchAgain = 'A';
             do {
@@ -656,7 +660,7 @@ public class ProductMixCart {
                 char filterProductID = targetProductID.charAt(0);
                 Product targetProduct = linearSearchByProductID(searchResultList, targetProductID, filterProductID);
                 while (targetProduct == null) {
-                    System.out.println("Product not found");
+                    System.out.println("product.Product not found");
                     System.out.print("Please reenter the product ID that you want to add to cart: ");
                     targetProductID = input.nextLine().toUpperCase();
                     filterProductID = targetProductID.charAt(0);
@@ -748,7 +752,7 @@ public class ProductMixCart {
         } while (priceRangeError);
         ArrayList<Product> searchResultList = linearSearchByPriceRange(productArrayList, lowerPrice, upperPrice);
         if (searchResultList.size() == 0) {
-            System.out.println("Product not found");
+            System.out.println("product.Product not found");
             boolean searchAgainError = true;
             char searchAgain = 'A';
             do {
@@ -793,7 +797,7 @@ public class ProductMixCart {
                 char filterProductID = targetProductID.charAt(0);
                 Product targetProduct = linearSearchByProductID(searchResultList, targetProductID, filterProductID);
                 while (targetProduct == null) {
-                    System.out.println("Product not found");
+                    System.out.println("product.Product not found");
                     System.out.print("Please reenter the product ID that you want to add to cart: ");
                     targetProductID = input.nextLine().toUpperCase();
                     filterProductID = targetProductID.charAt(0);
@@ -929,9 +933,9 @@ public class ProductMixCart {
         System.out.println("\t\t+------------+");
         System.out.println("\t\t|  Category  |");
         System.out.println("\t\t+------------+");
-        System.out.println("[1] Shirt");
-        System.out.println("[2] Pant");
-        System.out.println("[3] Accessories");
+        System.out.println("[1] product.Shirt");
+        System.out.println("[2] product.Pant");
+        System.out.println("[3] product.Accessories");
         System.out.println("[4] Shoes");
         System.out.println("[5] Best Sales");
         System.out.println("[6] Back to previous Menu");
@@ -960,16 +964,16 @@ public class ProductMixCart {
         clearScreen();
         switch (categoryOption) {
             case 1:
-                Category(productArrayList, cart,"Shirt");
+                Category(productArrayList, cart,"product.Shirt");
                 break;
             case 2:
-                Category(productArrayList, cart,"Pant");
+                Category(productArrayList, cart,"product.Pant");
                 break;
             case 3:
-                Category(productArrayList, cart,"Accessories");
+                Category(productArrayList, cart,"product.Accessories");
                 break;
             case 4:
-                Category(productArrayList, cart,"Shoe");
+                Category(productArrayList, cart,"product.Shoe");
                 break;
             case 5:
                 Category(productArrayList, cart,"Best Sales");
@@ -983,7 +987,7 @@ public class ProductMixCart {
     private static void Category(ArrayList<Product> productArrayList, Cart cart, String category) throws InterruptedException {
         //Display product shirt
         ArrayList<Product> categoryResultList = linearSearchByProductCategory(productArrayList, category);
-        System.out.println("Product ID\t\t" + "Product Name\t\t\t" + "Product Price\t\t" + "Quantity In Stock");
+        System.out.println("product.Product ID\t\t" + "product.Product Name\t\t\t" + "product.Product Price\t\t" + "Quantity In Stock");
         for (Product product : categoryResultList) {
             System.out.println(product);
         }
@@ -1008,7 +1012,7 @@ public class ProductMixCart {
             char filterProductID = targetProductID.charAt(0);
             Product targetProduct = linearSearchByProductID(categoryResultList, targetProductID, filterProductID);
             while (targetProduct == null) {
-                System.out.println("Product not found");
+                System.out.println("product.Product not found");
                 System.out.print("Please reenter the product ID that you want to add to cart: ");
                 targetProductID = input.nextLine().toUpperCase();
                 filterProductID = targetProductID.charAt(0);
@@ -1045,28 +1049,28 @@ public class ProductMixCart {
     private static ArrayList<Product> linearSearchByProductCategory(ArrayList<Product> productArrayList, String category) {
         ArrayList<Product> categoryResultList = new ArrayList<>();
         switch (category) {
-            case "Shirt":
+            case "product.Shirt":
                 for (Product product : productArrayList) {
                     if(product instanceof Shirt) {
                         categoryResultList.add(product);
                     }
                 }
                 break;
-            case "Pant":
+            case "product.Pant":
                 for (Product product : productArrayList) {
                     if (product instanceof Pant) {
                         categoryResultList.add(product);
                     }
                 }
                 break;
-            case "Shoe":
+            case "product.Shoe":
                 for (Product product : productArrayList) {
                     if (product instanceof Shoe) {
                         categoryResultList.add(product);
                     }
                 }
                 break;
-            case "Accessories":
+            case "product.Accessories":
                 for (Product product : productArrayList) {
                     if (product instanceof Accessories) {
                         categoryResultList.add(product);
@@ -1087,7 +1091,7 @@ public class ProductMixCart {
         return categoryResultList;
     }
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: End Category & Best Sales~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: End Product Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: End product.Product Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
     public static void clearScreen() {
     //    try{

@@ -1,8 +1,19 @@
+package driver;
+
+import cart.Cart;
+import order.Order;
+import product.Product;
+import user.Admin;
+import user.AuthCodeMultithreading;
+import user.Customer;
+import user.People;
 import utility.Font;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import static utility.utility.clearScreen;
 
 public class LoginSignupMenu {
     public static void main(String[] args) throws InterruptedException {
@@ -34,7 +45,7 @@ public class LoginSignupMenu {
         adminArrList.add(admin2);
 
         // array list of product
-//        productArrayList.add(ProductMixCart.productArraylist.get(1).clone());
+//        productArrayList.add(driver.ProductMixCart.productArraylist.get(1).clone());
 
         menu(adminArrList, customerArrList);
     }
@@ -95,8 +106,8 @@ public class LoginSignupMenu {
             System.out.print(Font.RESET);
 
             System.out.println("Do you wish to login as admin or customer");
-            System.out.println("1. Admin");
-            System.out.println("2. Customer");
+            System.out.println("1. user.Admin");
+            System.out.println("2. user.Customer");
             System.out.println("3. Back to Previous Page");
             System.out.println("4. Exit");
 
@@ -135,10 +146,10 @@ public class LoginSignupMenu {
 
         do {
             System.out.println();
-            System.out.print(Font.TEXT_CYAN + "Enter Admin Email: ");
+            System.out.print(Font.TEXT_CYAN + "Enter user.Admin Email: ");
             System.out.print(Font.RESET);
             adminInputEmail = scanner.next();
-            System.out.print(Font.TEXT_CYAN + "Enter Admin Password: ");
+            System.out.print(Font.TEXT_CYAN + "Enter user.Admin Password: ");
             System.out.print(Font.RESET);
             adminInputPassword = scanner.next();
 
@@ -173,10 +184,10 @@ public class LoginSignupMenu {
 
         do {
             System.out.println();
-            System.out.print(Font.TEXT_CYAN + "Enter Customer Email: ");
+            System.out.print(Font.TEXT_CYAN + "Enter user.Customer Email: ");
             System.out.print(Font.RESET);
             custInputEmail = scanner.next();
-            System.out.print(Font.TEXT_CYAN + "Enter Customer Password: ");
+            System.out.print(Font.TEXT_CYAN + "Enter user.Customer Password: ");
             System.out.print(Font.RESET);
             custInputPassword = scanner.next();
 
@@ -216,8 +227,8 @@ public class LoginSignupMenu {
             System.out.print(Font.RESET);
 
             System.out.println("Do you wish to sign up as admin or customer");
-            System.out.println("1. Admin");
-            System.out.println("2. Customer");
+            System.out.println("1. user.Admin");
+            System.out.println("2. user.Customer");
             System.out.println("3. Back to Previous Page");
             System.out.println("4. Exit");
 
@@ -441,7 +452,7 @@ public class LoginSignupMenu {
             clearScreen();
             System.out.print(Font.TEXT_CYAN);
             System.out.printf(  "%55s", "+------------------+");
-            System.out.printf("%n%55s", "|    Admin Menu    |");
+            System.out.printf("%n%55s", "|    user.Admin Menu    |");
             System.out.printf("%n%55s%n", "+------------------+");
             System.out.print(Font.RESET);
             System.out.println("Currently Logged In As " + Font.BOLD_YELLOW + admin.getName());
@@ -451,7 +462,7 @@ public class LoginSignupMenu {
             System.out.println();
 
             System.out.println("1. Edit Products");
-            System.out.println("2. Order Products From Supplier");
+            System.out.println("2. order.Order Products From Supplier");
             System.out.println("3. Check Stock Quantity");
             System.out.println("4. Sign Out");
             System.out.println("5. Exit");
@@ -465,13 +476,13 @@ public class LoginSignupMenu {
                 switch (selection) {
                     case 1:
                         // edit products
-                        System.out.print("Please Enter Product ID: ");
+                        System.out.print("Please Enter product.Product ID: ");
                         productID = scanner.next();
                         scanner.nextLine();
 
                         productFilter = productID.charAt(0);
 
-//                        ProductMixCart.linearSearchByProductID(productArrayList, productID, productFilter);
+//                        driver.ProductMixCart.linearSearchByProductID(productArrayList, productID, productFilter);
                         break;
                     case 2:
                         // increment by id or name
@@ -513,15 +524,15 @@ public class LoginSignupMenu {
             clearScreen();
             System.out.print(Font.TEXT_CYAN);
             System.out.printf(  "%55s", "+--------------------+");
-            System.out.printf("%n%55s", "|    Customer Menu   |");
+            System.out.printf("%n%55s", "|    user.Customer Menu   |");
             System.out.printf("%n%55s%n", "+-------------------+");
             System.out.print(Font.RESET);
 
             System.out.println("1. Profile");
-            System.out.println("2. Make Order");
-            System.out.println("3. Cart");
-            System.out.println("4. Order History");
-            System.out.println("5. Payment");
+            System.out.println("2. Make order.Order");
+            System.out.println("3. cart.Cart");
+            System.out.println("4. order.Order History");
+            System.out.println("5. payment.Payment");
             System.out.println("6. Sign Out");
             System.out.println("7. Exit");
 
@@ -531,7 +542,7 @@ public class LoginSignupMenu {
 
                 switch (selection) {
                     case 1 -> custProfile(adminArrList, customerArrList, customer);
-//                    case 2 -> ProductMixCart.productMenu(productArrayList, cart);
+//                    case 2 -> driver.ProductMixCart.productMenu(productArrayList, cart);
 //                    case 3 -> menu(adminArrList, customerArrList);
                     case 4 -> System.exit(0);
                     default -> {
@@ -557,7 +568,7 @@ public class LoginSignupMenu {
         Scanner scanner = new Scanner(System.in);
 
         do {
-            LoginSignupMenu.clearScreen();
+            utility.utility.clearScreen();
             System.out.print(Font.TEXT_CYAN);
             System.out.printf(  "%55s", "+-------------+");
             System.out.printf("%n%55s", "|    Profile    |");
@@ -565,7 +576,7 @@ public class LoginSignupMenu {
             System.out.print(Font.RESET);
 
             System.out.println();
-            System.out.println("Customer ID: " + Font.BOLD_YELLOW + customer.getCustomerID() + Font.RESET);
+            System.out.println("user.Customer ID: " + Font.BOLD_YELLOW + customer.getCustomerID() + Font.RESET);
             System.out.println("Name: " + Font.BOLD_YELLOW + customer.getName() + Font.RESET);
             System.out.println("Email: " + Font.BOLD_YELLOW + customer.getEmail() + Font.RESET);
             System.out.println("Phone No: " + Font.BOLD_YELLOW + customer.getPhoneNo() + Font.RESET);
@@ -584,9 +595,9 @@ public class LoginSignupMenu {
                 option = scanner.nextInt();
 
                 switch (option) {
-                    case 1 -> editCustName(customer);
-                    case 2 -> editCustEmail(customer);
-                    case 3 -> editCustPassword(customer);
+//                    case 1 -> editCustName(customer);
+//                    case 2 -> editCustEmail(customer);
+//                    case 3 -> editCustPassword(customer);
 //                    case 4 -> editPhoneNo();
 //                    case 5 -> editAddress();
                     case 7 -> LoginSignupMenu.custMenu(adminArrList, customerArrList, customer);
@@ -612,7 +623,7 @@ public class LoginSignupMenu {
         String name;
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("New Customer Name (type exit to stop): ");
+        System.out.print("New user.Customer Name (type exit to stop): ");
         name = scanner.nextLine();
 
         if (name.equalsIgnoreCase("exit")) {
@@ -631,7 +642,7 @@ public class LoginSignupMenu {
         Scanner scanner = new Scanner(System.in);
 
         do {
-            System.out.print("New Customer Email (type exit to stop): ");
+            System.out.print("New user.Customer Email (type exit to stop): ");
             email = scanner.next();
             scanner.nextLine();
 
@@ -683,7 +694,7 @@ public class LoginSignupMenu {
         } while (!authValid);
 
         do {
-            System.out.print("New Customer Password: ");
+            System.out.print("New user.Customer Password: ");
             password = scanner.next();
             scanner.nextLine();
 
@@ -708,15 +719,15 @@ public class LoginSignupMenu {
     }
 
 
-    public static void clearScreen() {
-        //    try{
-        //        new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
-        //    }
-        //    catch(Exception e){
-        //        System.out.println(e);
-        //    }
-        for (int i = 0; i < 50; i++) {
-            System.out.println();
-        }
-    }
+//    public static void clearScreen() {
+//        //    try{
+//        //        new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
+//        //    }
+//        //    catch(Exception e){
+//        //        System.out.println(e);
+//        //    }
+//        for (int i = 0; i < 50; i++) {
+//            System.out.println();
+//        }
+//    }
 }

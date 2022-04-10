@@ -1,3 +1,11 @@
+package user;
+
+
+import driver.LoginSignupMenu;
+import product.Accessories;
+import product.Pant;
+import product.Shirt;
+import product.Shoe;
 import utility.Font;
 
 import java.io.BufferedReader;
@@ -79,7 +87,8 @@ public class Admin extends People {
         Scanner scanner = new Scanner(System.in);
 
         do {
-            LoginSignupMenu.clearScreen();
+
+            utility.utility.clearScreen();
             System.out.print(Font.TEXT_CYAN);
             System.out.printf(  "%55s", "+-----------------------+");
             System.out.printf("%n%55s", "|    Modify Products    |");
@@ -87,7 +96,7 @@ public class Admin extends People {
             System.out.print(Font.RESET);
 
             System.out.println("What do you wish to modify?");
-            System.out.println("1. Product Name");
+            System.out.println("1. product.Product Name");
             System.out.println("2. Price");
             System.out.println("3. Quantity");
             System.out.println("4. Back to Previous Page");
@@ -133,7 +142,7 @@ public class Admin extends People {
 
                         }
                         else {
-                            System.out.println(Font.BOLD_RED + "No Product Found.");
+                            System.out.println(Font.BOLD_RED + "No product.Product Found.");
                             System.out.print(Font.RESET);
                         }
                         break;
@@ -172,7 +181,7 @@ public class Admin extends People {
                             scanner.nextLine();
                         }
                         else {
-                            System.out.println(Font.BOLD_RED + "No Product Found.");
+                            System.out.println(Font.BOLD_RED + "No product.Product Found.");
                             System.out.print(Font.RESET);
                         }
                         break;
@@ -210,11 +219,12 @@ public class Admin extends People {
                             scanner.nextLine();
                         }
                         else {
-                            System.out.println(Font.BOLD_RED + "No Product Found.");
+                            System.out.println(Font.BOLD_RED + "No product.Product Found.");
                             System.out.print(Font.RESET);
                         }
                         break;
                     case 4:
+
                         LoginSignupMenu.adminMenu(adminArrList, customerArrList, admin);
                         break;
                     case 5:

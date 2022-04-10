@@ -1,3 +1,5 @@
+package product;
+
 public class Shoe extends Product implements Cloneable{
     private String shoeID;
     private static int shoeCount = 1;
@@ -32,10 +34,10 @@ public class Shoe extends Product implements Cloneable{
     @Override
     public String toString() {
         if(this.getTotalPrice() == 0){
-            //Product
+            //product.Product
             return String.format("%25s",this.shoeID) + String.format("%8s","")  + super.toString();
         } else{
-            //Cart
+            //cart.Cart
             return String.format("%9s",this.shoeID) + super.toString();
         }
     }

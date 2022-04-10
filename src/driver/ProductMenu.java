@@ -1,3 +1,6 @@
+package driver;
+
+import product.*;
 import utility.Font;
 import utility.Validation;
 import utility.ValidationException;
@@ -55,7 +58,7 @@ public class ProductMenu {
 
     private static void productMenu() {
         System.out.println("\t\t+-----------+");
-        System.out.println("\t\t|  Product  |");
+        System.out.println("\t\t|  product.Product  |");
         System.out.println("\t\t+-----------+");
         System.out.println("\n[1] Search product ");
         System.out.println("[2] Category ");
@@ -64,15 +67,15 @@ public class ProductMenu {
     }
 
     private static void setProducts(ArrayList<Product> productArrayList) {
-        //Shirt
+        //product.Shirt
         Product p1 = new Shirt("Crew Tee", 25.30, 20, 3);
         Product p2 = new Shirt("Hoodie", 50.20, 10, 4);
         Product p3 = new Shirt("Jacket", 67.70, 30, 2);
-        Product p4 = new Shirt("Poplin Shirt", 43.80, 40, 4);
+        Product p4 = new Shirt("Poplin product.Shirt", 43.80, 40, 4);
         Product p5 = new Shirt("Dress", 40.50, 30, 5);
         Product p6 = new Shirt("Jumpsuit", 70.60, 25, 3);
         Product p7 = new Shirt("Sport wear", 80.30, 66, 5);
-        //Pant
+        //product.Pant
         Product p8 = new Pant("Jeans", 30.50, 12, 5);
         Product p9 = new Pant("Trousers", 40.20, 5, 5);
         Product p10 = new Pant("Cotton pants", 35.30, 20, 4);
@@ -80,14 +83,14 @@ public class ProductMenu {
         Product p12 = new Pant("Ripped pants", 43.20, 19, 2);
         Product p13 = new Pant("Sport pan", 30.60, 45, 4);
         Product p14 = new Pant("Cropped pant", 39.20, 45, 1);
-        //Accessories
+        //product.Accessories
         Product p15 = new Accessories("Cap", 14.60, 30, 2);
         Product p16 = new Accessories("Short wallet", 20.60, 25, 3);
         Product p17 = new Accessories("Long wallet", 30.60, 17, 2);
         Product p18 = new Accessories("Earring", 10.30, 30, 5);
         Product p19 = new Accessories("Headband", 15.40, 50, 4);
         Product p20 = new Accessories("Sunglasses", 12.50, 45, 3);
-        //Shoe
+        //product.Shoe
         Product p21 = new Shoe("Running shoe", 60, 25, 4);
         Product p22 = new Shoe("Leather shoe", 300, 10, 5);
         Product p23 = new Shoe("Basketball shoe", 200, 25, 3);
@@ -126,10 +129,10 @@ public class ProductMenu {
 
     public static void searchProduct(ArrayList<Product> productArrayList) throws InterruptedException {
         System.out.println("\t\t+------------------+");
-        System.out.println("\t\t|  Search Product  |");
+        System.out.println("\t\t|  Search product.Product  |");
         System.out.println("\t\t+------------------+");
-        System.out.println("[1] Product ID");
-        System.out.println("[2] Product Name");
+        System.out.println("[1] product.Product ID");
+        System.out.println("[2] product.Product Name");
         System.out.println("[3] Price Range");
         System.out.println();
         // Get input for cart option
@@ -154,11 +157,11 @@ public class ProductMenu {
         switch (searchOption) {
             case 1:
                 clearScreen();
-                System.out.println("T For Shirt");
-                System.out.println("P For Pant");
-                System.out.println("A For Accessories");
-                System.out.println("S For Shoe");
-                System.out.println("Format: T/P/A/S + Product ID");
+                System.out.println("T For product.Shirt");
+                System.out.println("P For product.Pant");
+                System.out.println("A For product.Accessories");
+                System.out.println("S For product.Shoe");
+                System.out.println("Format: T/P/A/S + product.Product ID");
                 input.nextLine();
                 System.out.print("Enter the ID that you want to search: ");
                 String targetProductID = input.nextLine().toUpperCase();
@@ -237,9 +240,9 @@ public class ProductMenu {
         System.out.println("\t\t+------------+");
         System.out.println("\t\t|  Category  |");
         System.out.println("\t\t+------------+");
-        System.out.println("[1] Shirt");
-        System.out.println("[2] Pant");
-        System.out.println("[3] Accessories");
+        System.out.println("[1] product.Shirt");
+        System.out.println("[2] product.Pant");
+        System.out.println("[3] product.Accessories");
         System.out.println("[4] Shoes");
 
         // Get input for cart option
@@ -263,7 +266,7 @@ public class ProductMenu {
         } while (categoryOptionError);
 
         //Display which category
-        System.out.println("Product ID\t\t" + "Product Name\t\t\t" + "Product Price\t\t" + "Quantity In Stock");
+        System.out.println("product.Product ID\t\t" + "product.Product Name\t\t\t" + "product.Product Price\t\t" + "Quantity In Stock");
         switch (categoryOption) {
             case 1:
                 //Display product shirt

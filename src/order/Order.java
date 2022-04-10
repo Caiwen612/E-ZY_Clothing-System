@@ -1,4 +1,6 @@
-import utility.Font;
+package order;
+
+import payment.Payment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +30,7 @@ public class Order{
 
     public static void removeOrder(int index){
         paymentList.remove(index-1);
-        System.out.print("Order removed");
+        System.out.print("order.Order removed");
     }
 
     public static void displayOrder(){

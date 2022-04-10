@@ -1,3 +1,5 @@
+package payment;
+
 import java.util.Date;
 
 public class Payment {
@@ -39,8 +41,8 @@ public class Payment {
     //ToString
     @Override
     public String toString() {
-        return "\nPayment ID: " + paymentID +
-                "\nPayment Date: " + paymentDate;
+        return "\npayment.Payment ID: " + paymentID +
+                "\npayment.Payment Date: " + paymentDate;
     }
 }
 

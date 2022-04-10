@@ -1,3 +1,5 @@
+package payment;
+
 import utility.Font;
 
 public class DebitCredit extends Payment{
@@ -42,7 +44,7 @@ public class DebitCredit extends Payment{
         return " Total Price: RM" + getTotalPrice() +
                 "\n Amount paid: RM" + payAmount +
                 "\n      Change: RM" + (payAmount - getTotalPrice()) +
-                "\n   Bank Name: " + bankName +
+                "\n   payment.Bank Name: " + bankName +
                 "\n Card Number: " + cardNo +
                 super.toString() + "\n\nThank you for shopping!";
     }

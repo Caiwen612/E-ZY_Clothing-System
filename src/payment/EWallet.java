@@ -1,27 +1,29 @@
+package payment;
+
 import utility.Font;
 
-public class Bank extends Payment{
+public class EWallet extends Payment {
 
-    private String bankName;
-    private int bankNo;
+    private int accountID;
+    private String userName;
     public double payAmount;
 
-    public Bank(){
-        this("",0,0);
+    public EWallet(){
+        this(0,"",0);
     }
-    public Bank(String bankName, int bankNo, double payAmount){
+    public EWallet(int accountID, String userName, double payAmount){
         super();
-        this.bankName = bankName;
-        this.bankNo = bankNo;
+        this.accountID = accountID;
+        this.userName = userName;
         this.payAmount = payAmount;
     }
 
     //setter
-    public void setBankName(String bankName) {
-        this.bankName = bankName;
+    public void setAccountID(int accountID) {
+        this.accountID = accountID;
     }
-    public void setBankNo(int bankNo) {
-        this.bankNo = bankNo;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
     public void setBalance(double payAmount) {
         this.payAmount = payAmount;
@@ -38,8 +40,8 @@ public class Bank extends Payment{
         return " Total Price: RM" + getTotalPrice() +
                 "\n Amount paid: RM" + payAmount +
                 "\n      Change: RM" + (payAmount - getTotalPrice()) +
-                "\n   Bank Name: " + bankName +
-                "\n Bank Number: " + bankNo +
+                "\n  Account ID: " + accountID +
+                "\n    Username: " + userName +
                 super.toString() + "\n\nThank you for shopping!";
     }
 }

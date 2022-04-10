@@ -1,3 +1,6 @@
+package driver;
+
+import cart.Cart;
 import utility.Font;
 import utility.Validation;
 import utility.ValidationException;
@@ -15,7 +18,7 @@ public class CartMenu {
 
 
         System.out.println("\t\t+----------+");
-        System.out.println("\t\t|   Cart   |");
+        System.out.println("\t\t|   cart.Cart   |");
         System.out.println("\t\t+----------+");
         //Display cart
 //        cart.getCartItem();
@@ -23,7 +26,7 @@ public class CartMenu {
         System.out.println("\t\t[2] Edit Item");
         System.out.println("\t\t[3] Delete Item");
         System.out.println("\t\t[4] Sort Item");
-        System.out.println("\t\t[5] Make Payment");
+        System.out.println("\t\t[5] Make payment.Payment");
         System.out.println("\t\t[6] Back to previous Menu");
 
         // Get input for cart option

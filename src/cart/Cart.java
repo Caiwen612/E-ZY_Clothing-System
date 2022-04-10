@@ -1,3 +1,7 @@
+package cart;
+
+import product.Product;
+import product.sort.*;
 import utility.Font;
 
 import java.text.DecimalFormat;
@@ -42,7 +46,7 @@ public class Cart {
                 System.out.println();
             }
         } else {
-            System.out.println("Cart is empty");
+            System.out.println("cart.Cart is empty");
         }
         System.out.println(Font.TEXT_PURPLE);
         System.out.print("Total Item : " + itemCount);
@@ -54,7 +58,7 @@ public class Cart {
     public void addItem(Product product, int quantity){
         //Check similar
         if (checkSimilar(product)){
-            System.out.println("Product already exist in cart");
+            System.out.println("product.Product already exist in cart");
         } else{
             product.setQty(quantity);
             product.setTotalPrice(product.getPrice() * quantity);
@@ -62,7 +66,7 @@ public class Cart {
             itemCount++;
             calculateTotalPrice();
             displayItem();
-            System.out.println("Product with " + quantity + " added to cart");
+            System.out.println("product.Product with " + quantity + " added to cart");
         }
     }
 
@@ -86,7 +90,7 @@ public class Cart {
     public void removeItem(int index){
         this.cartItem.remove(index-1);
         System.out.print(Font.TEXT_YELLOW);
-        System.out.printf("%n%58s","Product removed from cart");
+        System.out.printf("%n%58s","product.Product removed from cart");
     }
 
     public double calculateTotalPrice(){
@@ -132,7 +136,7 @@ public class Cart {
 
     @Override
     public String toString() {
-        return "Cart{" +
+        return "cart.Cart{" +
                 "cartItem=" + cartItem +
                 '}';
     }
