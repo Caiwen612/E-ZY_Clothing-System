@@ -2,6 +2,7 @@ import utility.Font;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class LoginSignupMenu {
@@ -608,27 +609,39 @@ public class LoginSignupMenu {
 
     }
 
-    public static void editCustName(Customer customer) throws InterruptedException {
+    public static void editCustName(ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList, Customer customer) throws InterruptedException {
+        String name;
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("New Customer Name: ");
-        customer.setName(scanner.nextLine());
+        System.out.print("New Customer Name (type exit to stop): ");
+        name = scanner.nextLine();
+
+        if (name.equalsIgnoreCase("exit")) {
+            custProfile(adminArrList, customerArrList, customer);
+        }
+
+        customer.setName(name);
+
         System.out.println(Font.BOLD_GREEN + "Name Changed." + Font.RESET);
         Thread.sleep(1000);
     }
 
-    public static void editCustEmail(Customer customer) throws InterruptedException {
+    public static void editCustEmail(ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList, Customer customer) throws InterruptedException {
         String email;
         boolean emailVld = true;
         Scanner scanner = new Scanner(System.in);
 
         do {
-            System.out.print("New Customer Email: ");
+            System.out.print("New Customer Email (type exit to stop): ");
             email = scanner.next();
             scanner.nextLine();
 
+            if (email.equalsIgnoreCase("exit")) {
+                custProfile(adminArrList, customerArrList, customer);
+            }
+
             if (People.vldEmail(email)) {
-                customer.setEmail(email);
+                customer.setEmail(email.toLowerCase());
                 System.out.println(Font.BOLD_GREEN + "Email Changed." + Font.RESET);
                 Thread.sleep(1000);
             }
@@ -643,14 +656,32 @@ public class LoginSignupMenu {
 
     }
 
-    public static void editCustPassword(Customer customer) throws InterruptedException {
+    public static void editCustPassword(ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList, Customer customer) throws InterruptedException {
         String password;
         String authCode;
-        boolean passwordVld = true;
-        boolean authCodeVld = true;
+        boolean passwordVld = false;
+        boolean authValid = false;
         Scanner scanner = new Scanner(System.in);
 
+        do {
+            System.out.print("Auth Code (type exit to stop): ");
+            authCode = scanner.next();
+            scanner.nextLine();
 
+            if (authCode.equalsIgnoreCase("exit")) {
+                custProfile(adminArrList, customerArrList, customer);
+            }
+
+            if (authCode.equals(Integer.toString(AuthCodeMultithreading.authCode))) {
+                authValid = true;
+            }
+            else {
+                System.out.println(Font.BOLD_RED + "Wrong Auth Code Entered, Please Try again.");
+                System.out.print(Font.RESET);
+                System.out.println();
+                Thread.sleep(1000);
+            }
+        } while (!authValid);
 
         do {
             System.out.print("New Customer Password: ");
@@ -658,13 +689,13 @@ public class LoginSignupMenu {
             scanner.nextLine();
 
             if (People.vldPassword(password)) {
-                customer.setEmail(password);
+                passwordVld = true;
+                customer.setPassword(password);
                 System.out.println(Font.BOLD_GREEN + "Password Changed." + Font.RESET);
                 Thread.sleep(1000);
             }
             else {
-                passwordVld = false;
-                System.out.println(Font.BOLD_RED + "");
+                System.out.println(Font.BOLD_RED + "Password Must Include Alphabet, Number and At Least 6 Characters.");
                 System.out.print(Font.RESET);
                 scanner.nextLine();
                 Thread.sleep(1000);
@@ -672,6 +703,11 @@ public class LoginSignupMenu {
         } while (!passwordVld);
 
     }
+
+    public static void editPhoneNo() {
+        
+    }
+
 
     public static void clearScreen() {
         //    try{
