@@ -11,6 +11,8 @@ public class Order{
     private Cart orderDetails;
     private Payment paymentMethod;
     private Date orderDate;
+    private Cart itemCount;
+    private Cart totalPrice;
 
     public Order(){
         this(new Customer(), new Cart(), new Payment());
@@ -39,10 +41,15 @@ public class Order{
         return orderDate;
     }
 
+    public Cart getTotalPrice() {
+        return totalPrice;
+    }
 
+    public Cart getItemCount() {
+        return itemCount;
+    }
 
-
-//    public static void removeOrder(int index){
+    //    public static void removeOrder(int index){
 //        paymentList.remove(index-1);
 //        System.out.print("order.Order removed");
 //    }
@@ -59,9 +66,10 @@ public class Order{
 //        }
 //    }
 //
+
     @Override
     public String toString() {
-        return "\t" +  + "\t" + orderDate;
+        return "\t" + itemCount + "\t" + totalPrice + "\t" + orderDate;
     }
 }
 
