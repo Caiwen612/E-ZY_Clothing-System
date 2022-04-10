@@ -1,3 +1,5 @@
+import utility.Font;
+
 public class EWallet extends Payment {
 
     private int accountID;
@@ -28,14 +30,16 @@ public class EWallet extends Payment {
 
     @Override
     public String toString() {
-        System.out.println("+-------------+");
-        System.out.println("|   Receipt   |");
-        System.out.println("+-------------+");
-        return "Total Price: RM" + getTotalPrice() +
-                "\nAmount paid: RM" + payAmount +
-                "\nChange: RM" + (payAmount - getTotalPrice()) +
-                "\nAccount ID: " + accountID +
-                "\nUsername: " + userName +
-                super.toString() + "\nThank you for shopping!";
+        System.out.print(Font.TEXT_CYAN);
+        System.out.printf("%20s", "+-------------+");
+        System.out.printf("%n%20s", "|   Receipt   |");
+        System.out.printf("%n%20s", "+-------------+");
+        System.out.println(Font.RESET);
+        return " Total Price: RM" + getTotalPrice() +
+                "\n Amount paid: RM" + payAmount +
+                "\n      Change: RM" + (payAmount - getTotalPrice()) +
+                "\n  Account ID: " + accountID +
+                "\n    Username: " + userName +
+                super.toString() + "\n\nThank you for shopping!";
     }
 }

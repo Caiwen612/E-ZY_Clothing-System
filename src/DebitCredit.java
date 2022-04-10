@@ -1,3 +1,5 @@
+import utility.Font;
+
 public class DebitCredit extends Payment{
 
     private String bankName;
@@ -32,15 +34,17 @@ public class DebitCredit extends Payment{
 
     @Override
     public String toString() {
-        System.out.println("+-------------+");
-        System.out.println("|   Receipt   |");
-        System.out.println("+-------------+");
-        return "Total Price: RM" + getTotalPrice() +
-                "\nAmount paid: RM" + payAmount +
-                "\nChange: RM" + (payAmount - getTotalPrice()) +
-                "\nBank Name: " + bankName +
-                "\nCard Number: " + cardNo +
-                super.toString() + "\nThank you for shopping!";
+        System.out.print(Font.TEXT_CYAN);
+        System.out.printf("%20s", "+-------------+");
+        System.out.printf("%n%20s", "|   Receipt   |");
+        System.out.printf("%n%20s", "+-------------+");
+        System.out.println(Font.RESET);
+        return " Total Price: RM" + getTotalPrice() +
+                "\n Amount paid: RM" + payAmount +
+                "\n      Change: RM" + (payAmount - getTotalPrice()) +
+                "\n   Bank Name: " + bankName +
+                "\n Card Number: " + cardNo +
+                super.toString() + "\n\nThank you for shopping!";
     }
 }
 

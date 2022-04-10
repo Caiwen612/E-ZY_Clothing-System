@@ -23,29 +23,39 @@ public class PaymentMenu {
     }
 
     public static void paymentMenu(Cart cart, ArrayList<Payment> payment) throws InterruptedException {
-        System.out.println("+-------------+");
-        System.out.println("|   Payment   |");
-        System.out.println("+-------------+");
-        System.out.println("Choose Payment Method (1-3)");
-        System.out.println("[1] Bank");
-        System.out.println("[2] E-Wallet");
-        System.out.println("[3] Debit/Credit");
+        clearScreen();
+        System.out.print(Font.TEXT_CYAN);
+        System.out.printf("%55s",  "+-------------+");
+        System.out.printf("%n%55s","|   Payment   |");
+        System.out.printf("%n%55s","+-------------+");
+        System.out.print(Font.RESET);
+        System.out.println(Font.TEXT_BRIGHT_MAGENTA);
+        System.out.printf("%59s","Choose A Payment Method");
+        System.out.print(Font.RESET);
+        System.out.printf("%n%61s","[1] Bank             ");
+        System.out.printf("%n%61s","[2] E-Wallet         ");
+        System.out.printf("%n%61s","[3] Debit/Credit     ");
 
         //Get input for payment method
         boolean paymentOptionError = true;
         int paymentOption = 0;
         do {
             try {
-                System.out.print("Enter your option: ");
+                System.out.print(Font.TEXT_BLUE);
+                System.out.printf("%n%55s","Enter your option: ");
                 paymentOption = input.nextInt();
+                System.out.print(Font.RESET);
+                System.out.printf("%26s","");
                 Validation.validOption(paymentOption, 1, 3);
                 paymentOptionError = false;
             } catch (ValidationException e) {
-                System.err.println(e.getMessage());
+                System.err.print(e.getMessage());
                 Thread.sleep(1000);
             } catch (InputMismatchException e) {
-                System.err.println(Font.useFont(Font.BOLD_RED, "Please only key in integer"));
+                System.out.print(Font.BOLD_RED);
+                System.out.printf("%59s","Please only key in integer");
                 input.nextLine();
+                System.out.print(Font.RESET);
                 Thread.sleep(1000);
             }
         } while (paymentOptionError);
@@ -132,17 +142,26 @@ public class PaymentMenu {
 
     // Receive Bank details
     public static void bank(Payment bank, Cart cart) {
+        clearScreen();
         bank.setTotalPrice(cart.getTotalPrice());
-        System.out.print("\nYou have chose Bank as payment method");
-        System.out.print("\nTotal Price: RM" + cart.getTotalPrice() + "\n\n");
-        System.out.print("Available banks: MAYBANK, CIMB, RHB, HSBC");
+        System.out.println(Font.TEXT_BRIGHT_MAGENTA);
+        System.out.printf("%67s","You have chose Bank as payment method");
+        System.out.println(Font.RESET);
+        System.out.printf("%59s","Total Price (RM): " + cart.getTotalPrice());
 
-        System.out.print("\nChoose a bank: ");
+        System.out.println(Font.TEXT_YELLOW);
+        System.out.printf("%n%69s","Available banks: MAYBANK, CIMB, RHB, HSBC");
+        System.out.println(Font.TEXT_BLUE);
+        System.out.printf("%47s","Choose a bank: ");
         input.nextLine();
         String bankName = input.nextLine().toUpperCase();
         while (!bankName.matches("MAYBANK|CIMB|RHB|HSBC")) {
-            System.out.print(Font.useFont(Font.BOLD_RED,"Invalid!"));
-            System.out.print("\nEnter bank name: ");
+            System.out.print(Font.BOLD_RED);
+            System.out.printf("%52s","Invalid!");
+            System.out.println(Font.RESET);
+            System.out.print(Font.TEXT_BLUE);
+            System.out.printf("%47s","Enter a valid bank name: ");
+            System.out.print(Font.RESET);
             bankName = input.next().toUpperCase();
         }
         ((Bank) bank).setBankName(bankName);
@@ -151,12 +170,16 @@ public class PaymentMenu {
         int bankNo = 0;
         do {
             try {
-                System.out.print("Enter account ID: ");
+                System.out.print(Font.TEXT_BLUE);
+                System.out.printf("%47s","Enter account ID: ");
                 bankNo = input.nextInt();
+                System.out.print(Font.RESET);
                 bankNoError = false;
             } catch (InputMismatchException e) {
-                System.out.println(Font.useFont(Font.BOLD_RED, "Please only key in integer"));
+                System.out.print(Font.BOLD_RED);
+                System.out.printf("%62s","Please only key in integer");
                 input.nextLine();
+                System.out.print(Font.RESET);
             }
         } while (bankNoError);
         ((Bank) bank).setBankNo(bankNo);
@@ -164,82 +187,125 @@ public class PaymentMenu {
         double payAmount = 0;
         do {
             try {
-                System.out.print("Enter payment amount: RM");
+                System.out.print(Font.TEXT_BLUE);
+                System.out.printf("%47s","Enter payment amount (RM): ");
                 payAmount = input.nextDouble();
+                System.out.print(Font.RESET);
                 if (payAmount < cart.getTotalPrice()) {
-                    System.out.print(Font.useFont(Font.BOLD_RED, "Insufficient amount!\n"));
+                    System.out.print(Font.BOLD_RED);
+                    System.out.printf("%58s","Insufficient amount!\n");
+                    System.out.print(Font.RESET);
                 }
             } catch (InputMismatchException e) {
-                System.out.print(Font.useFont(Font.BOLD_RED, "Invalid!\n"));
+                System.out.print(Font.BOLD_RED);
+                System.out.printf("%50s","Invalid!");
+                System.out.println(Font.RESET);
                 input.nextLine();
             }
         } while (payAmount < cart.getTotalPrice());
         ((Bank) bank).setBalance(payAmount);
 
+        clearScreen();
         System.out.println(bank);
+        System.out.println("Press enter key to return to main menu");
+        pressAnyKeyToContinue();
+        //main menu
     }
 
     // Receive E-Wallet details
     public static void eWallet(Payment eWallet, Cart cart) {
+        clearScreen();
         eWallet.setTotalPrice(cart.getTotalPrice());
-        System.out.print("\nYou have chose E-Wallet as payment method");
-        System.out.print("\nTotal Price: RM" + cart.getTotalPrice() + "\n\n");
+        System.out.println(Font.TEXT_BRIGHT_MAGENTA);
+        System.out.printf("%70s","You have chose E-Wallet as payment method");
+        System.out.println(Font.RESET);
+        System.out.printf("%61s","Total Price (RM): " + cart.getTotalPrice());
+        System.out.println();
 
         boolean accIDError = true;
         int accountID = 0;
         do {
             try {
-                System.out.print("Enter account ID: ");
+                System.out.print(Font.TEXT_BLUE);
+                System.out.printf("%n%49s","Enter account ID: ");
                 accountID = input.nextInt();
+                System.out.print(Font.RESET);
                 accIDError = false;
             } catch (InputMismatchException e) {
-                System.out.println(Font.useFont(Font.BOLD_RED, "Please only key in integer"));
+                System.out.print(Font.BOLD_RED);
+                System.out.printf("%62s","Please only key in integer");
+                System.out.print(Font.RESET);
                 input.nextLine();
             }
         } while (accIDError);
         ((EWallet) eWallet).setAccountID(accountID);
 
-        System.out.print("Enter username: ");
+        System.out.print(Font.TEXT_BLUE);
+        System.out.printf("%49s","Enter username: ");
+        System.out.print(Font.RESET);
         input.nextLine();
         String userName = input.nextLine();
         while (!userName.matches("[a-zA-Z]+")) {
-            System.out.print(Font.useFont(Font.BOLD_RED, "Invalid!\n"));
-            System.out.print("Enter valid username: ");
+            System.out.print(Font.BOLD_RED);
+            System.out.printf("%52s","Invalid!");
+            System.out.println(Font.RESET);
+            System.out.print(Font.TEXT_BLUE);
+            System.out.printf("%49s","Enter valid username: ");
             userName = input.next();
+            System.out.print(Font.RESET);
         }
         ((EWallet) eWallet).setUserName(userName);
 
         double payAmount = 0;
         do {
             try {
-                System.out.print("Enter payment amount: RM");
+                System.out.print(Font.TEXT_BLUE);
+                System.out.printf("%49s","Enter payment amount (RM): ");
                 payAmount = input.nextDouble();
+                System.out.print(Font.RESET);
                 if (payAmount < cart.getTotalPrice()) {
-                    System.out.print(Font.useFont(Font.BOLD_RED, "Insufficient amount!\n"));
+                    System.out.print(Font.BOLD_RED);
+                    System.out.printf("%59s","Insufficient amount!\n");
+                    System.out.print(Font.RESET);
                 }
             } catch (InputMismatchException e) {
-                System.out.print(Font.useFont(Font.BOLD_RED, "Invalid!\n"));
+                System.out.print(Font.BOLD_RED);
+                System.out.printf("%52s","Invalid!");
+                System.out.println(Font.RESET);
                 input.nextLine();
             }
         } while (payAmount < cart.getTotalPrice());
         ((EWallet) eWallet).setBalance(payAmount);
 
+        clearScreen();
         System.out.println(eWallet);
+        System.out.println("Press enter key to return to main menu");
+        pressAnyKeyToContinue();
+        //main menu
     }
 
     // Receive Debit/Credit details
-    public static void debitCredit(Payment debitCredit, Cart cart) throws InterruptedException {
+    public static void debitCredit(Payment debitCredit, Cart cart) {
+        clearScreen();
         debitCredit.setTotalPrice(cart.getTotalPrice());
-        System.out.print("\nYou have chose Debit/Credit as payment method");
-        System.out.print("\nTotal Price: RM" + cart.getTotalPrice() + "\n\n");
-        System.out.print("Available banks: MAYBANK, CIMB, RHB, HSBC");
+        System.out.println(Font.TEXT_BRIGHT_MAGENTA);
+        System.out.printf("%70s","You have chose debit/credit as payment method");
+        System.out.println(Font.RESET);
+        System.out.printf("%59s","Total Price (RM): " + cart.getTotalPrice());
+        System.out.println(Font.TEXT_YELLOW);
+        System.out.printf("%n%69s","Available banks: MAYBANK, CIMB, RHB, HSBC");
 
-        System.out.print("\nChoose a bank: ");
+        System.out.println(Font.TEXT_BLUE);
+        System.out.printf("%47s","Choose a bank: ");
         input.nextLine();
         String bankName = input.nextLine().toUpperCase();
         while (!bankName.matches("MAYBANK|CIMB|RHB|HSBC")) {
-            System.out.print(Font.useFont(Font.BOLD_RED, "Invalid!"));
-            System.out.print("\nEnter bank name: ");
+            System.out.print(Font.BOLD_RED);
+            System.out.printf("%52s","Invalid!");
+            System.out.println(Font.RESET);
+            System.out.print(Font.TEXT_BLUE);
+            System.out.printf("%47s","Enter a valid bank name: ");
+            System.out.print(Font.RESET);
             bankName = input.next().toUpperCase();
         }
         ((DebitCredit) debitCredit).setBankName(bankName);
@@ -248,23 +314,32 @@ public class PaymentMenu {
         int cardNo = 0;
         do {
             try {
-                System.out.print("Enter card number: ");
+                System.out.print(Font.TEXT_BLUE);
+                System.out.printf("%47s","Enter account ID: ");
                 cardNo = input.nextInt();
+                System.out.print(Font.RESET);
                 cardNoError = false;
             } catch (InputMismatchException e) {
-                System.err.println(Font.useFont(Font.BOLD_RED, "Please only key in integer"));
+                System.out.print(Font.BOLD_RED);
+                System.out.printf("%62s","Please only key in integer\n");
+                System.out.print(Font.RESET);
                 input.nextLine();
-                Thread.sleep(1000);
             }
         } while (cardNoError);
         ((DebitCredit) debitCredit).setCardNo(cardNo);
 
-        System.out.print("Enter Valid Date (MM-YY): ");
+        System.out.print(Font.TEXT_BLUE);
+        System.out.printf("%47s","Enter Valid Date (MM-YY): ");
         input.nextLine();
+        System.out.print(Font.RESET);
         String validDate = input.nextLine();
         while (!validDate.matches("\\b([1-9]|1[0-2])\\b-\\b([0-9]|[1-9][0-9])\\b")) {
-            System.out.print(Font.useFont(Font.BOLD_RED, "Invalid!"));
-            System.out.print("\nPlease enter Valid Date (MM-YY): ");
+            System.out.print(Font.BOLD_RED);
+            System.out.printf("%52s","Invalid!");
+            System.out.print(Font.RESET);
+            System.out.println(Font.TEXT_BLUE);
+            System.out.printf("%47s","Please enter Valid Date (MM-YY): ");
+            System.out.print(Font.RESET);
             validDate = input.next();
         }
         ((DebitCredit) debitCredit).setValidDate(validDate);
@@ -273,21 +348,38 @@ public class PaymentMenu {
         double payAmount = 0;
         do {
             try {
-                System.out.print("Enter payment amount: RM");
+                System.out.print(Font.TEXT_BLUE);
+                System.out.printf("%47s","Enter payment amount (RM): ");
                 payAmount = input.nextDouble();
+                System.out.print(Font.RESET);
                 if (payAmount < cart.getTotalPrice()) {
-                    System.out.print(Font.useFont(Font.BOLD_RED, "Insufficient amount!\n"));
+                    System.out.print(Font.BOLD_RED);
+                    System.out.printf("%59s","Insufficient amount!\n");
+                    System.out.print(Font.RESET);
                 }
             } catch (InputMismatchException e) {
-                System.out.print(Font.useFont(Font.BOLD_RED, "Invalid!\n"));
+                System.out.print(Font.BOLD_RED);
+                System.out.printf("%52s","Invalid!");
+                System.out.println(Font.RESET);
                 input.nextLine();
             }
         } while (payAmount < cart.getTotalPrice());
         ((DebitCredit) debitCredit).setBalance(payAmount);
 
+        clearScreen();
         System.out.println(debitCredit);
+        System.out.println("Press enter key to return to main menu");
+        pressAnyKeyToContinue();
+        //main menu
+    }
+
+    public static void clearScreen() {
+        for (int i = 0; i < 50; i++) {
+            System.out.println();
+        }
+    }
+    public static void pressAnyKeyToContinue(){
+        input.nextLine();
+        input.nextLine();
     }
 }
-
-
-
