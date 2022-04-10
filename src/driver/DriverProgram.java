@@ -68,15 +68,15 @@ public class DriverProgram {
     }
 
     private static void setProducts(ArrayList<Product> productArrayList) {
-        //product.Shirt
+        //Shirt
         Product p1 = new Shirt("Crew Tee", 25.30, 20, 3);
         Product p2 = new Shirt("Hoodie", 50.20, 10, 4);
         Product p3 = new Shirt("Jacket", 67.70, 30, 2);
-        Product p4 = new Shirt("Poplin product.Shirt", 43.80, 40, 4);
+        Product p4 = new Shirt("Poplin Shirt", 43.80, 40, 4);
         Product p5 = new Shirt("Dress", 40.50, 30, 5);
         Product p6 = new Shirt("Jumpsuit", 70.60, 25, 3);
         Product p7 = new Shirt("Sport wear", 80.30, 66, 5);
-        //product.Pant
+        //Pant
         Product p8 = new Pant("Jeans", 30.50, 12, 5);
         Product p9 = new Pant("Trousers", 40.20, 5, 5);
         Product p10 = new Pant("Cotton pants", 35.30, 20, 4);
@@ -84,14 +84,14 @@ public class DriverProgram {
         Product p12 = new Pant("Ripped pants", 43.20, 19, 2);
         Product p13 = new Pant("Sport pan", 30.60, 45, 4);
         Product p14 = new Pant("Cropped pant", 39.20, 45, 1);
-        //product.Accessories
+        //Accessories
         Product p15 = new Accessories("Cap", 14.60, 30, 2);
         Product p16 = new Accessories("Short wallet", 20.60, 25, 3);
         Product p17 = new Accessories("Long wallet", 30.60, 17, 2);
         Product p18 = new Accessories("Earring", 10.30, 30, 5);
         Product p19 = new Accessories("Headband", 15.40, 50, 4);
         Product p20 = new Accessories("Sunglasses", 12.50, 45, 3);
-        //product.Shoe
+        //Shoe
         Product p21 = new Shoe("Running shoe", 60, 25, 4);
         Product p22 = new Shoe("Leather shoe", 300, 10, 5);
         Product p23 = new Shoe("Basketball shoe", 200, 25, 3);
@@ -902,7 +902,7 @@ public class DriverProgram {
     }
 
     //TODO: PRODUCT + CART
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: cart.Cart Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: Cart Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
     public static void cartMenu(ArrayList<Product> productArrayList, Cart cart,Customer customer) throws InterruptedException {
         //Create a new cart
         clearScreen();
@@ -1122,7 +1122,7 @@ public class DriverProgram {
         System.out.printf("%n%75s",("[6] Sort by quantity " + Font.TEXT_YELLOW + "[DESC]" + Font.RESET));
         System.out.printf("%n%85s",("[7] Sort by qty and total price " + Font.TEXT_YELLOW + "[ASC]" + Font.RESET));
         System.out.printf("%n%86s",("[8] Sort by qty and total price " + Font.TEXT_YELLOW + "[DESC]" + Font.RESET));
-        System.out.printf("%n%61s","[9] Back to cart.Cart Menu ");
+        System.out.printf("%n%61s","[9] Back to Cart Menu ");
 
         boolean sortOptionError = true;
         int sortOption = 0;
@@ -1174,9 +1174,9 @@ public class DriverProgram {
         cartMenu(productArrayList,cart,customer);
     }
 
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: End cart.Cart Menu~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: End Cart Menu~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: product.Product Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: Product Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
     public static void productMenu(ArrayList<Product> productArrayList,Cart cart, Customer customer) throws InterruptedException {
         //Display product menu
         clearScreen();
@@ -1416,7 +1416,7 @@ public class DriverProgram {
         String targetProductName = input.nextLine().toUpperCase();
         ArrayList<Product> searchResultList = linearSearchByProductName(productArrayList, targetProductName);
         if (searchResultList.size() == 0) {
-            System.out.println("product.Product not found");
+            System.out.println("Product not found");
             boolean searchAgainError = true;
             char searchAgain = 'A';
             do {
@@ -1892,7 +1892,7 @@ public class DriverProgram {
         return categoryResultList;
     }
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: End Category & Best Sales~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: End product.Product Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: End Product Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
     //TODO: Payment + Order
     public static void paymentMenu(Cart cart, ArrayList<Payment> payment, Customer customer) throws InterruptedException {

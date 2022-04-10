@@ -126,7 +126,7 @@ public class People {
 
     @Override
     public String toString() {
-        return "user.People{" +
+        return "People{" +
                 "name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +

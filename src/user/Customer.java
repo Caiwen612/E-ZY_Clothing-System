@@ -108,7 +108,7 @@ public class Customer extends People {
 
     @Override
     public String toString() {
-        return "user.Customer{" +
+        return "Customer{" +
                 "customerID='" + customerID + '\'' +
                 ", address='" + address + '\'' +
                 ", cart=" + cart +

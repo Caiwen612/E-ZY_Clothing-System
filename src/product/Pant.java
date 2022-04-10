@@ -34,10 +34,10 @@ public class Pant extends Product implements Cloneable{
     @Override
     public String toString() {
         if(this.getTotalPrice() == 0){
-            //product.Product
+            //Product
             return String.format("%25s",this.pantID) + String.format("%8s","")  + super.toString();
         } else{
-            //cart.Cart
+            //Cart
             return String.format("%9s",this.pantID) + super.toString();
         }
     }
