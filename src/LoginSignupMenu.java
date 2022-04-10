@@ -2,7 +2,6 @@ import utility.Font;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class LoginSignupMenu {
@@ -705,7 +704,7 @@ public class LoginSignupMenu {
     }
 
     public static void editPhoneNo() {
-        
+
     }
 
 
