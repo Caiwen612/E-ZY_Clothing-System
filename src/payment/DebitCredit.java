@@ -2,28 +2,32 @@ package payment;
 
 import utility.Font;
 
-public class EWallet extends Payment {
+public class DebitCredit extends Payment{
 
-    private int accountID;
-    private String userName;
+    private String bankName;
+    private int cardNo;
+    private String validDate;
     public double payAmount;
 
-    public EWallet(){
-        this(0,"",0);
+    public DebitCredit(){
+        this("",0,"",0);
     }
-    public EWallet(int accountID, String userName, double payAmount){
-        super();
-        this.accountID = accountID;
-        this.userName = userName;
+    public DebitCredit(String bankName, int cardNo, String validDate, double payAmount){
+        this.bankName = bankName;
+        this.cardNo = cardNo;
+        this.validDate = validDate;
         this.payAmount = payAmount;
     }
 
     //setter
-    public void setAccountID(int accountID) {
-        this.accountID = accountID;
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
     }
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setCardNo(int cardNo) {
+        this.cardNo = cardNo;
+    }
+    public void setValidDate(String validDate) {
+        this.validDate = validDate;
     }
     public void setPayAmount(double payAmount) {
         this.payAmount = payAmount;
@@ -40,8 +44,9 @@ public class EWallet extends Payment {
         return " Total Price: RM" + getTotalPrice() +
                 "\n Amount paid: RM" + payAmount +
                 "\n      Change: RM" + (payAmount - getTotalPrice()) +
-                "\n  Account ID: " + accountID +
-                "\n    Username: " + userName +
+                "\n   Bank Name: " + bankName +
+                "\n Card Number: " + cardNo +
                 super.toString();
     }
 }
+
