@@ -42,6 +42,6 @@ public class EWallet extends Payment {
                 "\n      Change: RM" + (payAmount - getTotalPrice()) +
                 "\n  Account ID: " + accountID +
                 "\n    Username: " + userName +
-                super.toString() + "\n\nThank you for shopping!";
+                super.toString();
     }
 }
