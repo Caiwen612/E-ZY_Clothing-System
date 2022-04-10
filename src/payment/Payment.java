@@ -23,10 +23,6 @@ public class Payment {
         return this.totalPrice;
     }
 
-    public  String getPaymentID() {
-        return paymentID;
-    }
-
     public Date getPaymentDate() {
         return paymentDate;
     }
@@ -40,8 +36,9 @@ public class Payment {
     //ToString
     @Override
     public String toString() {
-        return "\npayment.Payment ID: " + paymentID +
-                "\npayment.Payment Date: " + paymentDate;
+        return "\n  Payment ID: " + paymentID +
+                "\nPayment Date: " + paymentDate +
+                "\n\nThank you for shopping!";
     }
 }
 
