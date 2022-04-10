@@ -40,8 +40,8 @@ public class Bank extends Payment{
         return " Total Price: RM" + getTotalPrice() +
                 "\n Amount paid: RM" + payAmount +
                 "\n      Change: RM" + (payAmount - getTotalPrice()) +
-                "\n   payment.Bank Name: " + bankName +
-                "\n payment.Bank Number: " + bankNo +
-                super.toString() + "\n\nThank you for shopping!";
+                "\n   Bank Name: " + bankName +
+                "\n Bank Number: " + bankNo +
+                super.toString();
     }
 }
