@@ -2,7 +2,7 @@ package payment;
 
 import java.util.Date;
 
-public class Payment {
+public class Payment implements Cloneable {
     private  String paymentID;
     private Date paymentDate;
     private static int paymentCount = 1;
@@ -39,6 +39,17 @@ public class Payment {
         return "\n  Payment ID: " + paymentID +
                 "\nPayment Date: " + paymentDate +
                 "\n\nThank you for shopping!";
+    }
+
+    @Override
+    public Payment clone() {
+        try {
+            Payment clone = (Payment) super.clone();
+            // TODO: copy mutable state here, so the clone can't change the internals of the original
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }
 

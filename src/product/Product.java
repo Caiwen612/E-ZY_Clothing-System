@@ -67,6 +67,14 @@ public class Product implements Cloneable, Serializable {
         this.qty = qty;
     }
 
+    public void addQty(int qty){
+        this.qty += qty;
+    }
+
+    public void minusQty(int qty){
+        this.qty -= qty;
+    }
+
     public double getTotalPrice() {
         return totalPrice;
     }

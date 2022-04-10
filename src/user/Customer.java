@@ -6,7 +6,7 @@ import order.Order;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Customer extends People {
+public class Customer extends People implements Cloneable{
     private String customerID;
     private String address;
     private Cart cart;
@@ -14,17 +14,16 @@ public class Customer extends People {
     private static int custCount = 0;
 
     public Customer(){
-        this("",new Cart(),new Order());
+        this("", "", "", "", "");
     }
-    public Customer(String address, Cart cart, Order orderHistory) {
-        this("", "", "", "", "", new Cart(), new Order());
-        custCount++;
+    public Customer(String address) {
+        this("", "", "", "", address);
     }
 
-    public Customer(String name, String email, String password, String phoneNo, String address, Cart cart, Order orderHistory) {
+    public Customer(String name, String email, String password, String phoneNo, String address) {
         super(name, email, password, phoneNo);
         this.address = address;
-        this.cart = cart;
+        this.cart = new Cart();
         this.orderHistory = new ArrayList<Order>();
         custCount++;
     }
@@ -73,14 +72,16 @@ public class Customer extends People {
 
     public void displayOrder(){
         int orderIndex = 0;
+        System.out.println("Order Index\tTotal order of item\tOrder Date\t Total amount of item");
         for (Order order: orderHistory){
-            System.out.println((orderIndex +1) + order.toString());
+            System.out.println((orderIndex +1) + order.getItemCount() + order.getOrderDate()  + order.getTotalPrice());
             orderIndex++;
+
         }
     }
 
     public void viewOrder(int index){
-        System.out.println(orderHistory.get(index).toString());
+        System.out.println(orderHistory.get(index-1).toString());
     }
 
     public void removeOrder(int index){
@@ -113,5 +114,12 @@ public class Customer extends People {
                 ", address='" + address + '\'' +
                 ", cart=" + cart +
                 '}';
+    }
+
+    @Override
+    public Customer clone() {
+        Customer clone = (Customer) super.clone();
+        // TODO: copy mutable state here, so the clone can't change the internals of the original
+        return clone;
     }
 }

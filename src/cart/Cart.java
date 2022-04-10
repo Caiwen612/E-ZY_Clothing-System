@@ -8,7 +8,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cart {
+public class Cart implements Cloneable{
     private List<Product> cartItem;
     private double totalPrice;
     private int itemCount;
@@ -81,7 +81,11 @@ public class Cart {
         return isExist;
     }
 
-    public void editItem(int index,int quantity){
+    public int getItemCount() {
+        return itemCount;
+    }
+
+    public void editItem(int index, int quantity){
         this.cartItem.get(index-1).setQty(quantity);
         System.out.print(Font.TEXT_YELLOW);
         System.out.printf("%n%68s","Quantity of product has successfully updated.");
@@ -91,6 +95,23 @@ public class Cart {
         this.cartItem.remove(index-1);
         System.out.print(Font.TEXT_YELLOW);
         System.out.printf("%n%58s","Product removed from cart");
+    }
+
+    public  void clearCart(){
+        this.cartItem.clear();
+        this.totalPrice = 0;
+        this.itemCount = 0;
+    }
+
+    public void reduceStock(ArrayList<Product> productArrayList){
+        //search cart and product is smae
+        for (Product cart : cartItem) {
+            for (Product product1 : productArrayList) {
+                if (cart.getName().equals(product1.getName())) {
+                    product1.minusQty(cart.getQty());
+                }
+            }
+        }
     }
 
     public double calculateTotalPrice(){
@@ -141,4 +162,14 @@ public class Cart {
                 '}';
     }
 
+    @Override
+    public Cart clone() {
+        try {
+            Cart clone = (Cart) super.clone();
+            // TODO: copy mutable state here, so the clone can't change the internals of the original
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
 }

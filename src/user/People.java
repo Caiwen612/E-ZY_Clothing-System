@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class People {
+public class People implements Cloneable{
     private String name;
     private String email;
     private String password;
@@ -132,5 +132,16 @@ public class People {
                 ", password='" + password + '\'' +
                 ", phoneNo='" + phoneNo + '\'' +
                 '}';
+    }
+
+    @Override
+    public People clone() {
+        try {
+            People clone = (People) super.clone();
+            // TODO: copy mutable state here, so the clone can't change the internals of the original
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }

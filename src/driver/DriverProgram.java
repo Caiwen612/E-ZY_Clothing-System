@@ -47,9 +47,9 @@ public class DriverProgram {
     //TODO: Initialize the arrayList
     private static void setUser(ArrayList<Admin> adminArrList ,ArrayList<Customer> customerArrList) {
         // calling customer constructor
-        Customer customer1 = new Customer("Kelvin", "kelvin@gmail.com", "a123", "012-34567890", "12, Jalan AhKao, Bandar ABC", new Cart(), new Order());
+        Customer customer1 = new Customer("Kelvin", "kelvin@gmail.com", "a123", "012-34567890", "12, Jalan AhKao, Bandar ABC");
         customer1.generateCustID();
-        Customer customer2 = new Customer("Ali", "ali@gmail.com", "a123", "011-34567890", "11, Jalan AhKao Bandar ABC", new Cart(), new Order());
+        Customer customer2 = new Customer("Ali", "ali@gmail.com", "a123", "011-34567890", "11, Jalan AhKao Bandar ABC");
         customer2.generateCustID();
 
         // calling admin constructor
@@ -182,7 +182,7 @@ public class DriverProgram {
             System.out.print(Font.TEXT_CYAN);
             System.out.printf(  "%55s", "+-------------+");
             System.out.printf("%n%55s", "|    Login    |");
-            System.out.printf("%n%55s%n", "+-----------+");
+            System.out.printf("%n%55s%n", "+-------------+");
             System.out.print(Font.RESET);
 
             System.out.println("Do you wish to login as admin or customer");
@@ -513,7 +513,7 @@ public class DriverProgram {
         custAddress = scanner.nextLine();
 
 
-        Customer newCust = new Customer(custName, custEmail, custPassword, custPhoneNo, custAddress, new Cart(), new Order());
+        Customer newCust = new Customer(custName, custEmail, custPassword, custPhoneNo, custAddress);
         newCust.generateCustID();
         customerArrList.add(newCust);
 
@@ -643,7 +643,7 @@ public class DriverProgram {
                     case 2 -> productMenu(productArrayList, cart,customer);
                     case 3 -> cartMenu(productArrayList, cart,customer);
                     case 4 -> orderHistory(customer);
-                    case 5 -> PaymentMenu.paymentMenu(cart, payment);
+                    case 5 -> paymentMenu(cart, payment,customer);
                     case 6 -> login(adminArrList, customerArrList);
                     case 7 -> System.exit(0);
                     default -> {
@@ -843,7 +843,7 @@ public class DriverProgram {
             }
             else {
                 phoneNoVld = false;
-                System.out.println(Font.BOLD_RED + "Please Enter A Valid Phone Number");
+                System.out.println(Font.BOLD_RED + "Please Enter A Valid Phone Number (999-9999999999)");
                 System.out.print(Font.RESET);
                 scanner.nextLine();
                 Thread.sleep(1000);
@@ -1116,8 +1116,8 @@ public class DriverProgram {
         System.out.println();
         System.out.printf("%n%70s", ("[1] Sort by name " + Font.TEXT_YELLOW + "[ASC]" + Font.RESET));
         System.out.printf("%n%71s",("[2] Sort by name " + Font.TEXT_YELLOW + "[DESC]" + Font.RESET));
-        System.out.printf("%n%71s",("[3] Sort by price " + Font.TEXT_YELLOW + "[ASC]" + Font.RESET));
-        System.out.printf("%n%72s",("[4] Sort by price " + Font.TEXT_YELLOW + "[DESC]" + Font.RESET));
+        System.out.printf("%n%77s",("[3] Sort by total price " + Font.TEXT_YELLOW + "[ASC]" + Font.RESET));
+        System.out.printf("%n%78s",("[4] Sort by total price " + Font.TEXT_YELLOW + "[DESC]" + Font.RESET));
         System.out.printf("%n%74s",("[5] Sort by quantity " + Font.TEXT_YELLOW + "[ASC]" + Font.RESET));
         System.out.printf("%n%75s",("[6] Sort by quantity " + Font.TEXT_YELLOW + "[DESC]" + Font.RESET));
         System.out.printf("%n%85s",("[7] Sort by qty and total price " + Font.TEXT_YELLOW + "[ASC]" + Font.RESET));
@@ -1188,7 +1188,7 @@ public class DriverProgram {
         System.out.println();
         System.out.printf(  "%64s", "[1] Search product        ");
         System.out.printf("%n%64s", "[2] Category              ");
-        System.out.printf("%n%64s", "[3] Back to previous Menu ");
+        System.out.printf("%n%64s", "[3] Back to profile Menu  ");
         System.out.printf("%n%64s", "[4] Back to Cart Menu     ");
         // Get input for cart option
         boolean cartOptionError = true;
@@ -1788,7 +1788,6 @@ public class DriverProgram {
     private static void Category(ArrayList<Product> productArrayList, Cart cart, String category, Customer customer) throws InterruptedException {
         //Display product shirt
         ArrayList<Product> categoryResultList = linearSearchByProductCategory(productArrayList, category);
-        System.out.println("Product ID\t\t" + "Product Name\t\t\t" + "Product Price\t\t" + "Quantity In Stock");
         for (Product product : categoryResultList) {
             System.out.println(product);
         }
@@ -1879,9 +1878,6 @@ public class DriverProgram {
                 }
                 break;
             case "Best Sales":
-                System.out.println("\t\t+--------------+");
-                System.out.println("\t\t|  Best Sales  |");
-                System.out.println("\t\t+--------------+");
                 for (Product product : productArrayList) {
                     if (product.getRating() == 5) {
                         categoryResultList.add(product);
@@ -1920,7 +1916,7 @@ public class DriverProgram {
                 paymentOption = input.nextInt();
                 System.out.print(Font.RESET);
                 System.out.printf("%26s","");
-                Validation.validOption(paymentOption, 1, 3);
+                Validation.validOption(paymentOption, 1, 4);
                 paymentOptionError = false;
             } catch (ValidationException e) {
                 System.err.print(e.getMessage());
@@ -1960,7 +1956,7 @@ public class DriverProgram {
         System.out.println(Font.TEXT_BRIGHT_MAGENTA);
         System.out.printf("%67s","You have chose Bank as payment method");
         System.out.println(Font.RESET);
-        System.out.printf("%59s","Total Price (RM): " + cart.getTotalPrice());
+        System.out.printf("%59s","Total Price (RM): " + df2.format(cart.getTotalPrice()));
 
         System.out.println(Font.TEXT_YELLOW);
         System.out.printf("%n%69s","Available banks: MAYBANK, CIMB, RHB, HSBC");
@@ -2017,12 +2013,13 @@ public class DriverProgram {
             }
         } while (payAmount < cart.getTotalPrice());
         ((Bank) bank).setPayAmount(payAmount);
-        payment.add(bank);
         clearScreen();
-        System.out.println(bank);
-        setOrder(customer,cart,bank);
+        System.out.println(bank.toString());
+        payment.add(bank.clone());
+
         System.out.println("Press enter key to return to main menu");
         pressAnyKeyToContinue();
+        setOrder(customer,cart,bank);
         //main menu
     }
 
@@ -2090,12 +2087,12 @@ public class DriverProgram {
             }
         } while (payAmount < cart.getTotalPrice());
         ((EWallet) eWallet).setPayAmount(payAmount);
-        payment.add(eWallet);
+        payment.add(eWallet.clone());
         clearScreen();
         System.out.println(eWallet);
-        setOrder(customer,cart,eWallet);
         System.out.println("Press enter key to return to main menu");
         pressAnyKeyToContinue();
+        setOrder(customer,cart,eWallet);
         //main menu
     }
 
@@ -2180,19 +2177,22 @@ public class DriverProgram {
             }
         } while (payAmount < cart.getTotalPrice());
         ((DebitCredit) debitCredit).setPayAmount(payAmount);
-        payment.add(debitCredit);
+        payment.add(debitCredit.clone());
         clearScreen();
-        setOrder(customer,cart,debitCredit);
+
         System.out.println(debitCredit);
         System.out.println("Press enter key to return to main menu");
         pressAnyKeyToContinue();
         //main menu
+        setOrder(customer,cart,debitCredit);
     }
 
     //Prompt delivery
     public static void setOrder(Customer customer, Cart cart, Payment payment) throws InterruptedException {
-        Order order = new Order(customer,cart,payment);
+        Order order = new Order(customer.clone(),cart.clone(),payment.clone());
         customer.addOrder(order);
+        cart.reduceStock(productArrayList);
+        cart.clearCart();
         custMenu(adminArrList,customerArrList,customer);
     }
 
@@ -2200,6 +2200,7 @@ public class DriverProgram {
         System.out.println("+------------+");
         System.out.println("|   Orders   |");
         System.out.println("+------------+");
+
         customer.displayOrder();
 
         System.out.println("[1] view order detail");
@@ -2290,12 +2291,6 @@ public class DriverProgram {
     }
 
     public static void clearScreen() {
-        //    try{
-        //        new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
-        //    }
-        //    catch(Exception e){
-        //        System.out.println(e);
-        //    }
         for (int i = 0; i < 50; i++) {
             System.out.println();
         }

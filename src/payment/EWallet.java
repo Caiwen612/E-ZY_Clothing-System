@@ -2,7 +2,7 @@ package payment;
 
 import utility.Font;
 
-public class EWallet extends Payment {
+public class EWallet extends Payment implements Cloneable {
 
     private int accountID;
     private String userName;
@@ -43,5 +43,12 @@ public class EWallet extends Payment {
                 "\n  Account ID: " + accountID +
                 "\n    Username: " + userName +
                 super.toString();
+    }
+
+    @Override
+    public EWallet clone() {
+        EWallet clone = (EWallet) super.clone();
+        // TODO: copy mutable state here, so the clone can't change the internals of the original
+        return clone;
     }
 }

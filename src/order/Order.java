@@ -11,11 +11,10 @@ public class Order{
     private Cart orderDetails;
     private Payment paymentMethod;
     private Date orderDate;
-    private Cart itemCount;
-    private Cart totalPrice;
+
 
     public Order(){
-        this(new Customer(), new Cart(), new Payment());
+        this(null, null, null);
     }
 
     public Order(Customer customer, Cart orderDetails, Payment paymentMethod) {
@@ -41,12 +40,12 @@ public class Order{
         return orderDate;
     }
 
-    public Cart getTotalPrice() {
-        return totalPrice;
+    public double getTotalPrice() {
+        return this.getOrderDetails().getTotalPrice();
     }
 
-    public Cart getItemCount() {
-        return itemCount;
+    public int getItemCount() {
+        return this.getOrderDetails().getItemCount();
     }
 
     //    public static void removeOrder(int index){
@@ -69,7 +68,7 @@ public class Order{
 
     @Override
     public String toString() {
-        return "\t" + itemCount + "\t" + totalPrice + "\t" + orderDate;
+        return "\t" + this.getItemCount() + "\t" + this.getTotalPrice() + "\t" + orderDate;
     }
 }
 

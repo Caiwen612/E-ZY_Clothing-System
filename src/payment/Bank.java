@@ -2,7 +2,7 @@ package payment;
 
 import utility.Font;
 
-public class Bank extends Payment{
+public class Bank extends Payment implements Cloneable {
 
     private String bankName;
     private int bankNo;
@@ -43,5 +43,12 @@ public class Bank extends Payment{
                 "\n   Bank Name: " + bankName +
                 "\n Bank Number: " + bankNo +
                 super.toString();
+    }
+
+    @Override
+    public Bank clone() {
+        Bank clone = (Bank) super.clone();
+        // TODO: copy mutable state here, so the clone can't change the internals of the original
+        return clone;
     }
 }

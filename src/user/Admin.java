@@ -2,25 +2,25 @@ package user;
 
 
 import driver.DriverProgram;
-import product.Accessories;
-import product.Pant;
-import product.Shirt;
-import product.Shoe;
+import product.*;
 import utility.Font;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import static driver.DriverProgram.adminMenu;
 
 
 public class Admin extends People {
     private static String doubleAuthCode;
     private static int staffCount = 0;
     private String staffID;
+    static DecimalFormat df2 = new DecimalFormat("0.00");
 
 
     public Admin() {
@@ -153,7 +153,7 @@ public class Admin extends People {
                     case 2:
                         if (obj instanceof Accessories) {
                             System.out.println();
-                            System.out.println("Original Price: " + Font.BOLD_YELLOW + ((Accessories) obj).getPrice());
+                            System.out.println("Original Price: " + Font.BOLD_YELLOW +  df2.format(((Accessories) obj).getPrice()));
                             System.out.print(Font.RESET);
                             System.out.print("New Price: RM");
                             ((Accessories) obj).setPrice(scanner.nextDouble());
@@ -161,7 +161,7 @@ public class Admin extends People {
                         }
                         else if (obj instanceof Pant) {
                             System.out.println();
-                            System.out.println("Original Price: " + Font.BOLD_YELLOW + ((Pant) obj).getPrice());
+                            System.out.println("Original Price: " + Font.BOLD_YELLOW + df2.format(((Pant) obj).getPrice()));
                             System.out.print(Font.RESET);
                             System.out.print("New Price: RM");
                             ((Pant) obj).setPrice(scanner.nextDouble());
@@ -169,7 +169,7 @@ public class Admin extends People {
                         }
                         else if (obj instanceof Shirt) {
                             System.out.println();
-                            System.out.println("Original Price: " + Font.BOLD_YELLOW + ((Shirt) obj).getPrice());
+                            System.out.println("Original Price: " + Font.BOLD_YELLOW + df2.format(((Shirt) obj).getPrice()));
                             System.out.print(Font.RESET);
                             System.out.print("New Price: RM");
                             ((Shirt) obj).setPrice(scanner.nextDouble());
@@ -177,7 +177,7 @@ public class Admin extends People {
                         }
                         else if (obj instanceof Shoe) {
                             System.out.println();
-                            System.out.println("Original Price: " + Font.BOLD_YELLOW + ((Shoe) obj).getPrice());
+                            System.out.println("Original Price: " + Font.BOLD_YELLOW + df2.format(((Shoe) obj).getPrice()));
                             System.out.print(Font.RESET);
                             System.out.print("New Price: RM");
                             ((Shoe) obj).setPrice(scanner.nextDouble());
@@ -190,36 +190,12 @@ public class Admin extends People {
                         }
                         break;
                     case 3:
-                        if (obj instanceof Accessories) {
+                        if (obj instanceof Product) {
                             System.out.println();
-                            System.out.println("Original Quantity: " + Font.BOLD_YELLOW + ((Accessories) obj).getQty());
+                            System.out.println("Original Quantity: " + Font.BOLD_YELLOW + ((Product) obj).getQty());
                             System.out.print(Font.RESET);
                             System.out.print("New Quantity: ");
-                            ((Accessories) obj).setQty(scanner.nextInt());
-                            scanner.nextLine();
-                        }
-                        else if (obj instanceof Pant) {
-                            System.out.println();
-                            System.out.println("Original Price: " + Font.BOLD_YELLOW + ((Pant) obj).getPrice());
-                            System.out.print(Font.RESET);
-                            System.out.print("New Price: RM");
-                            ((Pant) obj).setPrice(scanner.nextInt());
-                            scanner.nextLine();
-                        }
-                        else if (obj instanceof Shirt) {
-                            System.out.println();
-                            System.out.println("Original Price: " + Font.BOLD_YELLOW + ((Shirt) obj).getPrice());
-                            System.out.print(Font.RESET);
-                            System.out.print("New Price: RM");
-                            ((Shirt) obj).setPrice(scanner.nextInt());
-                            scanner.nextLine();
-                        }
-                        else if (obj instanceof Shoe) {
-                            System.out.println();
-                            System.out.println("Original Price: " + Font.BOLD_YELLOW + ((Shoe) obj).getPrice());
-                            System.out.print(Font.RESET);
-                            System.out.print("New Price: RM");
-                            ((Shoe) obj).setPrice(scanner.nextInt());
+                            ((Product) obj).setQty(scanner.nextInt());
                             scanner.nextLine();
                         }
                         else {
@@ -229,7 +205,6 @@ public class Admin extends People {
                         }
                         break;
                     case 4:
-
                         adminMenu(adminArrList, customerArrList, admin);
                         break;
                     case 5:
@@ -275,16 +250,16 @@ public class Admin extends People {
                     qtyVld = true;
 
                     if (obj instanceof Accessories) {
-                        ((Accessories) obj).setQty(qty);
+                        ((Accessories) obj).addQty(qty);
                     }
                     else if (obj instanceof Pant) {
-                        ((Pant) obj).setQty(qty);
+                        ((Pant) obj).addQty(qty);
                     }
                     else if (obj instanceof Shirt) {
-                        ((Shirt) obj).setQty(qty);
+                        ((Shirt) obj).addQty(qty);
                     }
                     else if (obj instanceof Shoe) {
-                        ((Shoe) obj).setQty(qty);
+                        ((Shoe) obj).addQty(qty);
                     }
                     else {
                         productVld = false;
