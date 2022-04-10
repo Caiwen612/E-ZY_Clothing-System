@@ -102,7 +102,7 @@ public class ProductMixCart {
     }
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: cart.Cart Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-    private static void cartMenu(ArrayList<Product> productArrayList, Cart cart) throws InterruptedException {
+    public static void cartMenu(ArrayList<Product> productArrayList, Cart cart) throws InterruptedException {
         //Create a new cart
         clearScreen();
         System.out.print(Font.TEXT_CYAN);
