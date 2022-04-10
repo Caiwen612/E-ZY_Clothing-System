@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class Payment {
     private  String paymentID;
-    private double payAmount;
     private Date paymentDate;
     private static int paymentCount = 1;
     private double totalPrice;
