@@ -217,6 +217,7 @@ public class PaymentMenu {
         System.out.println(bank);
         System.out.println("Press enter key to return to main menu");
         pressAnyKeyToContinue();
+
         //main menu
     }
 

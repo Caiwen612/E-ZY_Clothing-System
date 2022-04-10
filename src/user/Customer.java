@@ -3,15 +3,19 @@ package user;
 import cart.Cart;
 import order.Order;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Customer extends People {
     private String customerID;
     private String address;
     private Cart cart;
-    private Order orderHistory;
+    private ArrayList<Order> orderHistory;
     private static int custCount = 0;
 
+    public Customer(){
+        this("",new Cart(),new Order());
+    }
     public Customer(String address, Cart cart, Order orderHistory) {
         this("", "", "", "", "", new Cart(), new Order());
         custCount++;
@@ -21,7 +25,7 @@ public class Customer extends People {
         super(name, email, password, phoneNo);
         this.address = address;
         this.cart = cart;
-        this.orderHistory = orderHistory;
+        this.orderHistory = new ArrayList<Order>();
         custCount++;
     }
 
@@ -58,7 +62,30 @@ public class Customer extends People {
         Customer.custCount = custCount;
     }
 
+    public ArrayList<Order> getOrderHistory() {
+        return orderHistory;
+    }
 
+    //add order to order history
+    public void addOrder(Order order) {
+        orderHistory.add(order);
+    }
+
+    public void displayOrder(){
+        int orderIndex = 0;
+        for (Order order: orderHistory){
+            System.out.println((orderIndex +1) + order.toString());
+            orderIndex++;
+        }
+    }
+
+    public void viewOrder(int index){
+        System.out.println(orderHistory.get(index).toString());
+    }
+
+    public void removeOrder(int index){
+        orderHistory.remove(index-1);
+    }
 
     // methods
     public void generateCustID() {

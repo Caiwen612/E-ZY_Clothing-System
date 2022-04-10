@@ -2,9 +2,14 @@ package product;
 
 import utility.Font;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.text.DecimalFormat;
 
-public class Product implements Cloneable  {
+public class Product implements Cloneable, Serializable {
+    //Serializable
+    @Serial
+    private static final long serialVersionUID = 1L;
     //Declare data member
     private String name;
     private double price;

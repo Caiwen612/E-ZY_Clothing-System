@@ -25,7 +25,7 @@ public class EWallet extends Payment {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-    public void setBalance(double payAmount) {
+    public void setPayAmount(double payAmount) {
         this.payAmount = payAmount;
     }
 

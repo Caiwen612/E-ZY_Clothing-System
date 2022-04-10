@@ -1,57 +1,67 @@
 package order;
 
+import cart.Cart;
 import payment.Payment;
+import user.Customer;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 public class Order{
-
-    public static List<Payment> paymentList;
-    private static int paymentCount;
+    private Customer customer;
+    private Cart orderDetails;
+    private Payment paymentMethod;
+    private Date orderDate;
 
     public Order(){
-        paymentList = new ArrayList<Payment>();
+        this(new Customer(), new Cart(), new Payment());
     }
 
-    public void addPayment(Payment payment){
-        paymentList.add(payment);
-        paymentCount++;
+    public Order(Customer customer, Cart orderDetails, Payment paymentMethod) {
+        this.customer = customer;
+        this.orderDetails = orderDetails;
+        this.paymentMethod = paymentMethod;
+        this.orderDate = paymentMethod.getPaymentDate();
+    }
+    //Getter and setter
+    public Customer getCustomer() {
+        return customer;
     }
 
-    //remove payment
-    public void removePayment(Payment payment){
-        paymentList.remove(payment);
+    public Cart getOrderDetails() {
+        return orderDetails;
     }
 
-    public List<Payment> getPaymentList(){
-        return paymentList;
+    public Payment getPaymentMethod() {
+        return paymentMethod;
     }
 
-    public static void removeOrder(int index){
-        paymentList.remove(index-1);
-        System.out.print("order.Order removed");
+    public Date getOrderDate() {
+        return orderDate;
     }
 
-    public static void displayOrder(){
-        if(paymentList.size() != 0){
-            for(int i=0; i<paymentList.size(); i++){
-                System.out.print(i+1);
-                System.out.print(paymentList.get(i));
-                System.out.println();
-            }
-        } else {
-            System.out.println("There are no orders");
-        }
-    }
 
+
+
+//    public static void removeOrder(int index){
+//        paymentList.remove(index-1);
+//        System.out.print("order.Order removed");
+//    }
+//
+//    public static void displayOrder(){
+//        if(paymentList.size() != 0){
+//            for(int i=0; i<paymentList.size(); i++){
+//                System.out.print(i+1);
+//                System.out.print(paymentList.get(i));
+//                System.out.println();
+//            }
+//        } else {
+//            System.out.println("There are no orders");
+//        }
+//    }
+//
     @Override
     public String toString() {
-        String output = "";
-        for(Payment payment: paymentList){
-            output += paymentCount + "\t" + payment.getPaymentID() + "\t\t" + payment.getPaymentDate();
-        }
-        return output;
+        return "\t" +  + "\t" + orderDate;
     }
 }
 

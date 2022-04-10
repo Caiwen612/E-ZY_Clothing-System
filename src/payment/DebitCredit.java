@@ -29,7 +29,7 @@ public class DebitCredit extends Payment{
     public void setValidDate(String validDate) {
         this.validDate = validDate;
     }
-    public void setBalance(double payAmount) {
+    public void setPayAmount(double payAmount) {
         this.payAmount = payAmount;
     }
 

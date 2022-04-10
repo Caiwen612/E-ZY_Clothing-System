@@ -1,7 +1,6 @@
 package user;
 
 
-import driver.LoginSignupMenu;
 import product.Accessories;
 import product.Pant;
 import product.Shirt;
@@ -14,6 +13,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import static driver.DriverProgram.adminMenu;
 
 public class Admin extends People {
     private static String doubleAuthCode;
@@ -225,7 +226,7 @@ public class Admin extends People {
                         break;
                     case 4:
 
-                        LoginSignupMenu.adminMenu(adminArrList, customerArrList, admin);
+                        adminMenu(adminArrList, customerArrList, admin);
                         break;
                     case 5:
                         System.exit(0);

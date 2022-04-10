@@ -25,7 +25,7 @@ public class Bank extends Payment{
     public void setBankNo(int bankNo) {
         this.bankNo = bankNo;
     }
-    public void setBalance(double payAmount) {
+    public void setPayAmount(double payAmount) {
         this.payAmount = payAmount;
     }
 
