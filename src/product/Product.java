@@ -4,6 +4,8 @@ import utility.Font;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 
+//Author: Tay Chai Boon
+
 public class Product implements Cloneable, Serializable {
     //Declare data members
     private String name;

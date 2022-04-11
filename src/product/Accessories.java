@@ -1,5 +1,7 @@
 package product;
 
+//Author: Tay Chai Boon
+
 public class Accessories extends Product implements Cloneable{
     //Declare data members
     private String accessoriesID;
