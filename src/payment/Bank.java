@@ -5,15 +5,18 @@ import utility.Font;
 import java.text.DecimalFormat;
 
 public class Bank extends Payment implements Cloneable {
-
+    // Data Members
     private String bankName;
     private int bankNo;
 
     public static DecimalFormat df2 = new DecimalFormat("0.00");
 
+    // No-argh constructor
     public Bank(){
         this("",0);
     }
+    
+    // Parameterized constructor
     public Bank(String bankName, int bankNo){
         super();
         this.bankName = bankName;
@@ -28,8 +31,7 @@ public class Bank extends Payment implements Cloneable {
         this.bankNo = bankNo;
     }
 
-
-
+    // ToString
     @Override
     public String toString() {
         System.out.print(Font.TEXT_CYAN);
@@ -45,6 +47,7 @@ public class Bank extends Payment implements Cloneable {
                 super.toString();
     }
 
+    // Clone
     @Override
     public Bank clone() {
         Bank clone = (Bank) super.clone();
