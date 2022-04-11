@@ -49,8 +49,7 @@ public class Payment implements Cloneable, Serializable {
     @Override
     public String toString() {
         return "\n  Payment ID: " + paymentID +
-                "\nPayment Date: " + paymentDate +
-                "\n\nThank you for shopping!";
+                "\nPayment Date: " + paymentDate;
     }
 
     // Clone
