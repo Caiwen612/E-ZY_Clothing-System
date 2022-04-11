@@ -17,10 +17,7 @@ import utility.ValidationException;
 
 import java.io.*;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class DriverProgram {
 
@@ -36,13 +33,16 @@ public class DriverProgram {
     static DecimalFormat df2 = new DecimalFormat("0.00");
 
     public static void main(String[] args) throws InterruptedException {
-        //Create files
-        databaseInit();
+        welcome();
+        //Generate auth code for sensitive purpose
         AuthCodeMultithreading authCodeGenerate = new AuthCodeMultithreading();
         authCodeGenerate.start();
+
+        //Create files
+        databaseInit();
         //Load the arrayList
         loadArrayList();
-        //Initialize the arrayList
+        //Initialize the arrayList if database is empty
         if(productArrayList.size() == 0){
             System.out.println("No product in the database");
             System.out.println("Default data is use to display");
@@ -55,23 +55,41 @@ public class DriverProgram {
         adminArrList.forEach(System.out::println);
         payment.forEach(System.out::println);
         orderArrList.forEach(System.out::println);
-//
-//        Order order = new Order(
-//                new Customer("haha"),
-//                new Cart(),
-//                new Bank("Hong Leong Bank",1234)
-//        );
 //        orderArrList.add(order);
 //        System.out.printf("RM %.2f",productArrayList
 //                .stream()
 //                .map(Product::getPrice)
 //                .reduce(0.0,Double::sum));
 //        productArrayList.add(new Product("haha", 123,5));
-        endProgram();
-
         menu(adminArrList, customerArrList);
     }
 
+    //TODO: Welcome + loading
+    public static void welcome(){
+        System.out.println("Welcome to the e-commerce system");
+        logo();
+        System.out.println("System Developer");
+        System.out.println("+=====================+");
+        System.out.println("|Application Developer|");
+        System.out.println("+=====================+");
+        System.out.println("Tay Chai Boon");
+        System.out.println("Kelvin Ee Wei Keong");
+        System.out.println("Eugene Law Kai Le");
+
+        //Display date and times
+        System.out.println();
+        System.out.println(new Date());
+
+
+    }
+
+
+
+
+
+
+    //TODO: Simple Database @Author TAY CHAI BOON
+    //Create database
     public static void databaseInit(){
         try {
             File file = new File("database/product.ser");
@@ -98,8 +116,7 @@ public class DriverProgram {
             e.printStackTrace();
         }
     }
-
-    //TODO: Load the arrayList
+    //Load arrayList from files
     public static void loadArrayList() {
         File[] files = new File("database").listFiles();
         for (File file : files) {
@@ -119,9 +136,12 @@ public class DriverProgram {
                     }
                     ois.close();
                     System.out.println("The object of the programs is loaded from the file");
+                }  catch (EOFException e){
+                    System.out.println("The file is empty");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
             }
         }
     }
@@ -131,7 +151,6 @@ public class DriverProgram {
         File[] files = new File("database").listFiles();
 
         for (File file : files) {
-            System.out.println(file.getName());
             if (file.exists()) { //If the files exists, load all data into driver program
                 try {
                     FileOutputStream fos = new FileOutputStream("database/" + file.getName());
@@ -145,19 +164,18 @@ public class DriverProgram {
                         default -> System.out.println("Unknown file stored in database to be serialize in " + file.getName());
                     }
                     oos.close();
-                    System.out.println("The object of the programs is loaded from the file");
+//                    System.out.println("Your progress has been store in database.");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }
+        System.out.print(Font.TEXT_YELLOW);
+        System.out.println("Your progress has been store in database.");
     }
 
 
-
-
-
-    //TODO: Initialize the arrayList
+    //TODO: Initialize the arrayList @Author TAY CHAI BOON
     private static void setUser(ArrayList<Admin> adminArrList ,ArrayList<Customer> customerArrList) {
         // calling customer constructor
         Customer customer1 = new Customer("Kelvin", "kelvin@gmail.com", "c12345", "012-34567890", "12, Jalan AhKao, Bandar ABC");
@@ -242,7 +260,7 @@ public class DriverProgram {
 
     }
 
-    //TODO: CUSTOMER AND ADMIN
+    //TODO: CUSTOMER AND ADMIN @Author Kelvin Ee Wei Keong
     private static void menu(ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList) throws InterruptedException {
 
         boolean optionVld = true;
@@ -782,7 +800,7 @@ public class DriverProgram {
         Scanner scanner = new Scanner(System.in);
 
         do {
-            utility.utility.clearScreen();
+            clearScreen();
             System.out.print(Font.TEXT_CYAN);
             System.out.printf(  "%55s", "+---------------+");
             System.out.printf("%n%55s", "|    Profile    |");
@@ -983,7 +1001,7 @@ public class DriverProgram {
         custProfile(adminArrList, customerArrList, customer);
     }
 
-    //TODO: PRODUCT + CART
+    //TODO: PRODUCT + CART @Author TAY CHAI BOON
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: Cart Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
     public static void cartMenu(ArrayList<Product> productArrayList, Cart cart,Customer customer) throws InterruptedException {
         //Create a new cart
@@ -1972,7 +1990,7 @@ public class DriverProgram {
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: End Category & Best Sales~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: End Product Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
-    //TODO: Payment + Order
+    //TODO: Payment + Order @Author EUGENE LAW KAI LE
     public static void paymentMenu(Cart cart, ArrayList<Payment> payment, Customer customer) throws InterruptedException {
         clearScreen();
         System.out.print(Font.TEXT_CYAN);
@@ -2069,6 +2087,7 @@ public class DriverProgram {
             } catch (InputMismatchException e) {
                 System.out.print(Font.BOLD_RED);
                 System.out.printf("%62s","Please only key in integer");
+                Thread.sleep(1000);
                 input.nextLine();
                 System.out.print(Font.RESET);
             }
@@ -2382,6 +2401,8 @@ public class DriverProgram {
         orderHistory(customer);
     }
 
+
+    //TODO: TEAM Tools @Author Team
     public static void clearScreen() {
         for (int i = 0; i < 50; i++) {
             System.out.println();
@@ -2395,13 +2416,41 @@ public class DriverProgram {
 
     public static void endProgram(){
         storeArrayList();
-        System.out.println(Font.useFont(Font.BOLD_RED, "Thank you for using our system"));
-        System.out.println(Font.useFont(Font.BOLD_RED, "Good bye"));
+        System.out.println(Font.TEXT_CYAN);
+        System.out.println(" /$$$$$$$$ /$$   /$$  /$$$$$$  /$$   /$$ /$$   /$$       /$$     /$$ /$$$$$$  /$$   /$$               ");
+        System.out.println("|__  $$__/| $$  | $$ /$$__  $$| $$$ | $$| $$  /$$/      |  $$   /$$//$$__  $$| $$  | $$               ");
+        System.out.println("   | $$   | $$  | $$| $$    \\ $$| $$$$| $$| $$ /$$/          \\  $$ /$$/| $$    \\ $$| $$  | $$      ");
+        System.out.println("   | $$   | $$$$$$$$| $$$$$$$$| $$ $$ $$| $$$$$/            \\  $$$$/ | $$  | $$| $$  | $$            ");
+        System.out.println("   | $$   | $$__  $$| $$__  $$| $$  $$$$| $$  $$             \\  $$/  | $$  | $$| $$  | $$            ");
+        System.out.println("   | $$   | $$  | $$| $$  | $$| $$  \\  $$$| $$  \\  $$         | $$   | $$  | $$| $$  | $$         ");
+        System.out.println("   | $$   | $$  | $$| $$  | $$| $$   \\  $$| $$   \\  $$        | $$   |  $$$$$$/|  $$$$$$/         ");
+        System.out.println("   |__/   |__/  |__/|__/  |__/|__/    \\__/|__/    \\__/        |__/      \\______/    \\______/    ");
+        System.out.println("                                                                                                      ");
+        System.out.println("                                                                                                      ");
+
         System.exit(0);
+
+    }
+
+    public static void logo(){
+        System.out.println(" .----------------.  .----------------.  .----------------.  .----------------.    ");
+        System.out.println("| .--------------. || .--------------. || .--------------. || .--------------. |   ");
+        System.out.println("| |  _________   | || |              | || |   ________   | || |  ____  ____  | |   ");
+        System.out.println("| | |_   ___  |  | || |              | || |  |  __   _|  | || | |_  _||_  _| | |   ");
+        System.out.println("| |   | |_  \\_|  | || |    ______    | || |  |_/  / /    | || |   \\ \\  / /   | |");
+        System.out.println("| |   |  _|  _   | || |   |______|   | || |     .'.' _   | || |    \\ \\/ /    | | ");
+        System.out.println("| |  _| |___/ |  | || |              | || |   _/ /__/ |  | || |    _|  |_    | |   ");
+        System.out.println("| | |_________|  | || |              | || |  |________|  | || |   |______|   | |   ");
+        System.out.println("| |              | || |              | || |              | || |              | |   ");
+        System.out.println("| '--------------' || '--------------' || '--------------' || '--------------' |   ");
+        System.out.println("'----------------'  '----------------'  '----------------'  '----------------'     ");
+    }
+
+        
     }
 
 
 
 
 
-}
+

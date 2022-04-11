@@ -32,6 +32,7 @@ public class Order implements Serializable {
         this.orderDetails = orderDetails;
         this.paymentMethod = paymentMethod;
         this.orderList = new ArrayList<>();
+        this.orderDate = paymentMethod.getPaymentDate();
     }
     //Getter and setter
     public Customer getCustomer() {

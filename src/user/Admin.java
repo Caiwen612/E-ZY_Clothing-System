@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import static driver.DriverProgram.adminMenu;
+import static driver.DriverProgram.*;
 
 
 public class Admin extends People {
@@ -90,7 +90,7 @@ public class Admin extends People {
 
         do {
             productVld = true;
-            utility.utility.clearScreen();
+            clearScreen();
             System.out.print(Font.TEXT_CYAN);
             System.out.printf(  "%55s", "+---------------------+");
             System.out.printf("%n%55s", "|    Edit Products    |");
@@ -304,6 +304,7 @@ public class Admin extends People {
             System.out.println(Font.BOLD_RED + "No Product Found.");
             System.out.print(Font.RESET);
         }
+        System.out.println("Press Enter to Continue.");
         DriverProgram.pressAnyKeyToContinue();
         adminMenu(adminArrList, customerArrList, admin);
     }
