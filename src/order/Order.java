@@ -50,14 +50,6 @@ public class Order implements Serializable {
         return orderDate;
     }
 
-//    public List<Product> getOrderList() {
-//        return orderList;
-//    }
-
-    public void setOrderList(List<Product> orderList) {
-        this.orderList = orderList;
-    }
-
     public double getTotalPrice() {
         return this.getOrderDetails().getTotalPrice();
     }
@@ -66,6 +58,9 @@ public class Order implements Serializable {
         return this.getOrderDetails().getItemCount();
     }
 
+    public void setOrderList(List<Product> orderList) {
+        this.orderList = orderList;
+    }
 
     @Override
     public String toString() {
