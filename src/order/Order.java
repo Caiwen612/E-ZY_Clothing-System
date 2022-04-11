@@ -81,17 +81,26 @@ public class Order implements Serializable {
         System.out.print("\n<<< ORDER DETAILS >>>");
         System.out.println("\n\tOrder Date: " + this.getOrderDate());
         System.out.println("");
-        System.out.println("Note: layout is according this sequence {Index,Product ID,Product Name, Price, Quantity, rating, subtotal}");
-        if(orderList != null) { //Check if orderList is not null and has value
-            if (orderList.size() > 0) {
-                for (int i = 0; i < orderList.size(); i++) {
-                    System.out.printf("%9s", (i + 1));
-                    System.out.print(orderList.get(i).toString());
-                    System.out.println();
-                }
-            } else {
-                System.out.println("Cart is empty");
+        System.out.println(" +=================================================================================================+   ");
+        System.out.print(" |");
+        System.out.printf("%12s", "Index No |");
+        System.out.printf("%7s", "ID  |");
+        System.out.printf("%21s", "Name        |");
+        System.out.printf("%14s", "Price    |");
+        System.out.printf("%8s", "Qty  |");
+        System.out.printf("%13s", "Rating   |");
+        System.out.printf("%24s", "Total per Item    |\n");
+        System.out.print(" +=================================================================================================+   ");
+        System.out.println();
+        System.out.print(Font.RESET);
+        if(orderList.size() != 0){
+            for(int i=0; i< orderList.size(); i++){
+                System.out.printf("%9s",(i+1));
+                System.out.print(orderList.get(i).toString());
+                System.out.println();
             }
+        } else {
+            System.out.println("There are no orders");
         }
         System.out.println(Font.TEXT_PURPLE);
         System.out.print("Total Item : " + this.getOrderDetails().getItemCount());
