@@ -5,15 +5,18 @@ import utility.Font;
 import java.text.DecimalFormat;
 
 public class EWallet extends Payment implements Cloneable {
-
+    // Data members
     private int accountID;
     private String userName;
 
     public static DecimalFormat df2 = new DecimalFormat("0.00");
 
+    // No-argh constructor
     public EWallet(){
         this(0,"");
     }
+    
+    // Parameterized constructor
     public EWallet(int accountID, String userName){
         super();
         this.accountID = accountID;
@@ -28,7 +31,7 @@ public class EWallet extends Payment implements Cloneable {
         this.userName = userName;
     }
 
-
+    // ToString
     @Override
     public String toString() {
         System.out.print(Font.TEXT_CYAN);
@@ -44,6 +47,7 @@ public class EWallet extends Payment implements Cloneable {
                 super.toString();
     }
 
+    // Clone
     @Override
     public EWallet clone() {
         EWallet clone = (EWallet) super.clone();
