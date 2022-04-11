@@ -2311,8 +2311,6 @@ public class DriverProgram {
         copyList = (ArrayList<Product>) cart.getCartItem().clone();
         order.setOrderList(copyList);
 
-        System.out.println(order);
-
         customer.addOrder(order);
         cart.reduceStock(productArrayList);
         cart.clearCart();
@@ -2330,8 +2328,7 @@ public class DriverProgram {
         customer.displayOrder();
 
         System.out.printf("%61s","[1] View order details");
-        System.out.printf("%n%55s","[2] Remove order");
-        System.out.printf("%n%62s","[3] Return to main menu");
+        System.out.printf("%n%62s","[2] Return to main menu");
 
         // Get input for order option
         boolean orderOptionError = true;
@@ -2360,6 +2357,7 @@ public class DriverProgram {
                 break;
             case 2:
                 custMenu(adminArrList,customerArrList,customer);
+                break;
         }
     }
 
@@ -2397,9 +2395,15 @@ public class DriverProgram {
     }
 
     public static void pressAnyKeyToContinue(){
+        input.nextLine();
+        input.nextLine();
+    }
+
+    public static void pressAnyKeyToContinueWithPrompt(){
         System.out.println(Font.TEXT_BRIGHT_MAGENTA + "Press any key to continue..." + Font.RESET);
         input.nextLine();
     }
+
 
     public static void endProgram(){
 

@@ -30,7 +30,6 @@ public class Cart implements Cloneable, Serializable {
     }
 
     public double getTotalPrice() {
-        calculateTotalPrice();
         return this.totalPrice;
     }
 
@@ -101,6 +100,7 @@ public class Cart implements Cloneable, Serializable {
         this.cartItem.get(index-1).setQty(quantity);
         System.out.print(Font.TEXT_YELLOW);
         System.out.printf("%n%68s","Quantity of product has successfully updated.");
+        calculateTotalPrice();
     }
 
     //Remove item from cart
@@ -108,6 +108,8 @@ public class Cart implements Cloneable, Serializable {
         this.cartItem.remove(index-1);
         System.out.print(Font.TEXT_YELLOW);
         System.out.printf("%n%58s","Product removed from cart");
+        calculateTotalPrice();
+        itemCount--;
     }
 
     //Clear cart and reduce stock after user make a payment
