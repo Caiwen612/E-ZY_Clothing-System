@@ -867,37 +867,6 @@ public class DriverProgram {
         custProfile(adminArrList, customerArrList, customer);
     }
 
-    public static void editEmail(ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList, Customer customer) throws InterruptedException {
-        String email;
-        boolean emailVld = true;
-        Scanner scanner = new Scanner(System.in);
-
-        do {
-            System.out.print("New Customer Email (type exit to stop): ");
-            email = scanner.next();
-            scanner.nextLine();
-
-            if (email.equalsIgnoreCase("exit")) {
-                custProfile(adminArrList, customerArrList, customer);
-            }
-
-            if (People.vldEmail(email)) {
-                emailVld = true;
-                customer.setEmail(email);
-                System.out.println(Font.BOLD_GREEN + "Email Changed." + Font.RESET);
-                Thread.sleep(1000);
-            }
-            else {
-                emailVld = false;
-                System.out.println(Font.BOLD_RED + "Please Enter A Valid Email");
-                System.out.print(Font.RESET);
-                scanner.nextLine();
-                Thread.sleep(1000);
-            }
-        } while (!emailVld);
-        custProfile(adminArrList, customerArrList, customer);
-    }
-
     //TODO: PRODUCT + CART
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: Cart Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
     public static void cartMenu(ArrayList<Product> productArrayList, Cart cart,Customer customer) throws InterruptedException {
