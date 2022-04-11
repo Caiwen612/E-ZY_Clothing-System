@@ -310,8 +310,36 @@ public class Admin extends People {
     }
 
     // report
-    public void generateReport(Order order) {
+    public static void generateReport(ArrayList<Order> orderArrList, ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList, Admin admin) throws InterruptedException {
+//        int index = 0;
+        double totalPrice = 0;
 
+        clearScreen();
+        System.out.println(Font.TEXT_CYAN);
+        System.out.printf("%40s","+------------+");
+        System.out.printf("%n%40s","|   Report   |");
+        System.out.printf("%n%40s","+------------+");
+        System.out.println(Font.RESET);
+
+        System.out.printf("%-10s | %-25s | %-14s | %-10s%n", "Product ID","Product Name", "Quantity Sold", "Price (RM)");
+        for (int i = 0; i < 68; i++) {
+            System.out.print("-");
+        }
+        System.out.println();
+        for (int i = 0; i < 5; i++) {
+//            System.out.printf("%-25s   %-14d   %-10.2f", orders.getOrderDetails().getProduct(index).getName(), );
+            // this one is testing, use the same formatting can ady
+            System.out.printf("%-10s   %-25s   %-14d   %-10.2f%n", "P" + (i+1), "Ali", 15, 200.2);
+//            totalPrice += orderArrList.get(i).getTotalPrice();
+//            index++;
+        }
+        for (int i = 0; i < 68; i++) {
+            System.out.print("-");
+        }
+        System.out.println();
+        System.out.printf("Total Price: RM%.2f%n", totalPrice);
+        DriverProgram.pressAnyKeyToContinue();
+        DriverProgram.adminMenu(adminArrList, customerArrList, admin);
     }
 
     @Override

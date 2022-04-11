@@ -62,33 +62,35 @@ public class DriverProgram {
     public static void welcome(){
         System.out.println("Welcome to the e-commerce system");
         logo();
-        System.out.println("System Developer");
-        System.out.println("+=====================+");
-        System.out.println("|Application Developer|");
-        System.out.println("+=====================+");
-        System.out.println("Tay Chai Boon");
-        System.out.println("Kelvin Ee Wei Keong");
-        System.out.println("Eugene Law Kai Le");
+        System.out.printf("%79s %s%n", "", "System Developer");
+        System.out.printf("%75s %s%n", "", "+=====================+");
+        System.out.printf("%75s %s%n", "", "|Application Developer|");
+        System.out.printf("%75s %s%n", "", "+=====================+");
+        System.out.printf("%80s %s%n", "", "Tay Chai Boon");
+        System.out.printf("%78s %s%n", "", "Eugene Law Kai Le");
+        System.out.printf("%77s %s%n", "", "Kelvin Ee Wei Keong");
 
         //Display date and times
         System.out.println();
-        System.out.println(new Date());
+        System.out.printf("%75s%s%n", "", new Date());
 
-
+        System.out.printf("%75s", "");
+        pressAnyKeyToContinue();
     }
 
     public static void logo(){
-        System.out.println(" .----------------.  .----------------.  .----------------.  .----------------.    ");
-        System.out.println("| .--------------. || .--------------. || .--------------. || .--------------. |   ");
-        System.out.println("| |  _________   | || |              | || |   ________   | || |  ____  ____  | |   ");
-        System.out.println("| | |_   ___  |  | || |              | || |  |  __   _|  | || | |_  _||_  _| | |   ");
-        System.out.println("| |   | |_  \\_|  | || |    ______    | || |  |_/  / /    | || |   \\ \\  / /   | |");
-        System.out.println("| |   |  _|  _   | || |   |______|   | || |     .'.' _   | || |    \\ \\/ /    | | ");
-        System.out.println("| |  _| |___/ |  | || |              | || |   _/ /__/ |  | || |    _|  |_    | |   ");
-        System.out.println("| | |_________|  | || |              | || |  |________|  | || |   |______|   | |   ");
-        System.out.println("| |              | || |              | || |              | || |              | |   ");
-        System.out.println("| '--------------' || '--------------' || '--------------' || '--------------' |   ");
-        System.out.println("'----------------'  '----------------'  '----------------'  '----------------'     ");
+        System.out.printf("%45s %s%n", "", Font.TEXT_CYAN + " .----------------.  .----------------.  .----------------.  .----------------.    ");
+        System.out.printf("%45s %s%n", "", "| .--------------. || .--------------. || .--------------. || .--------------. |   ");
+        System.out.printf("%45s %s%n", "", "| |  _________   | || |              | || |   ________   | || |  ____  ____  | |   ");
+        System.out.printf("%45s %s%n", "", "| | |_   ___  |  | || |              | || |  |  __   _|  | || | |_  _||_  _| | |   ");
+        System.out.printf("%45s %s%n", "", "| |   | |_  \\_|  | || |    ______    | || |  |_/  / /    | || |   \\ \\  / /   | |");
+        System.out.printf("%45s %s%n", "", "| |   |  _|  _   | || |   |______|   | || |     .'.' _   | || |    \\ \\/ /    | | ");
+        System.out.printf("%45s %s%n", "", "| |  _| |___/ |  | || |              | || |   _/ /__/ |  | || |    _|  |_    | |   ");
+        System.out.printf("%45s %s%n", "", "| | |_________|  | || |              | || |  |________|  | || |   |______|   | |   ");
+        System.out.printf("%45s %s%n", "", "| |              | || |              | || |              | || |              | |   ");
+        System.out.printf("%45s %s%n", "", "| '--------------' || '--------------' || '--------------' || '--------------' |   ");
+        System.out.printf("%45s %s%n", "", "'----------------'  '----------------'  '----------------'  '----------------'     ");
+        System.out.print(Font.RESET);
     }
 
     //TODO: Simple Database @Author TAY CHAI BOON
@@ -554,7 +556,7 @@ public class DriverProgram {
         } while (!confirmPwVld);
 
         do {
-            System.out.print("Phone Number (999-9999999(9): ");
+            System.out.print("Phone Number (999-9999999(9)): ");
             adminPhoneNo = scanner.next();
             scanner.nextLine();
 
@@ -685,8 +687,9 @@ public class DriverProgram {
             System.out.println("1. Edit Products");
             System.out.println("2. Order Products From Supplier");
             System.out.println("3. Check Stock Quantity");
-            System.out.println("4. Sign Out");
-            System.out.println("5. Exit");
+            System.out.println("4. Generate Sales Report");
+            System.out.println("5. Sign Out");
+            System.out.println("6. Exit");
 
             System.out.print("Selection: ");
             try {
@@ -726,12 +729,17 @@ public class DriverProgram {
                         obj = linearSearchByProductID(productArrayList, productID, productFilter);
                         Admin.checkQuantity(obj, adminArrList, customerArrList, admin);
                         break;
+
                     case 4:
+                        // generate sales report
+                        Admin.generateReport(orderArrList, adminArrList, customerArrList, admin);
+                        break;
+                    case 5:
                         System.out.println(Font.TEXT_CYAN + "You Are Signed Out.");
                         Thread.sleep(1000);
                         menu(adminArrList, customerArrList);
                         break;
-                    case 5:
+                    case 6:
                         endProgram();
                         break;
                     default:
@@ -2390,7 +2398,7 @@ public class DriverProgram {
     }
 
     public static void pressAnyKeyToContinue(){
-        input.nextLine();
+        System.out.println(Font.TEXT_BRIGHT_MAGENTA + "Press any key to continue..." + Font.RESET);
         input.nextLine();
     }
 
