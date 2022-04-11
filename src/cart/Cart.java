@@ -8,13 +8,17 @@ import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+//Author: Tay Chai Boon
+
 public class Cart implements Cloneable, Serializable {
-    private ArrayList<Product> cartItem;
-    private double totalPrice;
-    private int itemCount;
+    //Declare data members
+    private ArrayList<Product> cartItem;//Item that add by user
+    private double totalPrice;//Total price of all items
+    private int itemCount;//Total number of items
 
     DecimalFormat df2 = new DecimalFormat("0.00");
 
+    //No-argh Constructor
     public Cart(){
         this.cartItem = new ArrayList<Product>();
         this.totalPrice = 0;
@@ -22,22 +26,31 @@ public class Cart implements Cloneable, Serializable {
 
     //Getter and Setter
     public ArrayList<Product> getCartItem() {
-        return cartItem;
+        return this.cartItem;
+    }
+
+    public double getTotalPrice() {
+        calculateTotalPrice();
+        return this.totalPrice;
     }
 
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
 
-    public double getTotalPrice() {
-        return this.totalPrice;
+    public int getItemCount() {
+        return this.itemCount;
     }
 
+
     //Method
+
+    //Get the product
     public Product getProduct(int index){
         return cartItem.get(index-1);
     }
 
+    //Display cart, total Item and total Price
     public void displayItem(){
         if(cartItem.size() != 0){
             for(int i=0; i<cartItem.size(); i++){
@@ -55,8 +68,7 @@ public class Cart implements Cloneable, Serializable {
         System.out.println(Font.RESET);
     }
 
-
-
+    //Add item to cart
     public void addItem(Product product, int quantity){
         //Check similar
         if (checkSimilar(product)){
@@ -72,6 +84,7 @@ public class Cart implements Cloneable, Serializable {
         }
     }
 
+    //If product is similar, return true , to prevent customer order same product
     private boolean checkSimilar(Product product) {
         boolean isExist = false;
         for (Product cartItem : cartItem) {
@@ -83,28 +96,28 @@ public class Cart implements Cloneable, Serializable {
         return isExist;
     }
 
-    public int getItemCount() {
-        return itemCount;
-    }
-
+    //Edit quantity of item that order by user
     public void editItem(int index, int quantity){
         this.cartItem.get(index-1).setQty(quantity);
         System.out.print(Font.TEXT_YELLOW);
         System.out.printf("%n%68s","Quantity of product has successfully updated.");
     }
 
+    //Remove item from cart
     public void removeItem(int index){
         this.cartItem.remove(index-1);
         System.out.print(Font.TEXT_YELLOW);
         System.out.printf("%n%58s","Product removed from cart");
     }
 
+    //Clear cart and reduce stock after user make a payment
     public  void clearCart(){
         this.cartItem.clear();
         this.totalPrice = 0;
         this.itemCount = 0;
     }
 
+    //Check cart item and product to reduce the stock
     public void reduceStock(ArrayList<Product> productArrayList){
         //search cart and product is smae
         for (Product cart : cartItem) {
@@ -116,15 +129,16 @@ public class Cart implements Cloneable, Serializable {
         }
     }
 
-    public double calculateTotalPrice(){
+    //Calculate total price
+    public void calculateTotalPrice(){
         totalPrice = 0;
         for (Product product : cartItem) {
             totalPrice += product.getTotalPrice();
         }
         this.setTotalPrice(totalPrice);
-        return totalPrice;
     }
 
+    //Sort Method by using Comparator
     public void sortByNameAscending(){
         cartItem.sort(new SortByNameAsc());
     }
@@ -157,6 +171,7 @@ public class Cart implements Cloneable, Serializable {
         cartItem.sort(new SortByQtyPriceDesc());
     }
 
+    //To String
     @Override
     public String toString() {
         return "Cart{" +
@@ -164,6 +179,7 @@ public class Cart implements Cloneable, Serializable {
                 '}';
     }
 
+    //Clone
     @Override
     public Cart clone() {
         try {
