@@ -2066,7 +2066,7 @@ public class DriverProgram {
         }
     }
 
-    // Receive payment.Bank details
+    // Receive Bank details
     public static void bank(Payment bank, Cart cart,Customer customer) throws InterruptedException {
         clearScreen();
         bank.setTotalPrice(cart.getTotalPrice());
@@ -2134,11 +2134,11 @@ public class DriverProgram {
         clearScreen();
         System.out.println(bank.toString());
         payment.add(bank.clone());
+        System.out.println("\nThank you for shopping!");
 
         System.out.println("Press enter key to return to main menu");
         pressAnyKeyToContinue();
         setOrder(customer,cart,bank);
-        //main menu
     }
 
     // Receive E-Wallet details
@@ -2208,10 +2208,10 @@ public class DriverProgram {
         payment.add(eWallet.clone());
         clearScreen();
         System.out.println(eWallet);
+        System.out.println("\nThank you for shopping!");
         System.out.println("Press enter key to return to main menu");
         pressAnyKeyToContinue();
         setOrder(customer,cart,eWallet);
-        //main menu
     }
 
     // Receive Debit/Credit details
@@ -2297,11 +2297,10 @@ public class DriverProgram {
         ((DebitCredit) debitCredit).setPayAmount(payAmount);
         payment.add(debitCredit.clone());
         clearScreen();
-
         System.out.println(debitCredit);
+        System.out.println("\nThank you for shopping!");
         System.out.println("Press enter key to return to main menu");
         pressAnyKeyToContinue();
-        //main menu
         setOrder(customer,cart,debitCredit);
     }
 
