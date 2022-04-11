@@ -126,35 +126,35 @@ public class Cart implements Cloneable, Serializable {
     }
 
     public void sortByNameAscending(){
-        cartItem.sort(new sortByNameAsc());
+        cartItem.sort(new SortByNameAsc());
     }
 
     public void sortByNameDescending(){
-        cartItem.sort(new sortByNameDesc());
+        cartItem.sort(new SortByNameDesc());
     }
 
     public void sortByTotalPriceAscending(){
-        cartItem.sort(new sortByTotalPriceAsc());
+        cartItem.sort(new SortByTotalPriceAsc());
     }
 
     public void sortByTotalPriceDescending(){
-        cartItem.sort(new sortByTotalPriceDesc());
+        cartItem.sort(new SortByTotalPriceDesc());
     }
 
     public void sortByQtyAscending(){
-        cartItem.sort(new sortByQtyAsc());
+        cartItem.sort(new SortByQtyAsc());
     }
 
     public void sortByQtyDescending(){
-        cartItem.sort(new sortByQtyDesc());
+        cartItem.sort(new SortByQtyDesc());
     }
 
     public void sortByQtyPriceAscending(){
-        cartItem.sort(new sortByQtyPriceAsc());
+        cartItem.sort(new SortByQtyPriceAsc());
     }
 
     public void sortByQtyPriceDescending(){
-        cartItem.sort(new sortByQtyPriceDesc());
+        cartItem.sort(new SortByQtyPriceDesc());
     }
 
     @Override

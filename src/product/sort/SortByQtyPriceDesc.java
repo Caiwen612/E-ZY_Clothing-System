@@ -3,7 +3,7 @@ package product.sort;
 import product.Product;
 import java.util.Comparator;
 
-public class sortByQtyPriceDesc implements Comparator<Product> {
+public class SortByQtyPriceDesc implements Comparator<Product> {
     public int compare(Product product1, Product product2) {
 
         //Compare product
