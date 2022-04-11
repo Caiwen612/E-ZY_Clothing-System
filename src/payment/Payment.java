@@ -4,19 +4,21 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Payment implements Cloneable, Serializable {
+    // Data members
     private  String paymentID;
     private Date paymentDate;
     private static int paymentCount = 1;
     private double totalPrice;
     private double payAmount;
 
+    // Parameterized contructor
     public Payment(){
         this.paymentID = generatePayID();
         this.paymentDate = new Date();
         paymentCount++;
     }
 
-    //Getter & Setter
+    // Getter & Setter
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
@@ -37,13 +39,13 @@ public class Payment implements Cloneable, Serializable {
         this.payAmount = payAmount;
     }
 
-    //Method
+    // Method
     public static String generatePayID(){
         return "PM" + paymentCount;
     }
 
 
-    //ToString
+    // ToString
     @Override
     public String toString() {
         return "\n  Payment ID: " + paymentID +
@@ -51,6 +53,7 @@ public class Payment implements Cloneable, Serializable {
                 "\n\nThank you for shopping!";
     }
 
+    // Clone
     @Override
     public Payment clone() {
         try {
