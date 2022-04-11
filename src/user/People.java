@@ -1,9 +1,10 @@
 package user;
 
+import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class People implements Cloneable{
+public class People implements Cloneable, Serializable {
     private String name;
     private String email;
     private String password;

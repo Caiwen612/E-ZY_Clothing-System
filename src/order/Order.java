@@ -9,11 +9,13 @@ import product.Product;
 import user.Customer;
 import utility.Font;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Order{
+public class Order implements Serializable {
     private Customer customer;
     private Cart orderDetails;
     private Payment paymentMethod;
@@ -29,7 +31,7 @@ public class Order{
         this.customer = customer;
         this.orderDetails = orderDetails;
         this.paymentMethod = paymentMethod;
-
+        this.orderList = new ArrayList<>();
     }
     //Getter and setter
     public Customer getCustomer() {
@@ -48,25 +50,12 @@ public class Order{
         return orderDate;
     }
 
-    public List<Product> getOrderList() {
-        return orderList;
-    }
+//    public List<Product> getOrderList() {
+//        return orderList;
+//    }
 
     public void setOrderList(List<Product> orderList) {
         this.orderList = orderList;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public void setOrderDetails(Cart orderDetails) {
-        this.orderDetails = orderDetails;
-    }
-
-    public void setPaymentMethod(Payment paymentMethod) {
-        this.paymentMethod = paymentMethod;
-        this.orderDate = paymentMethod.getPaymentDate();
     }
 
     public double getTotalPrice() {
@@ -93,14 +82,16 @@ public class Order{
         System.out.println("\n\tOrder Date: " + this.getOrderDate());
         System.out.println("");
         System.out.println("Note: layout is according this sequence {Index,Product ID,Product Name, Price, Quantity, rating, subtotal}");
-        if(orderList.size() != 0){
-            for(int i=0; i< orderList.size(); i++){
-                System.out.printf("%9s",(i+1));
-                System.out.print(orderList.get(i).toString());
-                System.out.println();
+        if(orderList != null) { //Check if orderList is not null and has value
+            if (orderList.size() > 0) {
+                for (int i = 0; i < orderList.size(); i++) {
+                    System.out.printf("%9s", (i + 1));
+                    System.out.print(orderList.get(i).toString());
+                    System.out.println();
+                }
+            } else {
+                System.out.println("Cart is empty");
             }
-        } else {
-            System.out.println("Cart is empty");
         }
         System.out.println(Font.TEXT_PURPLE);
         System.out.print("Total Item : " + this.getOrderDetails().getItemCount());

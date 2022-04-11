@@ -15,8 +15,12 @@ import utility.Font;
 import utility.Validation;
 import utility.ValidationException;
 
+import java.io.*;
 import java.text.DecimalFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Objects;
+import java.util.Scanner;
 
 public class DriverProgram {
 
@@ -25,21 +29,133 @@ public class DriverProgram {
     public static ArrayList<Customer> customerArrList = new ArrayList<>();
     public static ArrayList<Admin> adminArrList = new ArrayList<>();
     public static ArrayList<Payment> payment = new ArrayList<>();
+    public static ArrayList<Order> orderArrList = new ArrayList<>();
     //Declare a static method
     static Scanner input = new Scanner(System.in);
     static Scanner scanner = new Scanner(System.in);
     static DecimalFormat df2 = new DecimalFormat("0.00");
 
     public static void main(String[] args) throws InterruptedException {
+        //Create files
+        databaseInit();
         AuthCodeMultithreading authCodeGenerate = new AuthCodeMultithreading();
         authCodeGenerate.start();
+        //Load the arrayList
+        loadArrayList();
         //Initialize the arrayList
-        setUser(adminArrList, customerArrList);
-        setProducts(productArrayList);
+        if(productArrayList.size() == 0){
+            System.out.println("No product in the database");
+            System.out.println("Default data is use to display");
+            setProducts(productArrayList);
+            setUser(adminArrList, customerArrList);
+        }
+        //Check Database
+        productArrayList.forEach(System.out::println);
+        customerArrList.forEach(System.out::println);
+        adminArrList.forEach(System.out::println);
+        payment.forEach(System.out::println);
+        orderArrList.forEach(System.out::println);
+//
+//        Order order = new Order(
+//                new Customer("haha"),
+//                new Cart(),
+//                new Bank("Hong Leong Bank",1234)
+//        );
+//        orderArrList.add(order);
+//        System.out.printf("RM %.2f",productArrayList
+//                .stream()
+//                .map(Product::getPrice)
+//                .reduce(0.0,Double::sum));
+//        productArrayList.add(new Product("haha", 123,5));
+        endProgram();
 
-        //LoginSign
         menu(adminArrList, customerArrList);
     }
+
+    public static void databaseInit(){
+        try {
+            File file = new File("database/product.ser");
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            File file2 = new File("database/customer.ser");
+            if (!file2.exists()) {
+                file2.createNewFile();
+            }
+            File file3 = new File("database/admin.ser");
+            if (!file3.exists()) {
+                file3.createNewFile();
+            }
+            File file4 = new File("database/payment.ser");
+            if (!file4.exists()) {
+                file4.createNewFile();
+            }
+            File file5 = new File("database/order.ser");
+            if (!file5.exists()) {
+                file5.createNewFile();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //TODO: Load the arrayList
+    public static void loadArrayList() {
+        File[] files = new File("database").listFiles();
+        for (File file : files) {
+            System.out.println(file.getName());
+            if (file.exists()) { //If the files exists, load all data into driver program
+                try {
+                    FileInputStream fis = new FileInputStream("database/" + file.getName());
+                    ObjectInputStream ois = new ObjectInputStream(fis);
+
+                    switch (file.getName()) {
+                        case "product.ser" -> productArrayList = (ArrayList<Product>) ois.readObject();
+                        case "customer.ser" -> customerArrList = (ArrayList<Customer>) ois.readObject();
+                        case "admin.ser" -> adminArrList = (ArrayList<Admin>) ois.readObject();
+                        case "payment.ser" -> payment = (ArrayList<Payment>) ois.readObject();
+                        case "order.ser" -> orderArrList = (ArrayList<Order>) ois.readObject();
+                        default -> System.out.println("Unknown file to load into arraylist " + file.getName());
+                    }
+                    ois.close();
+                    System.out.println("The object of the programs is loaded from the file");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    //Store arraylist from files
+    public static void storeArrayList() {
+        File[] files = new File("database").listFiles();
+
+        for (File file : files) {
+            System.out.println(file.getName());
+            if (file.exists()) { //If the files exists, load all data into driver program
+                try {
+                    FileOutputStream fos = new FileOutputStream("database/" + file.getName());
+                    ObjectOutputStream oos = new ObjectOutputStream(fos);
+                    switch (file.getName()) {
+                        case "product.ser" -> oos.writeObject(productArrayList);
+                        case "customer.ser" -> oos.writeObject(customerArrList);
+                        case "admin.ser" -> oos.writeObject(adminArrList);
+                        case "payment.ser" -> oos.writeObject(payment);
+                        case "order.ser" -> oos.writeObject(orderArrList);
+                        default -> System.out.println("Unknown file stored in database to be serialize in " + file.getName());
+                    }
+                    oos.close();
+                    System.out.println("The object of the programs is loaded from the file");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
+
+
 
     //TODO: Initialize the arrayList
     private static void setUser(ArrayList<Admin> adminArrList ,ArrayList<Customer> customerArrList) {
@@ -151,7 +267,7 @@ public class DriverProgram {
                 switch (loginOrSignup) {
                     case 1 -> login(adminArrList, customerArrList);
                     case 2 -> signup(adminArrList, customerArrList);
-                    case 3 -> System.exit(0);
+                    case 3 -> endProgram();
                     default -> {
                         optionVld = false;
                         System.out.println(Font.BOLD_RED + "Please Enter the Valid Option.");
@@ -196,7 +312,7 @@ public class DriverProgram {
                     case 1 -> adminLogin(adminArrList, customerArrList);
                     case 2 -> custLogin(adminArrList, customerArrList);
                     case 3 -> menu(adminArrList, customerArrList);
-                    case 4 -> System.exit(0);
+                    case 4 -> endProgram();
                     default -> {
                         vldOpt = false;
                         System.out.println(Font.BOLD_RED + "Please Enter the Valid Option.");
@@ -317,7 +433,7 @@ public class DriverProgram {
                     case 1 -> adminSignUp(adminArrList, customerArrList);
                     case 2 -> customerSignUp(adminArrList, customerArrList);
                     case 3 -> menu(adminArrList, customerArrList);
-                    case 4 -> System.exit(0);
+                    case 4 -> endProgram();
                     default -> {
                         vldOpt = false;
                         System.out.println(Font.BOLD_RED + "Please Enter the Valid Option.");
@@ -589,7 +705,7 @@ public class DriverProgram {
                         menu(adminArrList, customerArrList);
                         break;
                     case 5:
-                        System.exit(0);
+                        endProgram();
                         break;
                     default:
                         optionVld = false;
@@ -642,7 +758,7 @@ public class DriverProgram {
                     case 4 -> orderHistory(customer);
                     case 5 -> paymentMenu(cart, payment,customer);
                     case 6 -> login(adminArrList, customerArrList);
-                    case 7 -> System.exit(0);
+                    case 7 -> endProgram();
                     default -> {
                         vldOpt = false;
                         System.out.println(Font.BOLD_RED + "Please Enter the Valid Option.");
@@ -701,7 +817,7 @@ public class DriverProgram {
                     case 4 -> editPhoneNo(adminArrList, customerArrList, customer);
                     case 5 -> editAddress(adminArrList, customerArrList, customer);
                     case 6 -> custMenu(adminArrList, customerArrList, customer);
-                    case 7 -> System.exit(0);
+                    case 7 -> endProgram();
                     default -> {
                         optionVld = false;
                         System.out.println(Font.BOLD_RED + "Please Enter the Valid Option.");
@@ -2186,13 +2302,13 @@ public class DriverProgram {
 
     //Prompt delivery
     public static void setOrder(Customer customer, Cart cart, Payment payment) throws InterruptedException {
-        Order order = new Order();
-        order.setCustomer(customer.clone());
-        order.setOrderDetails(cart.clone());
-        order.setPaymentMethod(payment.clone());
-        ArrayList<Product> copyList = new ArrayList<Product>();
+        Order order = new Order(customer.clone(),cart.clone(),payment.clone());
+        ArrayList<Product> copyList;
         copyList = (ArrayList<Product>) cart.getCartItem().clone();
         order.setOrderList(copyList);
+
+        System.out.println(order);
+
         customer.addOrder(order);
         cart.reduceStock(productArrayList);
         cart.clearCart();
@@ -2305,6 +2421,16 @@ public class DriverProgram {
         input.nextLine();
         input.nextLine();
     }
+
+    public static void endProgram(){
+        storeArrayList();
+        System.out.println(Font.useFont(Font.BOLD_RED, "Thank you for using our system"));
+        System.out.println(Font.useFont(Font.BOLD_RED, "Good bye"));
+        System.exit(0);
+    }
+
+
+
 
 
 }

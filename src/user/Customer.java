@@ -3,10 +3,11 @@ package user;
 import cart.Cart;
 import order.Order;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class Customer extends People implements Cloneable{
+public class Customer extends People implements Cloneable, Serializable {
     private String customerID;
     private String address;
     private Cart cart;

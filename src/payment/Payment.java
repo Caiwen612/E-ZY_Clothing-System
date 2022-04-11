@@ -1,8 +1,9 @@
 package payment;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Payment implements Cloneable {
+public class Payment implements Cloneable, Serializable {
     private  String paymentID;
     private Date paymentDate;
     private static int paymentCount = 1;

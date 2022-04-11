@@ -1,10 +1,10 @@
 package product;
 
 import utility.Font;
-
+import java.io.Serializable;
 import java.text.DecimalFormat;
 
-public class Product implements Cloneable {
+public class Product implements Cloneable, Serializable {
     //Declare data member
     private String name;
     private double price;

@@ -4,10 +4,11 @@ import product.Product;
 import product.sort.*;
 import utility.Font;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class Cart implements Cloneable{
+public class Cart implements Cloneable, Serializable {
     private ArrayList<Product> cartItem;
     private double totalPrice;
     private int itemCount;
