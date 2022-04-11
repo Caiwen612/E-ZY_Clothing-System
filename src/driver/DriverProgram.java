@@ -2286,17 +2286,19 @@ public class DriverProgram {
 
     public static void orderHistory(Customer customer) throws InterruptedException {
         clearScreen();
-        System.out.println("+------------+");
-        System.out.println("|   Orders   |");
-        System.out.println("+------------+");
+        System.out.println(Font.TEXT_CYAN);
+        System.out.printf("%55s","+------------+");
+        System.out.printf("%n%55s","|   Orders   |");
+        System.out.printf("%n%55s","+------------+");
+        System.out.println(Font.RESET);
 
         customer.displayOrder();
 
-        System.out.println("[1] view order detail");
-        System.out.println("[2] remove order");
-        System.out.println("[3] return to main menu");
+        System.out.printf("%61s","[1] View order details");
+        System.out.printf("%n%55s","[2] Remove order");
+        System.out.printf("%n%62s","[3] Return to main menu");
 
-        // Get input for cart option
+        // Get input for order option
         boolean orderOptionError = true;
         int orderOption = 0;
         do {
