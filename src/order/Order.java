@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Order implements Serializable {
+    //Data members
     private Customer customer;
     private Cart orderDetails;
     private Payment paymentMethod;
@@ -23,10 +24,13 @@ public class Order implements Serializable {
     private Date orderDate;
 
     DecimalFormat df2 = new DecimalFormat("0.00");
+
+    // No-argh constructor
     public Order(){
         this(null, null, null);
     }
 
+    // Parameterized Contructor
     public Order(Customer customer, Cart orderDetails, Payment paymentMethod) {
         this.customer = customer;
         this.orderDetails = orderDetails;
@@ -34,6 +38,7 @@ public class Order implements Serializable {
         this.orderList = new ArrayList<>();
         this.orderDate = paymentMethod.getPaymentDate();
     }
+
     //Getter and setter
     public Customer getCustomer() {
         return customer;
@@ -63,6 +68,7 @@ public class Order implements Serializable {
         this.orderList = orderList;
     }
 
+    // ToString
     @Override
     public String toString() {
         String output = "";
