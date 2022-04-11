@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Order implements Serializable {
+    //Data members
     private Customer customer;
     private Cart orderDetails;
     private Payment paymentMethod;
@@ -23,10 +24,13 @@ public class Order implements Serializable {
     private Date orderDate;
 
     DecimalFormat df2 = new DecimalFormat("0.00");
+
+    // No-argh constructor
     public Order(){
         this(null, null, null);
     }
 
+    // Parameterized Contructor
     public Order(Customer customer, Cart orderDetails, Payment paymentMethod) {
         this.customer = customer;
         this.orderDetails = orderDetails;
@@ -34,6 +38,7 @@ public class Order implements Serializable {
         this.orderList = new ArrayList<>();
         this.orderDate = paymentMethod.getPaymentDate();
     }
+
     //Getter and setter
     public Customer getCustomer() {
         return customer;
@@ -63,20 +68,28 @@ public class Order implements Serializable {
         this.orderList = orderList;
     }
 
+    // ToString
     @Override
     public String toString() {
         String output = "";
-        System.out.print("<<< CUSTOMER DETAILS >>>" );
-        System.out.print("\n\tID: " + this.getCustomer().getCustomerID());
-        System.out.print("\n\tCustomer Name: " + this.getCustomer().getName());
-        System.out.print("\n\tEmail: " + this.getCustomer().getEmail());
-        System.out.print("\n\tPhone Number: " + this.getCustomer().getPhoneNo());
-        System.out.print("\n\tAddress: " + this.getCustomer().getAddress());
-        System.out.print("\n\tPhone: " + this.getCustomer().getPhoneNo());
-        System.out.print( "\n------------------------------------------------------");
-        System.out.print("\n<<< ORDER DETAILS >>>");
-        System.out.println("\n\tOrder Date: " + this.getOrderDate());
-        System.out.println("");
+        System.out.print("----------------------------------------------------------------------------------------------------\n");
+        if(this.getPaymentMethod() instanceof Bank) {
+            System.out.println(((Bank) this.getPaymentMethod()).toString());
+        }
+        else if(this.getPaymentMethod() instanceof DebitCredit) {
+            System.out.println(((DebitCredit)this.getPaymentMethod()).toString());
+        } else if(this.getPaymentMethod() instanceof EWallet) {
+            System.out.println(((EWallet)this.getPaymentMethod()).toString());
+        }
+        System.out.print(Font.TEXT_BLUE);
+        System.out.print( "----------------------------------------------------------------------------------------------------");
+        System.out.print(Font.RESET);
+        System.out.print(Font.TEXT_CYAN);
+        System.out.printf("%n%25s","\t\t\t\t\t\t\t\t\t\t+-------------------+");
+        System.out.printf("%n%25s","\t\t\t\t\t\t\t\t\t\t|   Order Details   |");
+        System.out.printf("%n%25s","\t\t\t\t\t\t\t\t\t\t+-------------------+");
+        System.out.print(Font.RESET);
+        System.out.println();
         System.out.println(" +=================================================================================================+   ");
         System.out.print(" |");
         System.out.printf("%12s", "Index No |");
@@ -103,17 +116,9 @@ public class Order implements Serializable {
         System.out.printf("%64s"," ");
         System.out.printf("%-20s","Total price: RM" + df2.format(this.getOrderDetails().getTotalPrice()));
         System.out.println(Font.RESET);
-        System.out.print("\n------------------------------------------------------");
-        System.out.println("\n<<< PAYMENT DETAILS >>>");
-        if(this.getPaymentMethod() instanceof Bank) {
-            System.out.println(((Bank) this.getPaymentMethod()).toString());
-        }
-        else if(this.getPaymentMethod() instanceof DebitCredit) {
-            System.out.println(((DebitCredit)this.getPaymentMethod()).toString());
-        } else if(this.getPaymentMethod() instanceof EWallet) {
-            System.out.println(((EWallet)this.getPaymentMethod()).toString());
-        }
-        System.out.print("\n------------------------------------------------------");
+        System.out.print(Font.TEXT_BLUE);
+        System.out.print( "----------------------------------------------------------------------------------------------------");
+        System.out.print(Font.RESET);
         return output;
     }
 }
