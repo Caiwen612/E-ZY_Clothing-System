@@ -106,9 +106,7 @@ public class Customer extends People implements Cloneable, Serializable {
         System.out.println(orderHistory.get(index-1).toString());
     }
 
-    public void removeOrder(int index){
-        orderHistory.remove(index-1);
-    }
+
 
     // methods
     public void generateCustID() {

@@ -10,21 +10,19 @@ public class Product implements Cloneable, Serializable {
     private double price;
     private int qty;
     private int rating;
-    private double totalPrice;//for cart use
-
+    //For cart use, (price*qty)
+    private double totalPrice;
+    //Number of product
     private static int productCount = 1;
 
     DecimalFormat df2 = new DecimalFormat("0.00");
 
+    //No-argh constructor
     public Product(){
         this("",0,0,0);
     }
 
-    public Product(String name, double price, int qty){
-        this(name,price,qty,0);
-    }
-
-    
+    //Parameterized constructor
     public Product(String name, double price, int qty,int rating) {
         this.name = name;
         this.price = price;
@@ -33,17 +31,13 @@ public class Product implements Cloneable, Serializable {
         productCount++;
     }
 
-    //Getter and Setter
+    //Getter and setter
     public String getName() {
         return this.name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getRating() {
-        return this.rating;
     }
 
     public double getPrice() {
@@ -54,30 +48,38 @@ public class Product implements Cloneable, Serializable {
         this.price = price;
     }
 
+    public int getRating() {
+        return this.rating;
+    }
+
     public int getQty() {
-        return qty;
+        return this.qty;
     }
 
     public void setQty(int qty) {
         this.qty = qty;
     }
 
-    public void addQty(int qty){
-        this.qty += qty;
-    }
-
-    public void minusQty(int qty){
-        this.qty -= qty;
-    }
-
     public double getTotalPrice() {
-        return totalPrice;
+        return this.totalPrice;
     }
+
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
 
     //Method
+
+    //Method for add stock
+    public void addQty(int qty){
+        this.qty += qty;
+    }
+
+    //method for minus stock after customer make a payment
+    public void minusQty(int qty){
+        this.qty -= qty;
+    }
+
     //Convert rating to symbol
     public String convertRating(int rating){
         return switch (rating) {
@@ -101,12 +103,14 @@ public class Product implements Cloneable, Serializable {
             return  String.format("%5s"," ") + String.format("%-21s",this.name) + String.format("%1s"," ") + String.format("%-13s", ("RM" + df2.format(this.price))) + " " + String.format("%-6s", this.qty) + "  " + String.format("%-23s", Font.TEXT_CYAN + convertRating(this.rating) + Font.RESET) + "  " + String.format("%-10s", "RM" + df2.format(this.totalPrice));
         }
     }
+
     //ToEqual
     @Override
     public boolean equals(Object object) {
        return true;
     }
 
+    //Clone
     @Override
     public Product clone() {
         try {

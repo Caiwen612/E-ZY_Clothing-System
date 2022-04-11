@@ -4,28 +4,24 @@ public class Accessories extends Product implements Cloneable{
     private String accessoriesID;
     private static int accessoriesCount = 1;
 
+    //No-argh constructor (Best Practice)
     public Accessories(){
-
+        this("",0,0,0);
     }
 
-    public Accessories(String name, double price, int qty) {
-        super(name, price, qty);
-        this.accessoriesID = generateID();
-        accessoriesCount++;
-    }
-
+    //Parameterized constructor
     public Accessories(String name, double price, int qty, int rating) {
         super(name, price, qty, rating);
         this.accessoriesID = generateID();
         accessoriesCount++;
     }
 
-    //Setter and getter
+    //Getter
     public String getAccessoriesID() {
         return accessoriesID;
     }
 
-    //Method
+    //Method to generate ID
     private static String generateID(){
         return "A" + accessoriesCount;
     }
@@ -43,10 +39,9 @@ public class Accessories extends Product implements Cloneable{
 
     }
 
+    //Clone
     @Override
     public Accessories clone() {
-        Accessories clone = (Accessories) super.clone();
-        // TODO: copy mutable state here, so the clone can't change the internals of the original
-        return clone;
+        return (Accessories) super.clone();
     }
 }

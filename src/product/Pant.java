@@ -4,28 +4,24 @@ public class Pant extends Product implements Cloneable{
     private String pantID;
     private static int pantCount = 1;
 
+    //No-argh Constructor (Best Practice)
     public Pant(){
-
+        this("",0,0,0);
     }
 
-    public Pant(String name, double price, int qty) {
-        super(name, price, qty);
-        this.pantID = generateID();
-        pantCount++;
-    }
-
+    //Parameterized constructor
     public Pant(String name, double price, int qty, int rating) {
         super(name, price, qty, rating);
         this.pantID = generateID();
         pantCount++;
     }
 
-    //Setter and getter
+    //Getter
     public String getPantID() {
         return this.pantID;
     }
 
-    //Method
+    //Method to generate ID
     private static String generateID(){
         return "P" + pantCount;
     }
@@ -42,10 +38,9 @@ public class Pant extends Product implements Cloneable{
         }
     }
 
+    //Clone
     @Override
     public Pant clone() {
-        Pant clone = (Pant) super.clone();
-        // TODO: copy mutable state here, so the clone can't change the internals of the original
-        return clone;
+        return (Pant) super.clone();
     }
 }

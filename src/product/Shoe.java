@@ -4,33 +4,29 @@ public class Shoe extends Product implements Cloneable{
     private String shoeID;
     private static int shoeCount = 1;
 
+    //No-argh Constructor (Best Practice)
     public Shoe(){
-
+        this("",0,0,0);
     }
 
-    public Shoe(String name, double price, int qty) {
-        super(name, price, qty);
-        this.shoeID = generateID();
-        shoeCount++;
-
-    }
-
+    //Parameterized Constructor
     public Shoe(String name, double price, int qty, int rating) {
         super(name, price, qty, rating);
         this.shoeID = generateID();
         shoeCount++;
     }
 
-    //Setter and getter
+    //Getter
     public String getShoeID() {
         return shoeID;
     }
 
-    //Method
+    //Method to generate ID
     private static String generateID(){
         return "S" + shoeCount;
     }
 
+    //To String
     @Override
     public String toString() {
         if(this.getTotalPrice() == 0){
@@ -42,11 +38,9 @@ public class Shoe extends Product implements Cloneable{
         }
     }
 
-
+    //Clone
     @Override
     public Shoe clone() {
-        Shoe clone = (Shoe) super.clone();
-        // TODO: copy mutable state here, so the clone can't change the internals of the original
-        return clone;
+        return (Shoe) super.clone();
     }
 }
