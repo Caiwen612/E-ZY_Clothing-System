@@ -75,17 +75,27 @@ public class Customer extends People implements Cloneable, Serializable {
 
     public void displayOrder(){
         int orderIndex = 0;
-        System.out.println("Index\t\tTotal item\t\t Total amount that paid\t\t\t Total amount \t\t\t\tOrder Date");
+        System.out.print(Font.TEXT_BLUE);
+        System.out.println(" +==============================================================================================+   ");
+        System.out.print(" |");
+        System.out.printf("%12s", "Index No |");
+        System.out.printf("%7s", " No. of items  |");
+        System.out.printf("%21s", " Amount paid        |");
+        System.out.printf("%14s", " Subtotal    |");
+        System.out.printf("%8s", " Order date                     |");
+        System.out.println("\n +==============================================================================================+   ");
+        System.out.print(Font.RESET);
         for (Order order: orderHistory){
-            System.out.print("  " + (orderIndex +1));
+            System.out.print("\t   " + (orderIndex +1));
             System.out.print("\t\t\t");
-            System.out.print("  " + order.getItemCount());
-            System.out.print("\t\t\t\t\t");
+            System.out.print(order.getItemCount());
+            System.out.print("\t\t   ");
             System.out.print("RM" + df2.format(order.getPaymentMethod().getPayAmount()));
-            System.out.print("\t\t\t\t\t");
-            System.out.print("    RM" + df2.format(order.getTotalPrice()));
-            System.out.print("\t\t\t\t");
+            System.out.print("\t\t   ");
+            System.out.print("     RM" + df2.format(order.getTotalPrice()));
+            System.out.print("\t      ");
             System.out.print(order.getOrderDate());
+            System.out.println();
             orderIndex++;
             System.out.println();
         }
