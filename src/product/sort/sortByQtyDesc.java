@@ -1,7 +1,6 @@
 package product.sort;
 
 import product.Product;
-
 import java.util.Comparator;
 
 public class sortByQtyDesc implements Comparator<Product> {

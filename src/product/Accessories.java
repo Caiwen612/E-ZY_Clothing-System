@@ -1,6 +1,7 @@
 package product;
 
 public class Accessories extends Product implements Cloneable{
+    //Declare data members
     private String accessoriesID;
     private static int accessoriesCount = 1;
 

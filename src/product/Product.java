@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.text.DecimalFormat;
 
 public class Product implements Cloneable, Serializable {
-    //Declare data member
+    //Declare data members
     private String name;
     private double price;
     private int qty;
