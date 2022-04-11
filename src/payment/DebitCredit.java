@@ -5,16 +5,19 @@ import utility.Font;
 import java.text.DecimalFormat;
 
 public class DebitCredit extends Payment implements Cloneable{
-
+    // Data members
     private String bankName;
     private int cardNo;
     private String validDate;
 
     public static DecimalFormat df2 = new DecimalFormat("0.00");
 
+    // No-argh contructor
     public DebitCredit(){
         this("",0,"");
     }
+    
+    // Parameterized constructor
     public DebitCredit(String bankName, int cardNo, String validDate){
         this.bankName = bankName;
         this.cardNo = cardNo;
@@ -32,8 +35,7 @@ public class DebitCredit extends Payment implements Cloneable{
         this.validDate = validDate;
     }
 
-
-
+    // ToString
     @Override
     public String toString() {
         System.out.print(Font.TEXT_CYAN);
@@ -49,6 +51,7 @@ public class DebitCredit extends Payment implements Cloneable{
                 super.toString();
     }
 
+    // Clone
     @Override
     public DebitCredit clone() {
         DebitCredit clone = (DebitCredit) super.clone();
