@@ -1,6 +1,5 @@
 package user;
 
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -112,19 +111,6 @@ public class People implements Cloneable{
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        People people = (People) o;
-        return Objects.equals(name, people.name) && Objects.equals(email, people.email) && Objects.equals(password, people.password) && Objects.equals(phoneNo, people.phoneNo);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, email, password, phoneNo);
-    }
-
-    @Override
     public String toString() {
         return "People{" +
                 "name='" + name + '\'' +
@@ -132,6 +118,28 @@ public class People implements Cloneable{
                 ", password='" + password + '\'' +
                 ", phoneNo='" + phoneNo + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        People people = (People) o;
+
+        if (name != null ? !name.equals(people.name) : people.name != null) return false;
+        if (email != null ? !email.equals(people.email) : people.email != null) return false;
+        if (password != null ? !password.equals(people.password) : people.password != null) return false;
+        return phoneNo != null ? phoneNo.equals(people.phoneNo) : people.phoneNo == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (phoneNo != null ? phoneNo.hashCode() : 0);
+        return result;
     }
 
     @Override

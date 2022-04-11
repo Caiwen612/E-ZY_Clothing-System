@@ -7,6 +7,7 @@ public class Payment implements Cloneable {
     private Date paymentDate;
     private static int paymentCount = 1;
     private double totalPrice;
+    private double payAmount;
 
     public Payment(){
         this.paymentID = generatePayID();
@@ -25,6 +26,14 @@ public class Payment implements Cloneable {
 
     public Date getPaymentDate() {
         return paymentDate;
+    }
+
+    public double getPayAmount() {
+        return payAmount;
+    }
+
+    public void setPayAmount(double payAmount) {
+        this.payAmount = payAmount;
     }
 
     //Method

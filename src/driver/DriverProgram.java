@@ -16,10 +16,7 @@ import utility.Validation;
 import utility.ValidationException;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class DriverProgram {
 
@@ -47,15 +44,15 @@ public class DriverProgram {
     //TODO: Initialize the arrayList
     private static void setUser(ArrayList<Admin> adminArrList ,ArrayList<Customer> customerArrList) {
         // calling customer constructor
-        Customer customer1 = new Customer("Kelvin", "kelvin@gmail.com", "a123", "012-34567890", "12, Jalan AhKao, Bandar ABC");
+        Customer customer1 = new Customer("Kelvin", "kelvin@gmail.com", "c12345", "012-34567890", "12, Jalan AhKao, Bandar ABC");
         customer1.generateCustID();
-        Customer customer2 = new Customer("Ali", "ali@gmail.com", "a123", "011-34567890", "11, Jalan AhKao Bandar ABC");
+        Customer customer2 = new Customer("Ali", "ali@gmail.com", "c67890", "011-34567890", "11, Jalan AhKao Bandar ABC");
         customer2.generateCustID();
 
         // calling admin constructor
-        Admin admin1 = new Admin("Kelvin", "kelvin@gmail.com", "a123", "011-2345678");
+        Admin admin1 = new Admin("Kelvin", "kelvin@gmail.com", "a12345", "011-2345678");
         admin1.generateStaffID();
-        Admin admin2 = new Admin("Yoshi", "yoshi@gmail.com", "a123", "014-34567890");
+        Admin admin2 = new Admin("Yoshi", "yoshi@gmail.com", "a67890", "014-34567890");
         admin2.generateStaffID();
 
         customerArrList.add(customer1);
@@ -2189,7 +2186,13 @@ public class DriverProgram {
 
     //Prompt delivery
     public static void setOrder(Customer customer, Cart cart, Payment payment) throws InterruptedException {
-        Order order = new Order(customer.clone(),cart.clone(),payment.clone());
+        Order order = new Order();
+        order.setCustomer(customer.clone());
+        order.setOrderDetails(cart.clone());
+        order.setPaymentMethod(payment.clone());
+        ArrayList<Product> copyList = new ArrayList<Product>();
+        copyList = (ArrayList<Product>) cart.getCartItem().clone();
+        order.setOrderList(copyList);
         customer.addOrder(order);
         cart.reduceStock(productArrayList);
         cart.clearCart();
@@ -2197,6 +2200,7 @@ public class DriverProgram {
     }
 
     public static void orderHistory(Customer customer) throws InterruptedException {
+        clearScreen();
         System.out.println("+------------+");
         System.out.println("|   Orders   |");
         System.out.println("+------------+");
@@ -2259,6 +2263,7 @@ public class DriverProgram {
                 Thread.sleep(1000);
             }
         } while (orderIndexError);
+        clearScreen();
         customer.viewOrder(orderIndex);
         System.out.println("Press enter key to return to order history");
         pressAnyKeyToContinue();

@@ -2,20 +2,22 @@ package payment;
 
 import utility.Font;
 
+import java.text.DecimalFormat;
+
 public class EWallet extends Payment implements Cloneable {
 
     private int accountID;
     private String userName;
-    public double payAmount;
+
+    public static DecimalFormat df2 = new DecimalFormat("0.00");
 
     public EWallet(){
-        this(0,"",0);
+        this(0,"");
     }
-    public EWallet(int accountID, String userName, double payAmount){
+    public EWallet(int accountID, String userName){
         super();
         this.accountID = accountID;
         this.userName = userName;
-        this.payAmount = payAmount;
     }
 
     //setter
@@ -24,9 +26,6 @@ public class EWallet extends Payment implements Cloneable {
     }
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-    public void setPayAmount(double payAmount) {
-        this.payAmount = payAmount;
     }
 
 
@@ -37,9 +36,9 @@ public class EWallet extends Payment implements Cloneable {
         System.out.printf("%n%20s", "|   Receipt   |");
         System.out.printf("%n%20s", "+-------------+");
         System.out.println(Font.RESET);
-        return " Total Price: RM" + getTotalPrice() +
-                "\n Amount paid: RM" + payAmount +
-                "\n      Change: RM" + (payAmount - getTotalPrice()) +
+        return " Total Price: RM" + df2.format(getTotalPrice())  +
+                "\n Amount paid: RM" + df2.format(this.getPayAmount())  +
+                "\n      Change: RM" + df2.format(this.getPayAmount() - getTotalPrice()) +
                 "\n  Account ID: " + accountID +
                 "\n    Username: " + userName +
                 super.toString();

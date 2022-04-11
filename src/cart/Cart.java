@@ -6,10 +6,9 @@ import utility.Font;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Cart implements Cloneable{
-    private List<Product> cartItem;
+    private ArrayList<Product> cartItem;
     private double totalPrice;
     private int itemCount;
 
@@ -21,7 +20,7 @@ public class Cart implements Cloneable{
     }
 
     //Getter and Setter
-    public List<Product> getCartItem() {
+    public ArrayList<Product> getCartItem() {
         return cartItem;
     }
 
@@ -54,6 +53,8 @@ public class Cart implements Cloneable{
         System.out.printf("%-20s","Total price: RM" + df2.format(totalPrice));
         System.out.println(Font.RESET);
     }
+
+
 
     public void addItem(Product product, int quantity){
         //Check similar

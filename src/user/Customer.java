@@ -3,8 +3,8 @@ package user;
 import cart.Cart;
 import order.Order;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Customer extends People implements Cloneable{
     private String customerID;
@@ -12,6 +12,8 @@ public class Customer extends People implements Cloneable{
     private Cart cart;
     private ArrayList<Order> orderHistory;
     private static int custCount = 0;
+
+    public static DecimalFormat df2 = new DecimalFormat("0.00");
 
     public Customer(){
         this("", "", "", "", "");
@@ -72,11 +74,19 @@ public class Customer extends People implements Cloneable{
 
     public void displayOrder(){
         int orderIndex = 0;
-        System.out.println("Order Index\tTotal order of item\tOrder Date\t Total amount of item");
+        System.out.println("Index\t\tTotal item\t\t Total amount that paid\t\t\t Total amount \t\t\t\tOrder Date");
         for (Order order: orderHistory){
-            System.out.println((orderIndex +1) + order.getItemCount() + order.getOrderDate()  + order.getTotalPrice());
+            System.out.print("  " + (orderIndex +1));
+            System.out.print("\t\t\t");
+            System.out.print("  " + order.getItemCount());
+            System.out.print("\t\t\t\t\t");
+            System.out.print("RM" + df2.format(order.getPaymentMethod().getPayAmount()));
+            System.out.print("\t\t\t\t\t");
+            System.out.print("    RM" + df2.format(order.getTotalPrice()));
+            System.out.print("\t\t\t\t");
+            System.out.print(order.getOrderDate());
             orderIndex++;
-
+            System.out.println();
         }
     }
 
@@ -94,26 +104,37 @@ public class Customer extends People implements Cloneable{
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Customer customer = (Customer) o;
-        return Objects.equals(customerID, customer.customerID) && Objects.equals(address, customer.address) && Objects.equals(cart, customer.cart);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), customerID, address, cart);
-    }
-
-    @Override
     public String toString() {
         return "Customer{" +
                 "customerID='" + customerID + '\'' +
                 ", address='" + address + '\'' +
                 ", cart=" + cart +
+                ", orderHistory=" + orderHistory +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Customer customer = (Customer) o;
+
+        if (customerID != null ? !customerID.equals(customer.customerID) : customer.customerID != null) return false;
+        if (address != null ? !address.equals(customer.address) : customer.address != null) return false;
+        if (cart != null ? !cart.equals(customer.cart) : customer.cart != null) return false;
+        return orderHistory != null ? orderHistory.equals(customer.orderHistory) : customer.orderHistory == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (customerID != null ? customerID.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (cart != null ? cart.hashCode() : 0);
+        result = 31 * result + (orderHistory != null ? orderHistory.hashCode() : 0);
+        return result;
     }
 
     @Override

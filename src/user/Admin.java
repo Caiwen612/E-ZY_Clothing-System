@@ -60,7 +60,7 @@ public class Admin extends People {
 
     // methods
     public void generateStaffID() {
-        this.setStaffID("S" + staffCount);
+        this.setStaffID("ST" + staffCount);
     }
 
     public boolean vldDoubleAuth(String code) {
@@ -307,5 +307,29 @@ public class Admin extends People {
         DriverProgram.pressAnyKeyToContinue();
         adminMenu(adminArrList, customerArrList, admin);
     }
-    // report feature
+
+    @Override
+    public String toString() {
+        return "Admin{" +
+                "staffID='" + staffID + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Admin admin = (Admin) o;
+
+        return staffID != null ? staffID.equals(admin.staffID) : admin.staffID == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (staffID != null ? staffID.hashCode() : 0);
+        return result;
+    }
 }

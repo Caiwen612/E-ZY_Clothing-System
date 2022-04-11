@@ -2,21 +2,23 @@ package payment;
 
 import utility.Font;
 
+import java.text.DecimalFormat;
+
 public class DebitCredit extends Payment implements Cloneable{
 
     private String bankName;
     private int cardNo;
     private String validDate;
-    public double payAmount;
+
+    public static DecimalFormat df2 = new DecimalFormat("0.00");
 
     public DebitCredit(){
-        this("",0,"",0);
+        this("",0,"");
     }
-    public DebitCredit(String bankName, int cardNo, String validDate, double payAmount){
+    public DebitCredit(String bankName, int cardNo, String validDate){
         this.bankName = bankName;
         this.cardNo = cardNo;
         this.validDate = validDate;
-        this.payAmount = payAmount;
     }
 
     //setter
@@ -29,9 +31,7 @@ public class DebitCredit extends Payment implements Cloneable{
     public void setValidDate(String validDate) {
         this.validDate = validDate;
     }
-    public void setPayAmount(double payAmount) {
-        this.payAmount = payAmount;
-    }
+
 
 
     @Override
@@ -41,9 +41,9 @@ public class DebitCredit extends Payment implements Cloneable{
         System.out.printf("%n%20s", "|   Receipt   |");
         System.out.printf("%n%20s", "+-------------+");
         System.out.println(Font.RESET);
-        return " Total Price: RM" + getTotalPrice() +
-                "\n Amount paid: RM" + payAmount +
-                "\n      Change: RM" + (payAmount - getTotalPrice()) +
+        return " Total Price: RM" + df2.format(getTotalPrice()) +
+                "\n Amount paid: RM" + df2.format(this.getPayAmount()) +
+                "\n      Change: RM" + df2.format(this.getPayAmount() - getTotalPrice()) +
                 "\n   Bank Name: " + bankName +
                 "\n Card Number: " + cardNo +
                 super.toString();
