@@ -2,6 +2,7 @@ package user;
 
 
 import driver.DriverProgram;
+import order.Order;
 import product.*;
 import utility.Font;
 
@@ -81,8 +82,7 @@ public class Admin extends People {
         }
     }
 
-    // modify, add, edit products
-
+    // modify products
     public void modifyProduct(Object obj, ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList, Admin admin) throws InterruptedException {
         int option = 0;
         boolean optionVld = true, productVld = true;
@@ -306,6 +306,11 @@ public class Admin extends People {
         }
         DriverProgram.pressAnyKeyToContinue();
         adminMenu(adminArrList, customerArrList, admin);
+    }
+
+    // report
+    public void generateReport(Order order) {
+
     }
 
     @Override
