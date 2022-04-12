@@ -635,7 +635,7 @@ public class DriverProgram {
         } while (!confirmPwVld);
 
         do {
-            System.out.print("Phone Number (999-9999999(9): ");
+            System.out.print("Phone Number (999-9999999(9)): ");
             custPhoneNo = scanner.next();
             scanner.nextLine();
 
@@ -770,7 +770,7 @@ public class DriverProgram {
             System.out.print(Font.TEXT_CYAN);
             System.out.printf(  "%55s", "+--------------------+");
             System.out.printf("%n%55s", "|    Customer Menu   |");
-            System.out.printf("%n%55s%n", "+-------------------+");
+            System.out.printf("%n%55s%n", "+--------------------+");
             System.out.print(Font.RESET);
 
             System.out.println("1. Profile");
@@ -2324,7 +2324,7 @@ public class DriverProgram {
         System.out.printf("%n%55s","+------------+");
         System.out.println(Font.RESET);
         if(customer.getOrderHistory().size() == 0){
-            System.out.println("You haven't make any order yet");
+            System.out.printf("%35s %s%n","", "You haven't make any order yet");
         } else{
             customer.displayOrder();
         }

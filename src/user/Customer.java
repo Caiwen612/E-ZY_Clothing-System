@@ -77,14 +77,14 @@ public class Customer extends People implements Cloneable, Serializable {
     public void displayOrder(){
         int orderIndex = 0;
         System.out.print(Font.TEXT_BLUE);
-        System.out.println(" +==============================================================================================+   ");
+        System.out.println(" +=====================================================================================================+   ");
         System.out.print(" |");
         System.out.printf("%12s", "Index No |");
         System.out.printf("%7s", " No. of items  |");
         System.out.printf("%21s", " Amount paid        |");
         System.out.printf("%14s", " Subtotal    |");
-        System.out.printf("%8s", " Order date                     |");
-        System.out.println("\n +==============================================================================================+   ");
+        System.out.printf("%8s", "     Order date                       |");
+        System.out.println("\n +=====================================================================================================+   ");
         System.out.print(Font.RESET);
         for (Order order: orderHistory){
             System.out.print("\t   " + (orderIndex +1));
