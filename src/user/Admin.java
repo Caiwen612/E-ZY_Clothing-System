@@ -326,10 +326,14 @@ public class Admin extends People {
             System.out.print("-");
         }
         System.out.println();
-        for (int i = 0; i < 5; i++) {
+//        for (int i = 0; i < 5; i++) {
+            for(int j = 0; j < orderArrList.size(); j++) {
+                for (int k = 0; k < orderArrList.get(j).getOrderList().size(); k++) {
+                    System.out.printf("%-10s | %-25s | %-14s | %-10s%n",orderArrList.get(j).getOrderList().get(k).getRating(), orderArrList.get(j).getOrderList().get(k).getName(),orderArrList.get(j).getOrderList().get(k).getQty(),orderArrList.get(j).getOrderList().get(k).getTotalPrice());
+                }
 //            System.out.printf("%-25s   %-14d   %-10.2f", orders.getOrderDetails().getProduct(index).getName(), );
             // this one is testing, use the same formatting can ady
-            System.out.printf("%-10s   %-25s   %-14d   %-10.2f%n", "P" + (i+1), "Ali", 15, 200.2);
+//            System.out.printf("%-10s   %-25s   %-14d   %-10.2f%n", "P" + (i+1), "Ali", 15, 200.2);
 //            totalPrice += orderArrList.get(i).getTotalPrice();
 //            index++;
         }

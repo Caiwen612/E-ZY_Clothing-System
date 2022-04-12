@@ -68,6 +68,10 @@ public class Order implements Serializable {
         this.orderList = orderList;
     }
 
+    public List<Product> getOrderList() {
+        return orderList;
+    }
+
     // ToString
     @Override
     public String toString() {

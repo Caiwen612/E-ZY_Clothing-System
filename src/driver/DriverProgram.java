@@ -32,7 +32,7 @@ public class DriverProgram {
     static Scanner scanner = new Scanner(System.in);
     static DecimalFormat df2 = new DecimalFormat("0.00");
 
-    private static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException {
         welcome();
         //Generate auth code for sensitive action purpose
         AuthCodeMultithreading authCodeGenerate = new AuthCodeMultithreading();
@@ -60,7 +60,6 @@ public class DriverProgram {
 
     //TODO: Welcome @TEAM
     private static void welcome(){
-        System.out.println("Welcome to the e-commerce system");
         logo();
         System.out.printf("%79s %s%n", "", "System Developer");
         System.out.printf("%75s %s%n", "", "+=====================+");
@@ -2324,8 +2323,12 @@ public class DriverProgram {
         System.out.printf("%n%55s","|   Orders   |");
         System.out.printf("%n%55s","+------------+");
         System.out.println(Font.RESET);
+        if(customer.getOrderHistory().size() == 0){
+            System.out.println("You haven't make any order yet");
+        } else{
+            customer.displayOrder();
+        }
 
-        customer.displayOrder();
 
         System.out.printf("%61s","[1] View order details");
         System.out.printf("%n%62s","[2] Return to main menu");
