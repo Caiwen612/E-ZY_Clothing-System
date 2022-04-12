@@ -51,6 +51,7 @@ public class Cart implements Cloneable, Serializable {
 
     //Display cart, total Item and total Price
     public void displayItem(){
+        System.out.println(Font.RESET);
         if(cartItem.size() != 0){
             for(int i=0; i<cartItem.size(); i++){
                 System.out.printf("%9s",(i+1));
@@ -79,7 +80,9 @@ public class Cart implements Cloneable, Serializable {
             itemCount++;
             calculateTotalPrice();
             displayItem();
-            System.out.println("Product with " + quantity + " added to cart");
+            System.out.print(Font.TEXT_YELLOW);
+            System.out.println("Product with " + quantity + " quantity added to cart");
+            System.out.print(Font.RESET);
         }
     }
 
@@ -121,7 +124,7 @@ public class Cart implements Cloneable, Serializable {
 
     //Check cart item and product to reduce the stock
     public void reduceStock(ArrayList<Product> productArrayList){
-        //search cart and product is smae
+        //search cart and product is same
         for (Product cart : cartItem) {
             for (Product product1 : productArrayList) {
                 if (cart.getName().equals(product1.getName())) {

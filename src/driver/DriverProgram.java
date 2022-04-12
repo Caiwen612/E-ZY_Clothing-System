@@ -33,6 +33,7 @@ public class DriverProgram {
     static DecimalFormat df2 = new DecimalFormat("0.00");
 
     public static void main(String[] args) throws InterruptedException {
+//        productMenu(productArrayList,new Cart(),new Customer());
         welcome();
         //Generate auth code for sensitive action purpose
         AuthCodeMultithreading authCodeGenerate = new AuthCodeMultithreading();
@@ -60,6 +61,7 @@ public class DriverProgram {
 
     //TODO: Welcome @TEAM
     private static void welcome(){
+
         logo();
         System.out.printf("%79s %s%n", "", "System Developer");
         System.out.printf("%75s %s%n", "", "+=====================+");
@@ -913,7 +915,6 @@ public class DriverProgram {
                 emailVld = false;
                 System.out.println(Font.BOLD_RED + "Please Enter A Valid Email");
                 System.out.print(Font.RESET);
-                scanner.nextLine();
                 Thread.sleep(1000);
             }
         } while (!emailVld);
@@ -961,7 +962,6 @@ public class DriverProgram {
             else {
                 System.out.println(Font.BOLD_RED + "Password Must Include Alphabet, Number and At Least 6 Characters.");
                 System.out.print(Font.RESET);
-                scanner.nextLine();
                 Thread.sleep(1000);
             }
         } while (!passwordVld);
@@ -992,7 +992,6 @@ public class DriverProgram {
                 phoneNoVld = false;
                 System.out.println(Font.BOLD_RED + "Please Enter A Valid Phone Number (999-9999999999)");
                 System.out.print(Font.RESET);
-                scanner.nextLine();
                 Thread.sleep(1000);
             }
         } while (!phoneNoVld);
@@ -1364,6 +1363,7 @@ public class DriverProgram {
             try {
                 System.out.print(Font.TEXT_BLUE);
                 System.out.printf("%n%58s", "Enter your option: ");
+                System.out.print(Font.RESET);
                 searchOption = input.nextInt();
                 Validation.validOption(searchOption, 1, 4);
                 searchOptionError = false;
@@ -1443,15 +1443,16 @@ public class DriverProgram {
                 searchProductMenu(productArrayList, cart,customer);
             }
         } else {
-            System.out.println(Font.TEXT_YELLOW);
+            System.out.print(Font.TEXT_YELLOW);
             System.out.println(targetProduct);
-            System.out.println(Font.RESET);
+            System.out.print(Font.RESET);
             //valid user choices
             boolean addToCartError = true;
             char addToCart = 'A';
             do {
                 try {
-                    System.out.print("Do you want to add this product to your cart? (Y/N) ");
+                    System.out.print(Font.TEXT_BLUE);
+                    System.out.printf("%n%87s","Do you want to add this product to your cart? (Y/N) ");
                     addToCart = Character.toUpperCase(input.next().charAt(0));
                     Validation.validCharYN(addToCart);
                     addToCartError = false;
@@ -1466,7 +1467,8 @@ public class DriverProgram {
                 int quantityOption = 0;
                 do {
                     try {
-                        System.out.print("Enter the quantity of this product that you want to add to your cart: ");
+                        System.out.print(Font.TEXT_BLUE);
+                        System.out.printf("%n%98s","Enter the quantity of this product that you want to add to your cart: ");
                         quantityOption = input.nextInt();
                         Validation.validProductQuantity(quantityOption, targetProduct.getQty());
                         quantityOptionError = false;
@@ -1484,7 +1486,8 @@ public class DriverProgram {
                 char searchAgain = 'A';
                 do {
                     try {
-                        System.out.print("Do you want to search again? (Y/N) ");
+                        System.out.print(Font.TEXT_BLUE);
+                        System.out.printf("%n%72s", "Do you want to search again? (Y/N) ");
                         searchAgain = Character.toUpperCase(input.next().charAt(0));
                         Validation.validCharYN(searchAgain);
                         searchAgainError = false;
@@ -1504,7 +1507,8 @@ public class DriverProgram {
                 char searchAgain = 'A';
                 do {
                     try {
-                        System.out.print("Do you want to search again? (Y/N) ");
+                        System.out.print(Font.TEXT_BLUE);
+                        System.out.printf("%n%72s", "Do you want to search again? (Y/N) ");
                         searchAgain = Character.toUpperCase(input.next().charAt(0));
                         Validation.validCharYN(searchAgain);
                         searchAgainError = false;
@@ -1528,16 +1532,20 @@ public class DriverProgram {
     private static void searchProductByProductName(ArrayList<Product> productArrayList, Cart cart, Customer customer) throws InterruptedException {
         clearScreen();
         input.nextLine();
-        System.out.print("Enter the name that you want to search: ");
+        System.out.print(Font.TEXT_BLUE);
+        System.out.printf("%n%77s","Enter the name that you want to search: ");
+        System.out.print(Font.RESET);
         String targetProductName = input.nextLine().toUpperCase();
         ArrayList<Product> searchResultList = linearSearchByProductName(productArrayList, targetProductName);
         if (searchResultList.size() == 0) {
-            System.out.println("Product not found");
+            System.out.print(Font.TEXT_RED);
+            System.out.printf("%n%61s", "Product not found");
             boolean searchAgainError = true;
             char searchAgain = 'A';
             do {
                 try {
-                    System.out.print("Do you want to search again? (Y/N) ");
+                    System.out.print(Font.TEXT_BLUE);
+                    System.out.printf("%n%72s", "Do you want to search again? (Y/N) ");
                     searchAgain = Character.toUpperCase(input.next().charAt(0));
                     Validation.validCharYN(searchAgain);
                     searchAgainError = false;
@@ -1554,13 +1562,16 @@ public class DriverProgram {
             }
         } else {
             for (Product product : searchResultList) {
+                System.out.print(Font.TEXT_YELLOW);
                 System.out.println(product);
             }
+            System.out.print(Font.RESET);
             boolean addToCartError = true;
             char addToCart = 'A';
             do {
                 try {
-                    System.out.print("Do you want to add product to your cart? (Y/N) ");
+                    System.out.print(Font.TEXT_BLUE);
+                    System.out.printf("%n%84s","Do you want to add product to your cart? (Y/N) ");
                     addToCart = Character.toUpperCase(input.next().charAt(0));
                     Validation.validCharYN(addToCart);
                     addToCartError = false;
@@ -1572,13 +1583,17 @@ public class DriverProgram {
             } while (addToCartError);
             if (addToCart == 'Y') {
                 input.nextLine();
-                System.out.print("Enter the product ID that you want to add to cart: ");
+                System.out.print(Font.TEXT_BLUE);
+                System.out.printf("%n%88s","Enter the product ID that you want to add to cart: ");
                 String targetProductID = input.nextLine().toUpperCase();
                 char filterProductID = targetProductID.charAt(0);
                 Product targetProduct = linearSearchByProductID(searchResultList, targetProductID, filterProductID);
                 while (targetProduct == null) {
-                    System.out.println("Product not found");
-                    System.out.print("Please reenter the product ID that you want to add to cart: ");
+                    System.out.print(Font.TEXT_RED);
+                    System.out.printf("%n%61s", "Product not found");
+                    System.out.print(Font.RESET);
+                    System.out.print(Font.TEXT_BLUE);
+                    System.out.printf("%n%97s","Please reenter the product ID that you want to add to cart: ");
                     targetProductID = input.nextLine().toUpperCase();
                     filterProductID = targetProductID.charAt(0);
                     targetProduct = linearSearchByProductID(searchResultList, targetProductID, filterProductID);
@@ -1587,7 +1602,8 @@ public class DriverProgram {
                 int quantityOption = 0;
                 do {
                     try {
-                        System.out.print("Enter the quantity of this product that you want to add to your cart: ");
+                        System.out.print(Font.TEXT_BLUE);
+                        System.out.printf("%n%98s","Enter the quantity of this product that you want to add to your cart: ");
                         quantityOption = input.nextInt();
                         Validation.validProductQuantity(quantityOption, targetProduct.getQty());
                         quantityOptionError = false;
@@ -1605,7 +1621,8 @@ public class DriverProgram {
                 char searchAgain = 'A';
                 do {
                     try {
-                        System.out.print("Do you want to search again? (Y/N) ");
+                        System.out.print(Font.TEXT_BLUE);
+                        System.out.printf("%n%72s", "Do you want to search again? (Y/N) ");
                         searchAgain = Character.toUpperCase(input.next().charAt(0));
                         Validation.validCharYN(searchAgain);
                         searchAgainError = false;
@@ -1625,7 +1642,8 @@ public class DriverProgram {
                 char searchAgain = 'A';
                 do {
                     try {
-                        System.out.print("Do you want to search again? (Y/N) ");
+                        System.out.print(Font.TEXT_BLUE);
+                        System.out.printf("%n%72s", "Do you want to search again? (Y/N) ");
                         searchAgain = Character.toUpperCase(input.next().charAt(0));
                         Validation.validCharYN(searchAgain);
                         searchAgainError = false;
@@ -1652,9 +1670,11 @@ public class DriverProgram {
         int upperPrice = 0;
         do {
             try {
-                System.out.print("Enter the lower price that you want to search for: RM");
+                System.out.print(Font.TEXT_BLUE);
+                System.out.printf("%n%91s","Enter the lower price that you want to search for: RM");
                 lowerPrice = input.nextInt();
-                System.out.print("Enter the upper price that you want to search for: RM");
+                System.out.printf("%n%91s","Enter the upper price that you want to search for: RM");
+                System.out.print(Font.RESET);
                 upperPrice = input.nextInt();
                 Validation.validPriceRange(lowerPrice, upperPrice);
                 priceRangeError = false;
@@ -1669,12 +1689,14 @@ public class DriverProgram {
         } while (priceRangeError);
         ArrayList<Product> searchResultList = linearSearchByPriceRange(productArrayList, lowerPrice, upperPrice);
         if (searchResultList.size() == 0) {
-            System.out.println("Product not found");
+            System.out.print(Font.TEXT_RED);
+            System.out.printf("%n%61s", "Product not found");
             boolean searchAgainError = true;
             char searchAgain = 'A';
             do {
                 try {
-                    System.out.print("Do you want to search again? (Y/N) ");
+                    System.out.print(Font.TEXT_BLUE);
+                    System.out.printf("%n%72s", "Do you want to search again? (Y/N) ");
                     searchAgain = Character.toUpperCase(input.next().charAt(0));
                     Validation.validCharYN(searchAgain);
                     searchAgainError = false;
@@ -1691,13 +1713,16 @@ public class DriverProgram {
             }
         } else {
             for (Product product : searchResultList) {
+                System.out.print(Font.TEXT_YELLOW);
                 System.out.println(product);
             }
+            System.out.print(Font.RESET);
             boolean addToCartError = true;
             char addToCart = 'A';
             do {
                 try {
-                    System.out.print("Do you want to add product to your cart? (Y/N) ");
+                    System.out.print(Font.TEXT_BLUE);
+                    System.out.printf("%n%84s","Do you want to add product to your cart? (Y/N) ");
                     addToCart = Character.toUpperCase(input.next().charAt(0));
                     Validation.validCharYN(addToCart);
                     addToCartError = false;
@@ -1709,13 +1734,17 @@ public class DriverProgram {
             } while (addToCartError);
             if (addToCart == 'Y') {
                 input.nextLine();
-                System.out.print("Enter the product ID that you want to add to cart: ");
+                System.out.print(Font.TEXT_BLUE);
+                System.out.printf("%n%88s","Enter the product ID that you want to add to cart: ");
                 String targetProductID = input.nextLine().toUpperCase();
                 char filterProductID = targetProductID.charAt(0);
                 Product targetProduct = linearSearchByProductID(searchResultList, targetProductID, filterProductID);
                 while (targetProduct == null) {
-                    System.out.println("Product not found");
-                    System.out.print("Please reenter the product ID that you want to add to cart: ");
+                    System.out.print(Font.TEXT_RED);
+                    System.out.printf("%n%61s", "Product not found");
+                    System.out.print(Font.RESET);
+                    System.out.print(Font.TEXT_BLUE);
+                    System.out.printf("%n%97s","Please reenter the product ID that you want to add to cart: ");
                     targetProductID = input.nextLine().toUpperCase();
                     filterProductID = targetProductID.charAt(0);
                     targetProduct = linearSearchByProductID(searchResultList, targetProductID, filterProductID);
@@ -1724,7 +1753,8 @@ public class DriverProgram {
                 int quantityOption = 0;
                 do {
                     try {
-                        System.out.print("Enter the quantity of this product that you want to add to your cart: ");
+                        System.out.print(Font.TEXT_BLUE);
+                        System.out.printf("%n%98s","Enter the quantity of this product that you want to add to your cart: ");
                         quantityOption = input.nextInt();
                         Validation.validProductQuantity(quantityOption, targetProduct.getQty());
                         quantityOptionError = false;
@@ -1742,7 +1772,8 @@ public class DriverProgram {
                 char searchAgain = 'A';
                 do {
                     try {
-                        System.out.print("Do you want to search again? (Y/N) ");
+                        System.out.print(Font.TEXT_BLUE);
+                        System.out.printf("%n%72s", "Do you want to search again? (Y/N) ");
                         searchAgain = Character.toUpperCase(input.next().charAt(0));
                         Validation.validCharYN(searchAgain);
                         searchAgainError = false;
@@ -1762,7 +1793,8 @@ public class DriverProgram {
                 char searchAgain = 'A';
                 do {
                     try {
-                        System.out.print("Do you want to search again? (Y/N) ");
+                        System.out.print(Font.TEXT_BLUE);
+                        System.out.printf("%n%72s", "Do you want to search again? (Y/N) ");
                         searchAgain = Character.toUpperCase(input.next().charAt(0));
                         Validation.validCharYN(searchAgain);
                         searchAgainError = false;
@@ -1847,22 +1879,27 @@ public class DriverProgram {
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: Start Category & Best Sales~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
     private static void categoryMenu(ArrayList<Product> productArrayList, Cart cart, Customer customer) throws InterruptedException {
         clearScreen();
-        System.out.println("\t\t+------------+");
-        System.out.println("\t\t|  Category  |");
-        System.out.println("\t\t+------------+");
-        System.out.println("[1] Shirt");
-        System.out.println("[2] Pant");
-        System.out.println("[3] Accessories");
-        System.out.println("[4] Shoes");
-        System.out.println("[5] Best Sales");
-        System.out.println("[6] Back to previous Menu");
+        System.out.print(Font.TEXT_CYAN);
+        System.out.printf(  "%66s", "+----------------------+");
+        System.out.printf("%n%66s", "|      Category        |");
+        System.out.printf("%n%66s", "+----------------------+");
+        System.out.print(Font.RESET);
+
+        System.out.printf("%n%71s", "[1] Shirt                 ");
+        System.out.printf("%n%71s", "[2] Pant                  ");
+        System.out.printf("%n%71s", "[3] Accessories           ");
+        System.out.printf("%n%71s", "[4] Shoes                 ");
+        System.out.printf("%n%71s", "[5] Best Sales            ");
+        System.out.printf("%n%71s", "[6] Back to previous Menu ");
+
 
         // Get input for cart option
         boolean categoryOptionError = true;
         int categoryOption = 0;
         do {
             try {
-                System.out.print("\nEnter your option: ");
+                System.out.print(Font.TEXT_BLUE);
+                System.out.printf("%n%51s", "Enter your option: ");
                 categoryOption = input.nextInt();
                 Validation.validOption(categoryOption, 1, 6);
                 categoryOptionError = false;
@@ -1905,13 +1942,16 @@ public class DriverProgram {
         //Display product shirt
         ArrayList<Product> categoryResultList = linearSearchByProductCategory(productArrayList, category);
         for (Product product : categoryResultList) {
+            System.out.print(Font.TEXT_YELLOW);
             System.out.println(product);
         }
+        System.out.print(Font.RESET);
         boolean addToCartError = true;
         char addToCart = 'A';
         do {
             try {
-                System.out.print("Do you want to add product to your cart? (Y/N) ");
+                System.out.print(Font.TEXT_BLUE);
+                System.out.printf("%n%84s","Do you want to add product to your cart? (Y/N) ");
                 addToCart = Character.toUpperCase(input.next().charAt(0));
                 Validation.validCharYN(addToCart);
                 addToCartError = false;
@@ -1923,13 +1963,17 @@ public class DriverProgram {
         } while (addToCartError);
         if (addToCart == 'Y') {
             input.nextLine();
-            System.out.print("Enter the product ID that you want to add to cart: ");
+            System.out.print(Font.TEXT_BLUE);
+            System.out.printf("%n%88s","Enter the product ID that you want to add to cart: ");
             String targetProductID = input.nextLine().toUpperCase();
             char filterProductID = targetProductID.charAt(0);
             Product targetProduct = linearSearchByProductID(categoryResultList, targetProductID, filterProductID);
             while (targetProduct == null) {
-                System.out.println("Product not found");
-                System.out.print("Please reenter the product ID that you want to add to cart: ");
+                System.out.print(Font.TEXT_RED);
+                System.out.printf("%n%61s", "Product not found");
+                System.out.print(Font.RESET);
+                System.out.print(Font.TEXT_BLUE);
+                System.out.printf("%n%97s","Please reenter the product ID that you want to add to cart: ");
                 targetProductID = input.nextLine().toUpperCase();
                 filterProductID = targetProductID.charAt(0);
                 targetProduct = linearSearchByProductID(categoryResultList, targetProductID, filterProductID);
@@ -1938,7 +1982,8 @@ public class DriverProgram {
             int quantityOption = 0;
             do {
                 try {
-                    System.out.print("Enter the quantity of this product that you want to add to your cart: ");
+                    System.out.print(Font.TEXT_BLUE);
+                    System.out.printf("%n%98s","Enter the quantity of this product that you want to add to your cart: ");
                     quantityOption = input.nextInt();
                     Validation.validProductQuantity(quantityOption, targetProduct.getQty());
                     quantityOptionError = false;
@@ -1952,11 +1997,13 @@ public class DriverProgram {
                 }
             } while (quantityOptionError);
             cart.addItem(targetProduct.clone(), quantityOption);
-            System.out.println("Press enter key to go back category menu");
+            System.out.println(Font.TEXT_YELLOW);
+            System.out.printf("%76s","Press enter key to go back Category menu");
             pressAnyKeyToContinue();
             categoryMenu(productArrayList, cart,customer);
         } else{
-            System.out.println("Press enter key to go back category menu");
+            System.out.println(Font.TEXT_YELLOW);
+            System.out.printf("%76s","Press enter key to go back Category menu");
             pressAnyKeyToContinue();
             categoryMenu(productArrayList, cart,customer);
         }
