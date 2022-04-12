@@ -32,7 +32,7 @@ public class DriverProgram {
     static Scanner scanner = new Scanner(System.in);
     static DecimalFormat df2 = new DecimalFormat("0.00");
 
-    public static void main(String[] args) throws InterruptedException {
+    private static void main(String[] args) throws InterruptedException {
         welcome();
         //Generate auth code for sensitive action purpose
         AuthCodeMultithreading authCodeGenerate = new AuthCodeMultithreading();
@@ -59,7 +59,7 @@ public class DriverProgram {
     }
 
     //TODO: Welcome @TEAM
-    public static void welcome(){
+    private static void welcome(){
         System.out.println("Welcome to the e-commerce system");
         logo();
         System.out.printf("%79s %s%n", "", "System Developer");
@@ -75,10 +75,10 @@ public class DriverProgram {
         System.out.printf("%75s%s%n", "", new Date());
 
         System.out.printf("%75s", "");
-        pressAnyKeyToContinue();
+        pressAnyKeyToContinueWithPrompt();
     }
 
-    public static void logo(){
+    private static void logo(){
         System.out.printf("%45s %s%n", "", Font.TEXT_CYAN + " .----------------.  .----------------.  .----------------.  .----------------.    ");
         System.out.printf("%45s %s%n", "", "| .--------------. || .--------------. || .--------------. || .--------------. |   ");
         System.out.printf("%45s %s%n", "", "| |  _________   | || |              | || |   ________   | || |  ____  ____  | |   ");
@@ -95,7 +95,7 @@ public class DriverProgram {
 
     //TODO: Simple Database @Author TAY CHAI BOON
     //Create database
-    public static void databaseInit(){
+    private static void databaseInit(){
         try {
             File file = new File("database/product.ser");
             if (!file.exists()) {
@@ -123,7 +123,7 @@ public class DriverProgram {
     }
 
     //Load arrayList from files
-    public static void loadArrayList() {
+    private static void loadArrayList() {
         File[] files = new File("database").listFiles();
         for (File file : files) {
             System.out.println(file.getName());
@@ -159,7 +159,7 @@ public class DriverProgram {
     }
 
     //Store arraylist from files
-    public static void storeArrayList() {
+    private static void storeArrayList() {
         File[] files = new File("database").listFiles();
 
         for (File file : files) {
@@ -759,8 +759,8 @@ public class DriverProgram {
 
     }
 
-    // incomplete
-    public static void custMenu(ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList, Customer customer) throws InterruptedException {
+
+    private static void custMenu(ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList, Customer customer) throws InterruptedException {
         Cart cart = customer.getCart();
         int selection;
         boolean vldOpt = true;
@@ -811,7 +811,7 @@ public class DriverProgram {
         } while (!vldOpt);
     }
 
-    public static void custProfile(ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList, Customer customer) throws InterruptedException {
+    private static void custProfile(ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList, Customer customer) throws InterruptedException {
         int option;
         boolean optionVld = true;
         Scanner scanner = new Scanner(System.in);
@@ -871,7 +871,7 @@ public class DriverProgram {
 
     }
 
-    public static void editCustName(ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList, Customer customer) throws InterruptedException {
+    private static void editCustName(ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList, Customer customer) throws InterruptedException {
         String name;
         Scanner scanner = new Scanner(System.in);
 
@@ -890,7 +890,7 @@ public class DriverProgram {
         custProfile(adminArrList, customerArrList, customer);
     }
 
-    public static void editCustEmail(ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList, Customer customer) throws InterruptedException {
+    private static void editCustEmail(ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList, Customer customer) throws InterruptedException {
         String email;
         boolean emailVld;
         Scanner scanner = new Scanner(System.in);
@@ -921,7 +921,7 @@ public class DriverProgram {
         custProfile(adminArrList, customerArrList, customer);
     }
 
-    public static void editCustPassword(ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList, Customer customer) throws InterruptedException {
+    private static void editCustPassword(ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList, Customer customer) throws InterruptedException {
         String password;
         String authCode;
         boolean passwordVld = false;
@@ -969,7 +969,7 @@ public class DriverProgram {
         custProfile(adminArrList, customerArrList, customer);
     }
 
-    public static void editPhoneNo(ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList, Customer customer) throws InterruptedException {
+    private static void editPhoneNo(ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList, Customer customer) throws InterruptedException {
         String phoneNo;
         boolean phoneNoVld = true;
         Scanner scanner = new Scanner(System.in);
@@ -1000,7 +1000,7 @@ public class DriverProgram {
         custProfile(adminArrList, customerArrList, customer);
     }
 
-    public static void editAddress(ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList, Customer customer) throws InterruptedException {
+    private static void editAddress(ArrayList<Admin> adminArrList, ArrayList<Customer> customerArrList, Customer customer) throws InterruptedException {
         String address;
         Scanner scanner = new Scanner(System.in);
 
@@ -1020,7 +1020,7 @@ public class DriverProgram {
 
     //TODO: PRODUCT + CART @Author TAY CHAI BOON
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: Cart Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-    public static void cartMenu(ArrayList<Product> productArrayList, Cart cart,Customer customer) throws InterruptedException {
+    private static void cartMenu(ArrayList<Product> productArrayList, Cart cart,Customer customer) throws InterruptedException {
         //Create a new cart
         clearScreen();
         System.out.print(Font.TEXT_CYAN);
@@ -1093,11 +1093,11 @@ public class DriverProgram {
         }
     }
 
-    public static void addItem(ArrayList<Product> productArrayList, Cart cart, Customer customer) throws InterruptedException {
+    private static void addItem(ArrayList<Product> productArrayList, Cart cart, Customer customer) throws InterruptedException {
         productMenu(productArrayList,cart,customer);
     }
 
-    public static void editItem(ArrayList<Product> productArrayList, Cart cart, Customer customer) throws InterruptedException {
+    private static void editItem(ArrayList<Product> productArrayList, Cart cart, Customer customer) throws InterruptedException {
         System.out.println(Font.TEXT_YELLOW);
         System.out.printf("%75s","Key in the cart no which you wish to edit the quantity. ^-^");
         boolean itemIndexError = true;
@@ -1169,7 +1169,7 @@ public class DriverProgram {
 
     }
 
-    public static void removeItem(ArrayList<Product> productArrayList, Cart cart, Customer customer) throws InterruptedException {
+    private static void removeItem(ArrayList<Product> productArrayList, Cart cart, Customer customer) throws InterruptedException {
         System.out.println(Font.TEXT_YELLOW);
         System.out.printf("%70s","Key in the cart no which you wish to remove. ^-^");
         boolean itemIndexError = true;
@@ -1219,7 +1219,7 @@ public class DriverProgram {
         }
     }
 
-    public static void sortItem(ArrayList<Product> productArrayList, Cart cart, Customer customer) throws InterruptedException {
+    private static void sortItem(ArrayList<Product> productArrayList, Cart cart, Customer customer) throws InterruptedException {
         clearScreen();
         System.out.print(Font.TEXT_CYAN);
         System.out.printf(  "%55s",  "+------------+");
@@ -1294,7 +1294,7 @@ public class DriverProgram {
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: End Cart Menu~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: Product Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-    public static void productMenu(ArrayList<Product> productArrayList,Cart cart, Customer customer) throws InterruptedException {
+    private static void productMenu(ArrayList<Product> productArrayList,Cart cart, Customer customer) throws InterruptedException {
         //Display product menu
         clearScreen();
         System.out.print(Font.TEXT_CYAN);
@@ -1346,7 +1346,7 @@ public class DriverProgram {
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: Start Search~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
     //***************TODO: Different Search Option***************//
-    public static void searchProductMenu(ArrayList<Product> productArrayList, Cart cart,Customer customer) throws InterruptedException {
+    private static void searchProductMenu(ArrayList<Product> productArrayList, Cart cart,Customer customer) throws InterruptedException {
         clearScreen();
         System.out.print(Font.TEXT_CYAN);
         System.out.printf(  "%66s", "+----------------------+");
@@ -1784,7 +1784,7 @@ public class DriverProgram {
     }
 
     //***************TODO: Linear Search Algorithm***************//
-    public static Product linearSearchByProductID(ArrayList<Product> productArrayList, String targetProductID, char filterProductID) {
+    private static Product linearSearchByProductID(ArrayList<Product> productArrayList, String targetProductID, char filterProductID) {
         Product targetProduct = null;
 
         for (Product product : productArrayList) {
@@ -1846,7 +1846,7 @@ public class DriverProgram {
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: End Search~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: Start Category & Best Sales~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-    public static void categoryMenu(ArrayList<Product> productArrayList, Cart cart, Customer customer) throws InterruptedException {
+    private static void categoryMenu(ArrayList<Product> productArrayList, Cart cart, Customer customer) throws InterruptedException {
         clearScreen();
         System.out.println("\t\t+------------+");
         System.out.println("\t\t|  Category  |");
@@ -2008,7 +2008,7 @@ public class DriverProgram {
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO: End Product Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
     //TODO: Payment + Order @Author EUGENE LAW KAI LE
-    public static void paymentMenu(Cart cart, ArrayList<Payment> payment, Customer customer) throws InterruptedException {
+    private static void paymentMenu(Cart cart, ArrayList<Payment> payment, Customer customer) throws InterruptedException {
         clearScreen();
         System.out.print(Font.TEXT_CYAN);
         System.out.printf("%55s",  "+-------------+");
@@ -2067,7 +2067,7 @@ public class DriverProgram {
     }
 
     // Receive Bank details
-    public static void bank(Payment bank, Cart cart,Customer customer) throws InterruptedException {
+    private static void bank(Payment bank, Cart cart,Customer customer) throws InterruptedException {
         clearScreen();
         bank.setTotalPrice(cart.getTotalPrice());
         System.out.println(Font.TEXT_BRIGHT_MAGENTA);
@@ -2142,7 +2142,7 @@ public class DriverProgram {
     }
 
     // Receive E-Wallet details
-    public static void eWallet(Payment eWallet, Cart cart,Customer customer) throws InterruptedException {
+    private static void eWallet(Payment eWallet, Cart cart,Customer customer) throws InterruptedException {
         clearScreen();
         eWallet.setTotalPrice(cart.getTotalPrice());
         System.out.println(Font.TEXT_BRIGHT_MAGENTA);
@@ -2215,7 +2215,7 @@ public class DriverProgram {
     }
 
     // Receive Debit/Credit details
-    public static void debitCredit(Payment debitCredit, Cart cart, Customer customer) throws InterruptedException {
+    private static void debitCredit(Payment debitCredit, Cart cart, Customer customer) throws InterruptedException {
         clearScreen();
         debitCredit.setTotalPrice(cart.getTotalPrice());
         System.out.println(Font.TEXT_BRIGHT_MAGENTA);
@@ -2305,7 +2305,7 @@ public class DriverProgram {
     }
 
     //Prompt delivery
-    public static void setOrder(Customer customer, Cart cart, Payment payment) throws InterruptedException {
+    private static void setOrder(Customer customer, Cart cart, Payment payment) throws InterruptedException {
         Order order = new Order(customer.clone(),cart.clone(),payment.clone());
         ArrayList<Product> copyList;
         copyList = (ArrayList<Product>) cart.getCartItem().clone();
@@ -2317,7 +2317,7 @@ public class DriverProgram {
         custMenu(adminArrList,customerArrList,customer);
     }
 
-    public static void orderHistory(Customer customer) throws InterruptedException {
+    private static void orderHistory(Customer customer) throws InterruptedException {
         clearScreen();
         System.out.println(Font.TEXT_CYAN);
         System.out.printf("%55s","+------------+");
@@ -2361,7 +2361,7 @@ public class DriverProgram {
         }
     }
 
-    public static void viewOrderDetail(Customer customer) throws InterruptedException {
+    private static void viewOrderDetail(Customer customer) throws InterruptedException {
         boolean orderIndexError = true;
         int orderIndex = 0;
         do {
@@ -2394,7 +2394,7 @@ public class DriverProgram {
         }
     }
 
-    public static void pressAnyKeyToContinue(){
+    private static void pressAnyKeyToContinue(){
         input.nextLine();
         input.nextLine();
     }
@@ -2404,8 +2404,7 @@ public class DriverProgram {
         input.nextLine();
     }
 
-
-    public static void endProgram(){
+    private static void endProgram(){
 
         storeArrayList();
         System.out.println(Font.TEXT_CYAN);
@@ -2423,9 +2422,6 @@ public class DriverProgram {
         System.exit(0);
 
     }
-
-
-
 
     }
 

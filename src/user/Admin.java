@@ -305,7 +305,7 @@ public class Admin extends People {
             System.out.print(Font.RESET);
         }
         System.out.println("Press Enter to Continue.");
-        DriverProgram.pressAnyKeyToContinue();
+        DriverProgram.pressAnyKeyToContinueWithPrompt();
         adminMenu(adminArrList, customerArrList, admin);
     }
 
@@ -338,7 +338,7 @@ public class Admin extends People {
         }
         System.out.println();
         System.out.printf("Total Price: RM%.2f%n", totalPrice);
-        DriverProgram.pressAnyKeyToContinue();
+        DriverProgram.pressAnyKeyToContinueWithPrompt();
         DriverProgram.adminMenu(adminArrList, customerArrList, admin);
     }
 
