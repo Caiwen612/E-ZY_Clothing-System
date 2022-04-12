@@ -51,7 +51,7 @@ public class Cart implements Cloneable, Serializable {
 
     //Display cart, total Item and total Price
     public void displayItem(){
-        System.out.println(Font.RESET);
+        System.out.print(Font.RESET);
         if(cartItem.size() != 0){
             for(int i=0; i<cartItem.size(); i++){
                 System.out.printf("%9s",(i+1));

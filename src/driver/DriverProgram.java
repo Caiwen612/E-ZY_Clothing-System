@@ -33,7 +33,6 @@ public class DriverProgram {
     static DecimalFormat df2 = new DecimalFormat("0.00");
 
     public static void main(String[] args) throws InterruptedException {
-//        productMenu(productArrayList,new Cart(),new Customer());
         welcome();
         //Generate auth code for sensitive action purpose
         AuthCodeMultithreading authCodeGenerate = new AuthCodeMultithreading();
@@ -61,7 +60,6 @@ public class DriverProgram {
 
     //TODO: Welcome @TEAM
     private static void welcome(){
-
         logo();
         System.out.printf("%79s %s%n", "", "System Developer");
         System.out.printf("%75s %s%n", "", "+=====================+");
@@ -2360,6 +2358,7 @@ public class DriverProgram {
         customer.addOrder(order);
         cart.reduceStock(productArrayList);
         cart.clearCart();
+        orderArrList.add(order);
         custMenu(adminArrList,customerArrList,customer);
     }
 
