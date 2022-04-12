@@ -135,6 +135,7 @@ public class Cart implements Cloneable, Serializable {
     public void calculateTotalPrice(){
         totalPrice = 0;
         for (Product product : cartItem) {
+            product.calcTotalPrice();
             totalPrice += product.getTotalPrice();
         }
         this.setTotalPrice(totalPrice);

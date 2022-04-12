@@ -63,7 +63,6 @@ public class Product implements Cloneable, Serializable {
     }
 
     public double getTotalPrice() {
-        calcTotalPrice();
         return this.totalPrice;
     }
 
